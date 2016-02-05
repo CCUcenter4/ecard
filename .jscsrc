@@ -1,0 +1,32 @@
+{
+  "esnext": true,
+  "preset": "google",
+
+  "fileExtensions": [".js"],
+
+  "requireCurlyBraces": true,
+  "requireParenthesesAroundIIFE": true,
+  "requireSpaceAfterKeywords": ["else"],
+
+  "maximumLineLength": 120,
+  "validateLineBreaks": "LF",
+  "validateIndentation": 2,
+
+  "disallowKeywords": ["with"],
+  "disallowSpaceAfterKeywords": [
+    "if",
+    "for",
+    "while",
+    "switch",
+    "catch"
+  ],
+  "disallowSpacesInsideObjectBrackets": null,
+  "disallowImplicitTypeConversion": ["string"],
+
+  "safeContextKeyword": "that",
+
+  "excludeFiles": [
+    "dist/**",
+    "node_modules/**"
+  ]
+}
