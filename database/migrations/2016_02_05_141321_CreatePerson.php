@@ -14,11 +14,13 @@ class CreatePerson extends Migration
     {
         Schema::create('person', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('user_id')->reference('id')->on('user');
+            $table->integer('user_id')->unsigned();
             $table->string('email', 128)->nullable();
             $table->string('phone', 128)->nullable();
             $table->date('birth')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('user');
         });
     }
 

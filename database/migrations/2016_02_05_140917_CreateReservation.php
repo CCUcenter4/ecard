@@ -14,14 +14,17 @@ class CreateReservation extends Migration
     {
         Schema::create('reservation', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('card_id')->reference('id')->on('card');
-            $table->integer('user_id')->reference('id')->on('user');
-            $table->string('mailer_mail', 128);
-            $table->string('target_mail', 128);
+            $table->integer('card_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->string('sender', 128);
+            $table->string('reciever', 128);
             $table->longtext('msg');
             $table->dateTime('mail_time');
             $table->timestamps();
             $table->enum('status', ['finished', 'queue']);
+
+            $table->foreign('card_id')->references('id')->on('card')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('user');
         });
     }
 

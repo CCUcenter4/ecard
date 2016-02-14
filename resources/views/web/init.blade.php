@@ -38,7 +38,6 @@
 
   <!-- Demonic Write -->
   <script src="{{url('assets/js/common.js')}}"></script>
-  <script src="{{url('assets/js/fb_login.js')}}"></script>
 
   @yield("js")
 

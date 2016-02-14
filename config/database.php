@@ -64,6 +64,18 @@ return [
             'strict'    => false,
         ],
 
+        'sso' => [
+            'driver'    => 'pgsql',
+            'host'      => env('SSO_HOST'),
+            'database'  => env('SSO_DATABASE'),
+            'username'  => env('SSO_USERNAME'),
+            'password'  => env('SSO_PASSWORD'),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
         'pgsql' => [
             'driver'   => 'pgsql',
             'host'     => env('DB_HOST', 'localhost'),

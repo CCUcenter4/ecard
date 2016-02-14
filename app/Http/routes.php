@@ -9,21 +9,46 @@
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
 |
-*/
+ */
 
 Route::get('/', 'InitController@index');
 
 Route::group(['prefix'=>'web'], function() {
-  Route::get('/', 'WebController@index');
-  Route::get('festival', 'WebController@festival');
+    Route::get('/', 'WebController@index');
+    Route::get('festival', 'WebController@festival');
+});
+
+Route::group(['prefix'=>'manager'], function() {
+    Route::get('/', 'ManagerController@index');
 });
 
 Route::group(['prefix'=>'api'], function() {
-  Route::group(['prefix'=>'auth'], function() {
-    Route::group(['prefix'=>'login'], function() {
-      Route::post('ecard', 'AuthController@ecard');
-      Route::get('facebook', 'AuthController@facebook');
-      Route::get('facebook/callback', 'AuthController@facebookCallback');
+    Route::group(['prefix'=>'auth'], function() {
+        Route::group(['prefix'=>'login'], function() {
+            Route::post('ecard', 'AuthController@ecard');
+            Route::post('sso', 'AuthController@sso');
+            Route::get('facebook', 'AuthController@facebook');
+            Route::get('facebook/callback', 'AuthController@facebookCallback');
+        });
     });
-  });
+    Route::group(['prefix'=>'card'], function() {
+        // manage
+        Route::post('create', 'Api\CardController@create');
+        Route::put('update/{id}', 'Api\CardController@create');
+        Route::delete('delete/{id}', 'Api\CardController@delete');
+
+        // get data
+        Route::get('get/{parent}/{child}', 'Api\CardController@get');
+    });
+
+    Route::group(['prefix'=>'person'], function() {
+        Route::put('update', 'Api\PersonController@update');
+        Route::get('history', 'Api\PersonController@gistory');
+
+        Route::group(['prefix'=>'reservation'], function() {
+            Route::post('create/{card_id}', 'Api\ReservationController@create');
+            Route::put('update/{id}', 'Api\ReservationController@update');
+            Route::delete('delete/{id}', 'Api\ReservationController@delete');
+        });
+    });
 });
