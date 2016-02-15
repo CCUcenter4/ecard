@@ -28,12 +28,14 @@
           <ul class="nav navbar-nav navbarHref">
             <li><a href="/web">首頁</a></li>
             <li><a href="/web/festival">節慶卡片</a></li>
-            <li><a href="/web/complex">綜合卡片</a></li>
-            <li><a href="/web/school">校慶卡片</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a data-toggle="modal" data-target="#loginModal">登入</a></li>
-            <li><a data-toggle="modal" data-target="#registerModal">註冊</a></li>
+            @if(Auth::check())
+                <li class="active"><a href="/web/person">個人設定頁面</a></li>
+            @else
+                <li><a data-toggle="modal" data-target="#loginModal">登入</a></li>
+                <li><a data-toggle="modal" data-target="#registerModal">註冊</a></li>
+            @endif
           </ul>
         </div>
       </div>

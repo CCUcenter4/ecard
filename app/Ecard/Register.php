@@ -4,57 +4,65 @@ use Illuminate\Http\Request;
 use DB;
 use Hash;
 
+use App\Ecard\Person;
+
 class Register{
-  public static $rule = [
-    'email'     => 'required|email',
-    'password'  => 'required|max:16',
-  ];
-
-  static public function create(Request $request){
-    $validator  = Validator::make($request->all(), self::$rule);
-    $result     = [];
-
-    if($validator->fails()){
-      $result['status'] = 0;
-      $result['reason'] = $validator->errors();
-    }else{
-      $data = [
-        'account'   => $request->input('email'),
-        'password'  => bcrypt($request->input('password')),
-        'type'      => '1',
-        'status'    => '0',
-        'created_at'=> date('Y-m-d H:i:s'),
-        'updated_at'=> date('Y-m-d H:i:s')
-      ];
-
-      $query = DB::table('users');
-      $id = $query->insertGetId($data);
-
-      self::createPersonInfo($id, $request->all());
-
-      $result['status'] = 1;
-    }
-
-    return $result;
-  }
-
-  static public function createFromMultiLogin($person){
-    // prepare person_info data
-    $data = [
-      'email' => $person['email'],
-      'name'  => $person['name'],
+    public static $rule = [
+        'account'     => 'required|email',
+        'password'  => 'required|max:16',
     ];
 
-    unset($person['email']);
-    unset($person['birth']);
+    static public function create(Request $request){
+        $validator  = Validator::make($request->all(), self::$rule);
+        $result     = [];
 
-    $person['created_at'] = date('Y-m-d H:i:s');
-    $person['updated_at'] = date('Y-m-d H:i:s');
+        if($validator->fails()){
+            $result['status'] = 0;
+            $result['reason'] = $validator->errors();
+        }else{
+            $data = [
+                'account'   => $request->input('account'),
+                'password'  => bcrypt($request->input('password')),
+                'type'      => 'ecard',
+                'status'    => 'available',
+                'role'      => 'user',
+                'created_at'=> date('Y-m-d H:i:s'),
+                'updated_at'=> date('Y-m-d H:i:s')
+            ];
 
-    $query = DB::table('users');
-    $id = $query->insertGetId($person);
-    self::createPersonInfo($id, $data);
+            $query = DB::table('user');
+            $user_id = $query->insertGetId($data);
 
-    return $id;
-  }
+            $data = [];
+            $data = [
+                'user_id'=>$user_id,
+                'name'=>$request->input('name')
+            ];
+            // 建立個人資料
+            Person::create($data);
+
+            $result['status'] = 1;
+        }
+
+        return $result;
+    }
+
+    static public function createFromMultiLogin($person){
+        // prepare person_info data
+        $data = [
+            'email' => $person['email'],
+            'name'  => $person['name'],
+        ];
+
+        unset($person['email']);
+        unset($person['birth']);
+
+        $person['created_at'] = date('Y-m-d H:i:s');
+        $person['updated_at'] = date('Y-m-d H:i:s');
+
+        $query = DB::table('users');
+        $id = $query->insertGetId($person);
+
+        return $id;
+    }
 }

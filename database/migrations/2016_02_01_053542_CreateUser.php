@@ -19,7 +19,10 @@ class CreateUser extends Migration
             $table->rememberToken();
             $table->enum('type', ['ecard', 'academic', 'academic_gra', 'sso']);
             $table->enum('status', ['available', 'disable']);
+            $table->enum('role', ['user', 'manager']);
             $table->timestamps();
+
+            $table->unique(['account', 'type']);
         });
     }
 

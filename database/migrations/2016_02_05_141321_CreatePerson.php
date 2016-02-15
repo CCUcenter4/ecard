@@ -15,6 +15,7 @@ class CreatePerson extends Migration
         Schema::create('person', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->string('name', 128)->nullable();
             $table->string('email', 128)->nullable();
             $table->string('phone', 128)->nullable();
             $table->date('birth')->nullable();

@@ -81,6 +81,12 @@ class Category {
 
         return $result;
     }
+
+    static public function get() {
+        $data = DB::table('category');
+
+        return $result;
+    }
 }
 
 ?>

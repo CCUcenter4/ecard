@@ -1,7 +1,7 @@
 @extends('manager.init')
 
 @section('css')
-<title>卡片管理系統</title>
+<title>ECARD後台 - 登入</title>
   {!!Html::style('assets/css/manager/login.css')!!}
 @stop
 

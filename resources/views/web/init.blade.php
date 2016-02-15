@@ -39,6 +39,10 @@
 <!-- Demonic Write -->
 <script src="{{url('assets/js/common.js')}}"></script>
 
+@if(Auth::check())
+@else
+<script src="{{url('assets/js/web/loginRegister.js')}}"></script>
+@endif
   @yield("js")
 
   </body>

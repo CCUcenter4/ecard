@@ -14,33 +14,47 @@ class CategoryController extends Controller
 {
     // Parent
     public function createParent(Request $request) {
+        $result = Category::createParent($request);
 
+        return $result;
     }
 
     public function updateParent($id, Request $request) {
+        $result = Category::updateParent($id, $request);
 
+        return $result;
     }
 
-    public function deleteParent($id) {
+    public function deleteParent($parent_id) {
+        $result = Category::deleteParent($parent_id);
 
+        return $result;
     }
 
     // Child
-    public function createchild(Request $request) {
+    public function createChild($parent_id, Request $request) {
+        $result = Category::createChild($parent_id, $request);
 
+        return $result;
     }
 
-    public function updatechild($id, Request $request) {
+    public function updateChild($id, Request $request) {
+        $result = Category::updateChild($id, $request);
 
+        return $result;
     }
 
-    public function deletechild($id) {
+    public function deleteChild($id) {
+        $result = Category::deleteChild($id);
 
+        return $result;
     }
 
 
     // Get The Tree
     public function get() {
+        $result = Category::get();
 
+        return $result;
     }
 }

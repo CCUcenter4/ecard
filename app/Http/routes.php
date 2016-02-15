@@ -16,6 +16,10 @@ Route::get('/', 'InitController@index');
 Route::group(['prefix'=>'web'], function() {
     Route::get('/', 'WebController@index');
     Route::get('festival', 'WebController@festival');
+
+    Route::group(['prefix'=>'person'], function() {
+        Route::get('/', 'WebController@person');
+    });
 });
 
 Route::group(['prefix'=>'manager'], function() {
@@ -56,6 +60,7 @@ Route::group(['prefix'=>'api'], function() {
             Route::post('create/{card_id}', 'Api\ReservationController@create');
             Route::put('update/{id}', 'Api\ReservationController@update');
             Route::delete('delete/{id}', 'Api\ReservationController@delete');
+            Route::get('list', 'Api\ReservationController@list');
         });
     });
 
