@@ -18,7 +18,7 @@ function bootstrapEvent() {
 }
 
 function pjaxEvent(){
-  $(document).pjax('.pjax', '#main');
+  $(document).pjax('a.pjax', '#main');
   $('#main')
     .on('pjax:start', function() {
       console.log('start');
@@ -26,4 +26,17 @@ function pjaxEvent(){
     .on('pjax:end', function() {
       console.log('end');
     });
+}
+
+function getCard() {
+  var request = {};
+  request.parent = $('meta[name="parent"]').attr('content');
+
+  $.get('/api/card/get', request, function(response) {
+
+  });
+}
+
+function produceCard() {
+
 }

@@ -19,17 +19,24 @@ Route::group(['prefix'=>'web'], function() {
 });
 
 Route::group(['prefix'=>'manager'], function() {
-    Route::get('/', 'ManagerController@index');
+    Route::get('/manage', 'ManagerController@manage');
+    Route::get('/login', 'ManagerController@login');
 });
 
 Route::group(['prefix'=>'api'], function() {
     Route::group(['prefix'=>'auth'], function() {
         Route::group(['prefix'=>'login'], function() {
+            // common user
             Route::post('ecard', 'AuthController@ecard');
             Route::post('sso', 'AuthController@sso');
             Route::get('facebook', 'AuthController@facebook');
             Route::get('facebook/callback', 'AuthController@facebookCallback');
+
+            // manager
+            Route::post('manager', 'AuthController@manager');
         });
+
+        Route::post('register', 'AuthController@register');
     });
     Route::group(['prefix'=>'card'], function() {
         // manage
@@ -49,6 +56,19 @@ Route::group(['prefix'=>'api'], function() {
             Route::post('create/{card_id}', 'Api\ReservationController@create');
             Route::put('update/{id}', 'Api\ReservationController@update');
             Route::delete('delete/{id}', 'Api\ReservationController@delete');
+        });
+    });
+
+    Route::group(['prefix'=>'category'], function() {
+        Route::group(['prefix'=>'parent'], function() {
+            Route::post('create', 'Api\CategoryController@createParent');
+            Route::put('update/{id}', 'Api\CategoryController@updateParent');
+            Route::delete('delete/{parent_id}', 'Api\CategoryController@deleteParent');
+        });
+        Route::group(['prefix'=>'child'], function() {
+            Route::post('create', 'Api\CategoryController@createChild');
+            Route::put('update/{id}', 'Api\CategoryController@updateChild');
+            Route::delete('delete/{id}', 'Api\CategoryController@deleteChild');
         });
     });
 });

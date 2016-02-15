@@ -8,6 +8,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Socialite;
+use App\Ecard\AuthTool;
+use Auth;
+
 class AuthController extends Controller
 {
   public function ecard() {
@@ -23,5 +26,15 @@ class AuthController extends Controller
 
   public function facebookCallback(Request $request) {
     return var_dump(Socialite::driver('facebook')->user());
+  }
+
+  public function manager(Request $request) {
+    AuthTool::manager($request);
+
+    if(Auth::check()) {
+        return view('manager.manage');
+    } else {
+        return view('manager.login');
+    }
   }
 }

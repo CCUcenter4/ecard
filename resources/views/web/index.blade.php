@@ -26,10 +26,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbarHref">
-            <li class="active"><a href="/web">首頁</a></li>
-            <li><a href="/web/festival">節慶卡片</a></li>
-            <li><a href="/web/complex">綜合卡片</a></li>
-            <li><a href="/web/school">校慶卡片</a></li>
+            <li class="active"><a class="pjax" href="/web">首頁</a></li>
+            <li><a class="pjax" href="/web/festival">節慶卡片</a></li>
+            <li><a class="pjax" href="/web/complex">綜合卡片</a></li>
+            <li><a class="pjax" href="/web/school">校慶卡片</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a data-toggle="modal" data-target="#loginModal">登入</a></li>

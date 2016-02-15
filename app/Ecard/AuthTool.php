@@ -19,5 +19,12 @@ class AuthTool {
     static public function sso(Request $request) {
 
     }
+
+    static public function manager(Request $request) {
+        $account = $request->input('account');
+        $password = bcrypt($request->input('password'));
+
+
+    }
 }
 ?>

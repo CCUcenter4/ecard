@@ -69,7 +69,6 @@ class Reservation{
     $member_id = Auth::user()->id;
 
     $insert_log = [
-      'status'    => '0',
       'member_id' => $member_id,
       'card_id'   => $id,
       'from_name' => $from_name,

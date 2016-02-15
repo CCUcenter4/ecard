@@ -16,7 +16,7 @@ function bootstrapEvent(){
 }
 
 function pjaxEvent(){
-  $(document).pjax('a', '#main', function() {
+  $(document).pjax('.pjax', '#main', function() {
     alert('click');
   });
 }
