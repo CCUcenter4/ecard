@@ -1,15 +1,13 @@
 $(function() {
   getParentList();
 
-  btnEvent();
-  editCategoryEvent();
-  getDataEvent();
+  categoryBtnEvent();
+  categoryEditEvent();
 });
 
 var parent_data;
 var child_data;
 var card_data;
-var card_detail;
 
 function getParentList() {
   $.get('/api/category/parent/get', function(result) {
@@ -17,24 +15,12 @@ function getParentList() {
     parent_data = result;
 
     produceParent();
-    changeEvent();
+    categoryChangeEvent();
     $('#parent').change();
   })
 }
 
-function getDataEvent(){
-  $('.thumbFile').unbind('click');
-  $('.thumbFile').click(function(){
-    var card_id = $(this).data('card_id');
-
-    $.get('/api/card/get/' + card_id, function(result){
-      console.log(result);
-      card_detail = result;
-    });
-  });
-}
-
-function editCategoryEvent() {
+function categoryEditEvent() {
   $('#createParentBtn').unbind('click');
   $('#createParentBtn').click(function(){
     var data = {};
@@ -122,7 +108,7 @@ function editCategoryEvent() {
   });
 }
 
-function changeEvent() {
+function categoryChangeEvent() {
   $('#parent').unbind('change');
   $('#parent').change(function(){
     var parent_id = $(this).val();
@@ -133,6 +119,7 @@ function changeEvent() {
       child_data = result;
 
       produceChild(parent_id);
+      $('#child').change();
       $('.cardContent *').remove();
     });
   });
@@ -140,14 +127,18 @@ function changeEvent() {
   $('#child').unbind('change');
   $('#child').change(function(){
     var parent_id = $('#parent').val();
-    var child_id = $(this).val();
+    var temp = $(this).val();
+    var child_id = $('#child option[value="' + temp + '"]').data('child_id');
 
+    if(child_id == null) {
+      return;
+    }
     console.log('child change');
-    $.get('/api/card/list/' + parent_id + '/' + child_id, data, function(result){
+    console.log(parent_id + ' ' + child_id);
+    $.get('/api/card/list/' + parent_id + '/' + child_id, function(result){
       console.log(result);
       card_data = result;
 
-      /*
       var text;
       text  = '<li id="addCard">';
       text += '<span class="glyphicon glyphicon-plus"></span>';
@@ -155,19 +146,15 @@ function changeEvent() {
 
       $('.cardContent *').remove();
       $('.cardContent').append(text);
-      $('#addCard')
-        .attr('data-parent', parent_id)
-        .attr('data-child', child_id);
 
       produceCard();
-      */
     });
   });
 
 
 }
 
-function btnEvent() {
+function categoryBtnEvent() {
   $('.openParentDialog').unbind('click');
   $('.openParentDialog').click(function(){
     var method = $(this).data('method');
@@ -217,7 +204,6 @@ function produceParent() {
   var text = '<option disabled>父元素</option>';
   var i;
 
-  $('#parent').html(text);
   for(i=0; parent_data[i]!=null; i++) {
     text += '<option value="' + parent_data[i]['id'] + '">' + parent_data[i]['name'] + '</option>';
   }
@@ -229,12 +215,11 @@ function produceChild(parent_id) {
   var text = '<option disabled>子元素</option>';
   var i;
 
-  $('#child').html(text);
   for(i=0; child_data[i]!=null; i++){
-    text = '<option value="' + child_data[i]['id'] + '">' + child_data[i]['name'] + '</option>';
-    $('#child').append(text);
-    $('#child .content:last')
-      .attr('data-parent_id', parent_id)
-      .attr('data-child', child_data[i]['child']);
+    text += '<option value="' + child_data[i]['id'] + '"';
+    text += 'data-child_id="' + child_data[i]['child'] + '">'
+    text += child_data[i]['name'] + '</option>';
   }
+  $('#child').html(text);
 }
+

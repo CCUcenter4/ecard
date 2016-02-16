@@ -21,8 +21,8 @@
 @if(Auth::check())
 
 @else
-    @include('web.loginModal');
-    @include('web.registerModal');
+    @include('web.modal.login');
+    @include('web.modal.register');
 @endif
 
 

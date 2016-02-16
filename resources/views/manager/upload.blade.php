@@ -8,7 +8,7 @@
 
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
-<script src="{{url('assets/js/manager/upload.js')}}"></script>
+<script src="{{url('assets/js/manager/category.js')}}"></script>
 <script src="{{url('assets/js/manager/file.js')}}"></script>
 @stop
 
@@ -35,5 +35,8 @@
           </select>
       </div>
   </div>
+  <br>
+  <ul class="cardContent">
+  </ul>
 @stop
 

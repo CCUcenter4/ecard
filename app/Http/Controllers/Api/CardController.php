@@ -13,11 +13,11 @@ use App\Ecard\Upload;
 
 class CardController extends Controller
 {
-    public function create() {
+    public function create(Request $request) {
         $thumb_type = $request->input('thumb_type');
         $web_type   = $request->input('web_type');
 
-        $id = Manage::createCard($request);
+        $id = Card::create($request);
 
         if($thumb_type > -1) {
             Upload::thumbFile($id, $_FILES['thumbFile']['tmp_name']);
@@ -37,7 +37,15 @@ class CardController extends Controller
 
     }
 
-    public function get($parent, $child) {
+    public function list($parent_id, $child_id) {
+        $result = Card::list($parent_id, $child_id);
 
+        return $result;
+    }
+
+    public function detail($id) {
+        $result = Card::detail($id);
+
+        return (array)$result;
     }
 }

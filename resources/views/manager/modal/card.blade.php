@@ -22,7 +22,7 @@
             <span id="thumbWrapper" class="previewWrapper"></span>
           </div>
           <div>
-            <p>web 卡片<b class="fileType">（限制格式為swf, jpg, png）</b></p>
+            <p>web 卡片<b class="fileType">（限制格式為jpg, png）</b></p>
             <p><b class="fileType">檔案大小不能超過10mb</b></p>
             <button id="webBtn" class="btn btn-primary">選擇卡片檔案</button>
               <!--

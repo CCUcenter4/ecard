@@ -15,7 +15,8 @@ class Card {
             'updated_at'=> date('Y-m-d H:i:s')
         ];
 
-        $id = $query->insertGetid($data);
+        $id = DB::table('card')
+            ->insertGetid($data);
 
         return $id;
     }
@@ -53,6 +54,23 @@ class Card {
 
         return $result;
     }
-}
 
+    static public function list($parent_id, $child_id) {
+        $result = DB::table('card')
+            ->select(['id', 'name'])
+            ->where('parent', '=', $parent_id)
+            ->where('child', '=', $child_id)
+            ->get();
+
+        return $result;
+    }
+
+    static public function detail($id) {
+        $result = DB::table('card')
+            ->where('id','=', $id)
+            ->first();
+
+        return $result;
+    }
+}
 ?>

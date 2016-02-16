@@ -45,11 +45,12 @@ Route::group(['prefix'=>'api'], function() {
     Route::group(['prefix'=>'card'], function() {
         // manage
         Route::post('create', 'Api\CardController@create');
-        Route::post('update/{id}', 'Api\CardController@create');
+        Route::post('update/{id}', 'Api\CardController@update');
         Route::post('delete/{id}', 'Api\CardController@delete');
 
         // get data
-        Route::get('get/{parent}/{child}', 'Api\CardController@get');
+        Route::get('list/{parent}/{child}', 'Api\CardController@list');
+        Route::get('detail/{id}', 'Api\CardController@detail');
     });
 
     Route::group(['prefix'=>'person'], function() {
@@ -60,7 +61,7 @@ Route::group(['prefix'=>'api'], function() {
             Route::post('create/{card_id}', 'Api\ReservationController@create');
             Route::post('update/{id}', 'Api\ReservationController@update');
             Route::post('delete/{id}', 'Api\ReservationController@delete');
-            Route::get('list', 'Api\ReservationController@list');
+            Route::get('get', 'Api\ReservationController@get');
         });
     });
 
