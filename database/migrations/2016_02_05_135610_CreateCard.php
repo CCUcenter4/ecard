@@ -17,10 +17,11 @@ class CreateCard extends Migration
             $table->integer('parent');
             $table->integer('child');
             $table->string('name', 128);
-            $table->enum('type', ['all', 'web']);
-            $table->integer('click_times');
-            $table->integer('share_times');
-            $table->integer('mail_times');
+            $table->enum('webfile_format', ['jpeg', 'png']);
+            $table->enum('thumbfile_format', ['jpeg', 'png']);
+            $table->integer('click_times')->default(0);
+            $table->integer('share_times')->default(0);
+            $table->integer('mail_times')->default(0);
             $table->timestamps();
         });
     }

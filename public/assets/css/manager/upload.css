@@ -1,0 +1,111 @@
+body{
+  color:white;
+}
+.menuWrapper{
+  position: absolute;
+  width:250px;
+  left:30px;
+  /* make float element has height
+  overflow:hidden;
+  */
+}
+.menuWrapper h3{
+  text-align:center;
+  padding:0;
+  margin:0;
+}
+.listRow:hover{
+  background:url(../../img/ccu/symphony.png);
+  color:blue;
+}
+.parent{
+  position: relative;
+  width:220px;
+  margin:0;
+  padding:0;
+  border:2px solid black;
+  border-radius:25px 25px 0 0;
+  font-size:20px;
+}
+.parent .content{
+  cursor:pointer;
+  margin-left:10px;
+}
+.child{
+  position: relative;
+  width:220px;
+  margin:0;
+  padding:0;
+  border:2px solid black;
+  font-size:20px;
+}
+.child .content{
+  cursor:pointer;
+  margin-left:10px;
+}
+.cardContent{
+  display:inline-block;
+  width:80%;
+  position: relative;
+  padding:0;
+  margin-left:250px;
+}
+.cardContent li{
+  width:160px;
+  min-height:140px;
+  float:left;
+  list-style:none;
+  cursor:pointer;
+  color:black;
+  background:#DBDBDB;
+  border:1px solid white;
+}
+.cardContent li:hover{
+  color:white;
+  background:#6D5297;
+}
+.cardContent li div{
+  width:120px;
+  height:85px;
+  background-repeat:no-repeat;
+  position: relative;
+  margin:0 auto;
+  bottom:-10px;
+}
+#addCard span{
+  -webkit-transform: scale(6);
+  position: absolute;
+  left:80px;
+  top:60px;
+}
+.listBtn{
+  color:red;
+  cursor:pointer;
+}
+.listBtn:hover{
+  opacity:0.7;
+}
+.editIcon{
+  display:inline-block;
+  background:url(/assets/img/ccu/pen.png);
+  background-size:100% 100%;
+  background-repeat:no-repeat;
+  height:25px;
+  width:25px;
+  border:0;
+  cursor:pointer;
+  position: relative;
+  top:3px;
+}
+.editIconHover{
+  display:inline-block;
+  background:url(/assets/img/ccu/writing.png);
+  background-size:100% 100%;
+  background-repeat:no-repeat;
+  height:25px;
+  width:25px;
+  border:0;
+  cursor:pointer;
+  position: relative;
+  top:3px;
+}

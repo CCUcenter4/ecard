@@ -23,7 +23,7 @@ Route::group(['prefix'=>'web'], function() {
 });
 
 Route::group(['prefix'=>'manager'], function() {
-    Route::get('/manage', 'ManagerController@manage');
+    Route::get('/upload', 'ManagerController@upload');
     Route::get('/login', 'ManagerController@login');
 });
 
@@ -69,11 +69,13 @@ Route::group(['prefix'=>'api'], function() {
             Route::post('create', 'Api\CategoryController@createParent');
             Route::put('update/{id}', 'Api\CategoryController@updateParent');
             Route::delete('delete/{parent_id}', 'Api\CategoryController@deleteParent');
+            Route::get('get', 'Api\CategoryController@getParent');
         });
         Route::group(['prefix'=>'child'], function() {
             Route::post('create', 'Api\CategoryController@createChild');
             Route::put('update/{id}', 'Api\CategoryController@updateChild');
             Route::delete('delete/{id}', 'Api\CategoryController@deleteChild');
+            Route::get('get', 'Api\CategoryController@getChild');
         });
     });
 });

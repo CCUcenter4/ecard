@@ -39,12 +39,8 @@ class AuthController extends Controller
     }
 
     public function manager(Request $request) {
-        AuthTool::manager($request);
+        $result = AuthTool::manager($request);
 
-        if(Auth::check()) {
-            return view('manager.manage');
-        } else {
-            return view('manager.login');
-        }
+        return $result;
     }
 }

@@ -16,17 +16,38 @@ class CategoryController extends Controller
     public function createParent(Request $request) {
         $result = Category::createParent($request);
 
+        if($result) {
+            $result = [];
+            $result['status'] = 'success';
+        }else {
+            $result = [];
+            $result['status'] = 'fail';
+        }
         return $result;
     }
 
     public function updateParent($id, Request $request) {
         $result = Category::updateParent($id, $request);
+        if($result) {
+            $result = [];
+            $result['status'] = 'success';
+        }else {
+            $result = [];
+            $result['status'] = 'fail';
+        }
 
         return $result;
     }
 
     public function deleteParent($parent_id) {
         $result = Category::deleteParent($parent_id);
+        if($result) {
+            $result = [];
+            $result['status'] = 'success';
+        }else {
+            $result = [];
+            $result['status'] = 'fail';
+        }
 
         return $result;
     }
@@ -34,26 +55,53 @@ class CategoryController extends Controller
     // Child
     public function createChild($parent_id, Request $request) {
         $result = Category::createChild($parent_id, $request);
+        if($result) {
+            $result = [];
+            $result['status'] = 'success';
+        }else {
+            $result = [];
+            $result['status'] = 'fail';
+        }
 
         return $result;
     }
 
     public function updateChild($id, Request $request) {
         $result = Category::updateChild($id, $request);
+        if($result) {
+            $result = [];
+            $result['status'] = 'success';
+        }else {
+            $result = [];
+            $result['status'] = 'fail';
+        }
 
         return $result;
     }
 
     public function deleteChild($id) {
         $result = Category::deleteChild($id);
+        if($result) {
+            $result = [];
+            $result['status'] = 'success';
+        }else {
+            $result = [];
+            $result['status'] = 'fail';
+        }
 
         return $result;
     }
 
 
-    // Get The Tree
-    public function get() {
-        $result = Category::get();
+    // Get
+    public function getParent() {
+        $result = Category::getParent();
+
+        return $result;
+    }
+
+    public function getChild($parent_id) {
+        $result = Category::getChild($parent_id);
 
         return $result;
     }

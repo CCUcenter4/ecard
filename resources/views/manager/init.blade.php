@@ -9,7 +9,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-    {!!Html::style('assets/css/manager/common.css')!!}
+    <link rel="stylesheet" href="{{url('assets/css/manager/common.css')}}">
 
     @yield('css')
 
@@ -23,7 +23,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="{{url('assets/js/common.js')}}"></script>
 
-  @yield("js")
+  @yield('js')
 
   </body>
 </html>

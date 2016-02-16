@@ -65,8 +65,17 @@ class AuthTool {
     }
 
     static public function manager(Request $request) {
-        $account = $request->input('account');
-        $password = bcrypt($request->input('password'));
+        $data = [
+            'account' => $request->input('account'),
+            'password' => $request->input('password'),
+            'role' => 'manager'
+        ];
+
+        if(Auth::attempt($data)) {
+            return redirect()->intended('manager/upload');
+        }else {
+            return redirect()->intended('manager/login');
+        }
     }
 }
 ?>

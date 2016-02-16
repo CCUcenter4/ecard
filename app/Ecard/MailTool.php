@@ -13,9 +13,5 @@ class MailTool {
     static public function card(Request $request) {
 
     }
-
-    static public function feedback(Request $request) {
-
-    }
 }
 ?>

@@ -9,8 +9,8 @@ use App\Http\Controllers\Controller;
 
 class ManagerController extends Controller
 {
-    public function manage() {
-        return view('manager.manage');
+    public function upload() {
+        return view('manager.upload');
     }
 
     public function login() {

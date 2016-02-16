@@ -48,6 +48,16 @@ return [
             'root'   => storage_path('app'),
         ],
 
+        'webFile' => [
+            'driver' => 'local',
+            'root'   => public_path('card/web'),
+        ],
+
+        'thumbFile' => [
+            'driver' => 'local',
+            'root'   => public_path('card/thumb')
+        ],
+
         'ftp' => [
             'driver'   => 'ftp',
             'host'     => 'ftp.example.com',

@@ -82,8 +82,19 @@ class Category {
         return $result;
     }
 
-    static public function get() {
-        $data = DB::table('category');
+    static public function getParent() {
+        $result = DB::table('category')
+            ->where('child', '=', 0)
+            ->get();
+
+        return $result;
+    }
+
+    static public function getChild($parent_id) {
+        $result = DB::table('category')
+            ->where('parent', '=', $parent_id)
+            ->where('child', '>', 0)
+            ->get();
 
         return $result;
     }
