@@ -11,17 +11,9 @@ class Category {
     }
 
     static public function createParent(Request $request) {
-        // determine parent id
-        $parent_id = DB::table('category')
-            ->max('parent');
-        $parent_id = $parent_id + 1;
-
-        $name = $request->input('name');
         $result = DB::table('category')
             ->insert([
-                'parent'=>$parent_id,
-                'child'=>0,
-                'name'=>$name
+                'name'=>$request->input('name')
             ]);
 
         return $result;
@@ -32,15 +24,16 @@ class Category {
         $result = DB::table('category')
             ->where('id', '=', $id)
             ->update([
-                'name'=>$name
+                'name'=>$request->input('name')
             ]);
 
         return $result;
     }
 
-    static public function deleteParent($parent_id) {
+    static public function deleteParent($id) {
         $result = DB::table('category')
-            ->where('parent', '=', $parent_id)
+            ->where('parent', '=', $id)
+            ->orWhere('id', '=', $id)
             ->delete();
 
         return $result;
@@ -51,14 +44,14 @@ class Category {
         $child_id = DB::table('category')
             ->where('parent', '=', $parent_id)
             ->max('child');
-        $child = $child + 1;
+        $child_id = $child_id + 1;
 
         $name = $request->input('name');
         $result = DB::table('category')
             ->insert([
-                'parent'=>$parent,
-                'child'=>$child,
-                'name'=>$name
+                'parent'=>$parent_id,
+                'child'=>$child_id,
+                'name'=>$request->input('name')
             ]);
 
         return $result;
@@ -69,7 +62,9 @@ class Category {
 
         $result = DB::table('category')
             ->where('id', '=', $id)
-            ->update(['name'=>$name]);
+            ->update([
+                'name'=>$request->input('name')
+            ]);
 
         return $result;
     }
@@ -84,7 +79,7 @@ class Category {
 
     static public function getParent() {
         $result = DB::table('category')
-            ->where('child', '=', 0)
+            ->where('parent', '=', 0)
             ->get();
 
         return $result;
@@ -93,7 +88,6 @@ class Category {
     static public function getChild($parent_id) {
         $result = DB::table('category')
             ->where('parent', '=', $parent_id)
-            ->where('child', '>', 0)
             ->get();
 
         return $result;

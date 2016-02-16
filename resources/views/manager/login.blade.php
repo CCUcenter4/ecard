@@ -13,11 +13,11 @@
     <form action="/api/auth/login/manager" method="post">
         <div>
             <label for="account">帳號：</label>
-            <input id="account" type="text" name="account">
+            <input id="account" type="text" name="account" placeholder="帳號">
         </div>
         <div>
             <label for="password">密碼：</label>
-            <input id="password" type="text" name="password">
+            <input id="password" type="text" name="password" placeholder="密碼">
         </div>
         <div class="btnWrapper">
             <input type="submit" value="登入" class="btn btn-primary">

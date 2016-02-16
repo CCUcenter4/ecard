@@ -3,7 +3,7 @@
 @section('css')
 <title>ECARD後台 - 卡片管理</title>
   {!!Html::style('assets/css/manager/upload.css')!!}
-  {!!Html::style('assets/css/manager/cardDialog.css')!!}
+  {!!Html::style('assets/css/manager/modal.css')!!}
 @stop
 
 @section('js')
@@ -13,30 +13,27 @@
 @stop
 
 @section('content')
-  @include('manager.cardModal')
-  @include('manager.parentModal')
-  @include('manager.childModal')
+  @include('manager.modal.card')
+  @include('manager.modal.parent')
+  @include('manager.modal.child')
   @include('manager.header')
 
-  <div class="menuWrapper">
-    <div class="parent">
-      <h3>Category</h3>
-      <span id="addParent" class="listBtn"><b>新增大類別</b></span>
-      <br>
-        <div class="listRow">
-          <span class="editParent editIcon"></span>
-          <span class="content" category="">
-          </span>
-        </div>
-    </div>
-    <div class="child">
-      <h3>Group</h3>
-      <span id="addChild" class="listBtn"><b>新增子類別</b></span>
-      <br>
-    </div>
+  <br>
+  <div class="row">
+      <div class="col-sm-4">
+          <br>
+          <button class="btn openParentDialog" data-method="create">新增父元素</button>
+          <button class="btn openParentDialog" data-method="edit">編輯父元素</button>
+          <select id="parent" class="form-control"></select>
+      </div>
+      <div class="col-sm-4">
+          <br>
+          <button class="btn openChildDialog" data-method="create">新增子元素</button>
+          <button class="btn openChildDialog" data-method="edit">編輯子元素</button>
+          <select id="child" class="form-control">
+              <option disabled>子元素</option>
+          </select>
+      </div>
   </div>
-
-  <ul class="cardContent">
-  </ul>
 @stop
 

@@ -14,8 +14,8 @@ class CreateCategory extends Migration
     {
         Schema::create('category', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent');
-            $table->integer('child');// 'child = 0' means parent
+            $table->integer('parent')->nullable();
+            $table->integer('child')->nullable();// 'child = 0' means parent
             $table->string('name', 128);
         });
     }

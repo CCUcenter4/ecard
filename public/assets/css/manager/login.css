@@ -3,4 +3,8 @@
   margin: 0 auto;
   padding: 0;
   text-align: center;
+  top: 200px;
+}
+.contentWrapper div {
+  padding: 10px;
 }

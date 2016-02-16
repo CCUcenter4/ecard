@@ -68,7 +68,7 @@ Route::group(['prefix'=>'api'], function() {
         Route::group(['prefix'=>'parent'], function() {
             Route::post('create', 'Api\CategoryController@createParent');
             Route::put('update/{id}', 'Api\CategoryController@updateParent');
-            Route::delete('delete/{parent_id}', 'Api\CategoryController@deleteParent');
+            Route::delete('delete/{id}', 'Api\CategoryController@deleteParent');
             Route::get('get', 'Api\CategoryController@getParent');
         });
         Route::group(['prefix'=>'child'], function() {

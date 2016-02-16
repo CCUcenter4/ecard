@@ -39,8 +39,8 @@ class CategoryController extends Controller
         return $result;
     }
 
-    public function deleteParent($parent_id) {
-        $result = Category::deleteParent($parent_id);
+    public function deleteParent($id) {
+        $result = Category::deleteParent($id);
         if($result) {
             $result = [];
             $result['status'] = 'success';
