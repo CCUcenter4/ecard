@@ -17,7 +17,7 @@
         </div>
         <div>
             <label for="password">密碼：</label>
-            <input id="password" type="text" name="password" placeholder="密碼">
+            <input id="password" type="password" name="password" placeholder="密碼">
         </div>
         <div class="btnWrapper">
             <input type="submit" value="登入" class="btn btn-primary">

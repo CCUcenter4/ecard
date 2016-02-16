@@ -23,8 +23,8 @@ Route::group(['prefix'=>'web'], function() {
 });
 
 Route::group(['prefix'=>'manager'], function() {
-    Route::get('/upload', 'ManagerController@upload');
-    Route::get('/login', 'ManagerController@login');
+    Route::get('upload', 'ManagerController@upload');
+    Route::get('login', 'ManagerController@login');
 });
 
 Route::group(['prefix'=>'api'], function() {
@@ -45,21 +45,21 @@ Route::group(['prefix'=>'api'], function() {
     Route::group(['prefix'=>'card'], function() {
         // manage
         Route::post('create', 'Api\CardController@create');
-        Route::put('update/{id}', 'Api\CardController@create');
-        Route::delete('delete/{id}', 'Api\CardController@delete');
+        Route::post('update/{id}', 'Api\CardController@create');
+        Route::post('delete/{id}', 'Api\CardController@delete');
 
         // get data
         Route::get('get/{parent}/{child}', 'Api\CardController@get');
     });
 
     Route::group(['prefix'=>'person'], function() {
-        Route::put('update', 'Api\PersonController@update');
+        Route::post('update', 'Api\PersonController@update');
         Route::get('history', 'Api\PersonController@gistory');
 
         Route::group(['prefix'=>'reservation'], function() {
             Route::post('create/{card_id}', 'Api\ReservationController@create');
-            Route::put('update/{id}', 'Api\ReservationController@update');
-            Route::delete('delete/{id}', 'Api\ReservationController@delete');
+            Route::post('update/{id}', 'Api\ReservationController@update');
+            Route::post('delete/{id}', 'Api\ReservationController@delete');
             Route::get('list', 'Api\ReservationController@list');
         });
     });
@@ -67,15 +67,15 @@ Route::group(['prefix'=>'api'], function() {
     Route::group(['prefix'=>'category'], function() {
         Route::group(['prefix'=>'parent'], function() {
             Route::post('create', 'Api\CategoryController@createParent');
-            Route::put('update/{id}', 'Api\CategoryController@updateParent');
-            Route::delete('delete/{id}', 'Api\CategoryController@deleteParent');
+            Route::post('update/{id}', 'Api\CategoryController@updateParent');
+            Route::post('delete/{id}', 'Api\CategoryController@deleteParent');
             Route::get('get', 'Api\CategoryController@getParent');
         });
         Route::group(['prefix'=>'child'], function() {
-            Route::post('create', 'Api\CategoryController@createChild');
-            Route::put('update/{id}', 'Api\CategoryController@updateChild');
-            Route::delete('delete/{id}', 'Api\CategoryController@deleteChild');
-            Route::get('get', 'Api\CategoryController@getChild');
+            Route::post('create/{parent_id}', 'Api\CategoryController@createChild');
+            Route::post('update/{id}', 'Api\CategoryController@updateChild');
+            Route::post('delete/{id}', 'Api\CategoryController@deleteChild');
+            Route::get('get/{parent_id}', 'Api\CategoryController@getChild');
         });
     });
 });

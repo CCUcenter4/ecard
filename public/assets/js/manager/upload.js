@@ -2,7 +2,8 @@ $(function() {
   getParentList();
 
   btnEvent();
-  postDataEvent();
+  editCategoryEvent();
+  getDataEvent();
 });
 
 var parent_data;
@@ -17,7 +18,7 @@ function getParentList() {
 
     produceParent();
     changeEvent();
-    getDataEvent();
+    $('#parent').change();
   })
 }
 
@@ -29,16 +30,11 @@ function getDataEvent(){
     $.get('/api/card/get/' + card_id, function(result){
       console.log(result);
       card_detail = result;
-      $('#cardDetail #updateCardBtn').attr('data-card_id', card_id);
-
-      emptyDetail();
-      insertDetail();
     });
   });
 }
 
-
-function postDataEvent() {
+function editCategoryEvent() {
   $('#createParentBtn').unbind('click');
   $('#createParentBtn').click(function(){
     var data = {};
@@ -46,6 +42,8 @@ function postDataEvent() {
 
     $.post('/api/category/parent/create', data, function(result){
       console.log(result);
+      getParentList();
+      $('#parentDialog').modal('hide');
     }).fail(function(){
       alert('新增父元素失敗');
     });
@@ -57,21 +55,38 @@ function postDataEvent() {
     var data = {};
     data.name     = $('#parentName').val();
 
-    $.put('/api/category/parent/update/' + id, data, function(result){
+    $.post('/api/category/parent/update/' + id, data, function(result){
       console.log(result);
+      getParentList();
+      $('#parentDialog').modal('hide');
     }).fail(function(){
       alert('更新父元素失敗');
     });
   });
 
+  $('#deleteParentBtn').unbind('click');
+  $('#deleteParentBtn').click(function() {
+    var id = $('#parent').val();
+
+    $.post('/api/category/parent/delete/' + id, function(result) {
+      console.log(result);
+      getParentList();
+      $('#parentDialog').modal('hide');
+    }).fail(function() {
+      alert('刪除父元素失敗');
+    });
+  });
+
   $('#createChildBtn').unbind('click');
   $('#createChildBtn').click(function(){
+    var parent_id = $('#parent').val();
     var data = {};
-    data.parent = $('#parent').val();
     data.name     = $('#childName').val();
 
-    $.post('/api/category/child/create', data, function(result){
+    $.post('/api/category/child/create/' + parent_id, data, function(result){
       console.log(result);
+      $('#parent').change();
+      $('#childDialog').modal('hide');
     }).fail(function(){
       alert('新增子元素失敗');
     });
@@ -86,8 +101,23 @@ function postDataEvent() {
     console.log(data);
     $.post('/api/category/child/update/' + id, data, function(result){
       console.log(result);
+      $('#parent').change();
+      $('#childDialog').modal('hide');
     }).fail(function(){
-      alert('更新群組失敗');
+      alert('更新子元素失敗');
+    });
+  });
+
+  $('#deleteChildBtn').unbind('click');
+  $('#deleteChildBtn').click(function() {
+    var id = $('#child').val();
+
+    $.post('/api/category/child/delete/' + id, function(result) {
+      console.log(result);
+      $('#parent').change();
+      $('#childDialog').modal('hide');
+    }).fail(function() {
+      alert('刪除子元素失敗');
     });
   });
 }
@@ -98,11 +128,11 @@ function changeEvent() {
     var parent_id = $(this).val();
 
     console.log('parent change');
-    $.get('/api/category/child/' + parent_id, function(result){
+    $.get('/api/category/child/get/' + parent_id, function(result){
       console.log(result);
       child_data = result;
 
-      produceGroup(parent_id);
+      produceChild(parent_id);
       $('.cardContent *').remove();
     });
   });
@@ -201,7 +231,7 @@ function produceChild(parent_id) {
 
   $('#child').html(text);
   for(i=0; child_data[i]!=null; i++){
-    text += '<option value="' + child_data[i]['id'] + '">' + child_data[i]['name'] + '</option>';
+    text = '<option value="' + child_data[i]['id'] + '">' + child_data[i]['name'] + '</option>';
     $('#child').append(text);
     $('#child .content:last')
       .attr('data-parent_id', parent_id)
