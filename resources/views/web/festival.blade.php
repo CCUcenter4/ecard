@@ -4,13 +4,20 @@
 <title>節慶卡片</title>
 <link rel="stylesheet" href="{{url('assets/css/web/index.css')}}">
 <link rel="stylesheet" href="{{url('assets/css/web/carousel.css')}}">
+<link rel="stylesheet" href="{{url('assets/css/web/card.css')}}">
+
 @stop
 
 @section('js')
-<script src="{{url('assets/js/web/festival.js')}}"></script>
+    <script src="{{url('assets/js/web/normal.js')}}"></script>
 @stop
 
 @section('content')
+@include('web.modal.card')
+<input type="hidden" value="{{$parent_id}}" id="parent_id">
+<input type="hidden" value="{{$child_id}}" id="child_id">
+
+<!-- Header -->
 <div class="navbar-wrapper">
     <div class="container">
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -37,8 +44,7 @@
 </div>
 </div>
 
-
-
+<!-- Card Player -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -79,9 +85,8 @@
 </a>
   </div>
 
-
-  <div id="main">
-      <h1>Festival</h1>
+  <!-- Card -->
+  <div id="main" class="container marketing">
   </div>
 @stop
 

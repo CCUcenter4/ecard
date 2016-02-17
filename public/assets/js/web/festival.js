@@ -6,4 +6,3 @@ function bootstrapEvent() {
   // carousel
   $('.myCarousel').carousel();
 }
-

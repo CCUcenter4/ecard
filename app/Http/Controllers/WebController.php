@@ -30,7 +30,9 @@ class WebController extends Controller
     }
 
     public function festival(){
-      return view('web.festival');
+        return view('web.festival')
+            ->with('parent_id', 3)
+            ->with('child_id', 1);
     }
 
     public function person(){

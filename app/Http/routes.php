@@ -23,7 +23,7 @@ Route::group(['prefix'=>'web'], function() {
 });
 
 Route::group(['prefix'=>'manager'], function() {
-    Route::get('upload', 'ManagerController@upload');
+    Route::get('upload', ['middleware'=>'manager', 'uses'=>'ManagerController@upload']);
     Route::get('login', 'ManagerController@login');
 });
 
@@ -49,7 +49,7 @@ Route::group(['prefix'=>'api'], function() {
         Route::post('delete/{id}', 'Api\CardController@delete');
 
         // get data
-        Route::get('list/{parent}/{child}', 'Api\CardController@list');
+        Route::get('list/{parent_id}/{child_id}', 'Api\CardController@list');
         Route::get('detail/{id}', 'Api\CardController@detail');
     });
 
