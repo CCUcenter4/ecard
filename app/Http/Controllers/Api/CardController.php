@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 use App\Ecard\Card;
 use App\Ecard\Upload;
+use App\Ecard\MailTool;
 
 class CardController extends Controller
 {
@@ -47,5 +48,11 @@ class CardController extends Controller
         $result = Card::detail($id);
 
         return (array)$result;
+    }
+
+    public function mail($id, Request $request) {
+        $result = MailTool::card($id, $request);
+
+        return $result;
     }
 }

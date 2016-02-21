@@ -41,5 +41,16 @@ class Person {
 
         return $result;
     }
+
+    static public function get() {
+        $user = Auth::user();
+        if($user) {
+            $result = DB::table('person')
+                ->where('user_id', '=', $user->id)
+                ->first();
+
+            return $result;
+        }
+    }
 }
 ?>

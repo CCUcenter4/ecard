@@ -38,7 +38,7 @@ function produceCard() {
       card_name = card_list[i].name;
 
       text += '<div class="col-lg-4">';
-      text += '<a data-toggle="modal" data-target="#card">';
+      text += `<a data-toggle="modal" data-target="#card" class="list" data-card_id="${card_id}">`;
       text += `<img class="${imgClass}" src="/card/thumb/${card_id}">`;
       text += '</a>';
       text += `<h3>${card_name}</h3>`;
@@ -48,4 +48,22 @@ function produceCard() {
 
     $('#main').append(text);
   }
+
+  cardEvent();
+}
+
+function cardEvent() {
+  $('.list').click(function() {
+    var id = $(this).data('card_id');
+
+    $.get('/api/card/detail/' + id, function(result) {
+      console.log(result);
+      $('#cardTitle').text(result.name);
+      $('#cardName').text(result.name);
+      $('#mailTime').text(result.mail_times);
+      $('#shareTime').text(result.share_times);
+
+      $('#mailHref').attr('href', '/web/card/' + id);
+    })
+  });
 }

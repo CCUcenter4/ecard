@@ -15,6 +15,8 @@ function modalBtnEvent() {
     if(from == 1) {// login ecard
       $.post('/api/auth/login/ecard', request, function(result) {
         console.log(result);
+      }).fail(function() {
+        alert('無此帳號密碼');
       });
     }else if(from == 2) {// login sso
 
@@ -31,6 +33,8 @@ function modalBtnEvent() {
     console.log(request);
     $.post('/api/auth/register', request, function(result) {
       console.log(result);
+    }).fail(function() {
+      alert('註冊失敗');
     });
   });
 }

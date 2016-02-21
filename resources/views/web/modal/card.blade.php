@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="cardModalLabel">緣。原</h4>
+                <h4 class="modal-title" id="cardTitle"></h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -12,25 +12,26 @@
                         <img class="featurette-image img-responsive center-block" data-src="holder.js/720x600/auto" alt="Generic placeholder image">
                     </div><!-- /.col-lg-4 -->
                     <div class="col-lg-4">
-                        <h3 id="cardName">緣。原</h3><cite title="Source Title" id="cardAuthor">Author</cite><br>
+                        <h3 id="cardName"></h3><cite title="Source Title" id="cardAuthor"></cite><br>
                         <p id="cardDescription">
-                </p>
-                <p>
-                    <a class="btn btn-danger" href="#" role="button"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 90</a>
-                    <a class="btn btn-warning" href="#" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
-                    <a class="btn btn-default" href="#" role="button"><span class="glyphicon glyphicon glyphicon-share-alt" aria-hidden="true"></span></a>
-                </p>
-                <hr>
-            </div>
-        </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary">Save changes</button>
-</div>
+                        </p>
+                        <p>
+                            <a class="btn btn-danger" id="mailHref">
+                                寄送
+                                <span class="glyphicon glyphicon-heart" aria-hidden="true" id="mailTime"></span>
+                            </a>
+                            <a class="btn btn-default" role="button">
+                                分享到FB
+                                <span class="glyphicon glyphicon glyphicon-share-alt" aria-hidden="true" id="shareTime"></span>
+                            </a>
+                        </p>
+                        <hr>
+                    </div>
+                </div><!-- /.col-lg-4 -->
+            </div><!-- /.row -->
         </div>
     </div>
+</div>
 </div>
 
 

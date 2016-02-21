@@ -16,12 +16,13 @@ class CreateReservation extends Migration
             $table->increments('id');
             $table->integer('card_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->string('sender', 128);
-            $table->string('reciever', 128);
-            $table->longtext('msg');
+            $table->string('sender_email', 128);
+            $table->string('sender_name', 128);
+            $table->string('reciever_email', 128);
+            $table->string('reciever_name', 128);
+            $table->longtext('message');
             $table->dateTime('mail_time');
             $table->timestamps();
-            $table->enum('status', ['finished', 'queue']);
 
             $table->foreign('card_id')->references('id')->on('card')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('user');

@@ -35,6 +35,11 @@ class WebController extends Controller
             ->with('child_id', 1);
     }
 
+    public function card($card_id) {
+        return view('web.card')
+            ->with('id');
+    }
+
     public function person(){
         return view('web.person');
     }

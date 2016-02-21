@@ -16,6 +16,7 @@ Route::get('/', 'InitController@index');
 Route::group(['prefix'=>'web'], function() {
     Route::get('/', 'WebController@index');
     Route::get('festival', 'WebController@festival');
+    Route::get('card/{card_id}', 'WebController@card');
 
     Route::group(['prefix'=>'person'], function() {
         Route::get('/', 'WebController@person');
@@ -51,6 +52,9 @@ Route::group(['prefix'=>'api'], function() {
         // get data
         Route::get('list/{parent_id}/{child_id}', 'Api\CardController@list');
         Route::get('detail/{id}', 'Api\CardController@detail');
+
+        // mail
+        Route::post('mail/{id}', 'Api\CardController@mail');
     });
 
     Route::group(['prefix'=>'person'], function() {
