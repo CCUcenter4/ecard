@@ -24,7 +24,6 @@ class CreateMailHistory extends Migration
             $table->dateTime('created_at');
             $table->enum('type', ['immediate', 'reservation']);
             $table->enum('status', ['success', 'fail']);
-            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('user');
         });

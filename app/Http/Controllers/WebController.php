@@ -10,12 +10,8 @@ use App\Http\Controllers\Controller;
 
 use App\Ecard\Card;
 use App\Ecard\Person;
+use App\Ecard\Category;
 
-
-/*
- **/
-
-use Mail;
 
 class WebController extends Controller
 {
@@ -29,10 +25,14 @@ class WebController extends Controller
       return view('web.index');
     }
 
-    public function festival(){
+    public function festival($parent_id, $child_id){
+        $list = Category::getChild($parent_id);
+
         return view('web.festival')
-            ->with('parent_id', 3)
-            ->with('child_id', 1);
+            ->with('parent_id', $parent_id)
+            ->with('child_id', $child_id)
+            ->with('list', $list)
+            ->with('active_id', $child_id);
     }
 
     public function card($card_id) {

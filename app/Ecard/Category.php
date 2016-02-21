@@ -79,7 +79,7 @@ class Category {
 
     static public function getParent() {
         $result = DB::table('category')
-            ->where('parent', '=', 0)
+            ->whereNull('parent')
             ->get();
 
         return $result;
