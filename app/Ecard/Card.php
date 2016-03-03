@@ -38,13 +38,8 @@ class Card {
             ->where('id', '=', $id)
             ->first();
 
-        if($data->thumbfile_format!=null){
-            $path = public_path().'card/thumb/'.$id;
-            unlink($path);
-        }
-
         if($data->webfile_format!=null){
-            $path = public_path().'card/web/'.$id;
+            $path = public_path().'/card/web/'.$id;
             unlink($path);
         }
 

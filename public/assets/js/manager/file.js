@@ -5,89 +5,31 @@ $(function() {
 var card_detail;
 
 function filePostEvent(){
-  var thumb_name = {
-    'jpg' : 0,
-    'png' : 1
-  };
-  var web_name = {
-    'jpg' : 1,
-    'png' : 2
-  };
-
-  var name;
-  var file_name;
-
-  $('#updateCardBtn').unbind('click');
-  $('#updateCardBtn').click(function(){
-    var data = {};
-    var thumb_t = $('input[name="thumbFile"]');
-    var web_t   = $('input[name="webFile"]');
-    var app_t   = $('input[name="appFile"]');
-
-    data._token       = $('meta[name="csrf-token"]').attr('content');
-    data.id          = $(this).data('id');
-    data.name         = $('input[name="cardName"]').val();
-    data.thumb_type   = -1;
-    data.web_type     = -1;
-    data.app_type     = -1;
-
-    if(thumb_t[0].files[0]!=null){
-      name            = thumb_t[0].files[0].name;
-      file_name       = name.substring(name.lastIndexOf('.')+1).toLowerCase();
-      data.thumb_type = thumb_name[file_name];
-    }
-
-    if(web_t[0].files[0]!=null){
-      name          = web_t[0].files[0].name;
-      file_name     = name.substring(name.lastIndexOf('.')+1).toLowerCase();
-      data.web_type = web_name[file_name];
-    }
-
-    console.log(data);
-    $('#cardFileForm').ajaxSubmit({
-      url     : '/api/card/update/' + data.id,
-      method  : 'POST',
-      data    : data,
-      success : function(result){
-        console.log(result);
-      },
-      fail    : function(){
-        alert('更新卡片失敗');
-      }
-    });
-  });
-
   $('#createCardBtn').unbind('click');
   $('#createCardBtn').click(function(){
     var temp;
     var data = {};
-    var thumb_t = $('input[name="thumbFile"]');
     var web_t   = $('input[name="webFile"]');
-    var app_t   = $('input[name="appFile"]');
 
     data._token       = $('meta[name="csrf-token"]').attr('content');
     data.parent       = $('#parent').val();
     temp = $('#child').val();
     data.child        = $('#child option[value="' + temp + '"]').data('child_id');
     data.name         = $('input[name="cardName"]').val();
-    data.thumb_type   = -1;
-    data.web_type     = -1;
-    data.app_type     = -1;
 
-    if(thumb_t[0].files[0]!=null){
-      name            = thumb_t[0].files[0].name;
-      file_name       = name.substring(name.lastIndexOf('.')+1).toLowerCase();
-      data.thumb_type = thumb_name[file_name];
-    }else{
-      alert('縮圖不能為空');
+
+    if(_.trim(data.name) == '') {
+      alert('還沒填寫卡片名字');
       return;
     }
 
-    if(web_t[0].files[0]!=null){
-      name          = web_t[0].files[0].name;
-      file_name     = name.substring(name.lastIndexOf('.')+1).toLowerCase();
-      data.web_type = web_name[file_name];
+    if(web_t[0].files[0]==null){
+      alert('還沒選擇卡片檔案');
+      return;
     }
+
+    temp = web_t[0].files[0].name;
+    data.file_extension = temp.substring(temp.lastIndexOf('.')+1).toLowerCase();
 
     console.log(data);
     $('#cardFileForm').ajaxSubmit({
@@ -96,10 +38,69 @@ function filePostEvent(){
       data    : data,
       success : function(result){
         console.log(result);
+        alert('新增卡片成功');
+        $('#cardDetail').modal('hide');
+        $('#child').change();
       },
-      fail    : function(){
+      error   : function(){
         alert('新增卡片失敗');
       }
+    });
+  });
+
+  $('#updateCardBtn').unbind('click');
+  $('#updateCardBtn').click(function(){
+    var data = {};
+    var id = $('input[name="currentEditCardId"]').val();
+    var web_t   = $('input[name="webFile"]');
+    var temp;
+
+    data._token       = $('meta[name="csrf-token"]').attr('content');
+    data.name         = $('input[name="cardName"]').val();
+
+    if(_.trim(data.name) == '') {
+      alert('還沒填寫卡片名字');
+      return;
+    }
+
+    if(web_t[0].files[0] != null) {
+      data.webFileExist = 1;
+      temp = web_t[0].files[0].name;
+      data.file_extension = temp.substring(temp.lastIndexOf('.')+1).toLowerCase();
+    }else {
+      data.webFileExist = 0;
+    }
+
+    console.log(data);
+    $('#cardFileForm').ajaxSubmit({
+      url     : '/api/card/update/' + id,
+      method  : 'POST',
+      data    : data,
+      success : function(result){
+        console.log(result);
+        alert('更新卡片成功');
+        $('#cardDetail').modal('hide');
+        $('#child').change();
+      },
+      fail    : function(){
+        alert('更新卡片失敗');
+      }
+    });
+  });
+
+  $('#deleteCardBtn').unbind('click');
+  $('#deleteCardBtn').click(function() {
+    var id = $('input[name="currentEditCardId"]').val();
+    var data = {};
+    data._token = $('meta[name="csrf-token"]').attr('content');
+
+    console.log(id);
+    $.post('/api/card/delete/' + id, function(result) {
+      alert('刪除成功');
+      $('#cardDetail').modal('hide');
+        $('#child').change();
+    }).fail(function() {
+      alert('刪除失敗');
     });
   });
 }
@@ -128,41 +129,6 @@ function fileChangeEvent() {
     $(this).addClass('editIcon').removeClass('editIconHover');
   });
 
-  $('input[name="thumbFile"]').unbind('change');
-  $('input[name="thumbFile"]').change(function(){
-    var size = $(this)[0].files[0].size/1024/1024;
-    if(size>=10){
-      alert('檔案大小超過10mb');
-      $(this).val(null);
-      return;
-    }
-
-    var name = $(this)[0].files[0].name;
-    var file_name = name.substring(name.lastIndexOf('.')+1).toLowerCase();
-
-    if(file_name != 'jpg' && file_name!='png'){
-      alert('檔案格式必須是jpg, png');
-      $(this).val(null);
-      return;
-    }
-
-    $('#thumbName').html(name);
-
-    var reader = new FileReader();
-    reader.onload = function(){
-      var dataURL = reader.result;
-
-      $('#thumbWrapper *').remove();
-      var text = '<img id="thumbImg">';
-      $('#thumbWrapper').append(text);
-
-      var output  = document.getElementById('thumbImg');
-      output.src = dataURL;
-    };
-
-    reader.readAsDataURL($(this)[0].files[0]);
-  });
-
   $('input[name="webFile"]').unbind('change');
   $('input[name="webFile"]').change(function(){
     var size = $(this)[0].files[0].size/1024/1024;
@@ -173,24 +139,21 @@ function fileChangeEvent() {
     }
 
     var name = $(this)[0].files[0].name;
-    var file_name = name.substring(name.lastIndexOf('.')+1).toLowerCase();
+    var file_extension = name.substring(name.lastIndexOf('.')+1).toLowerCase();
 
-    if(file_name!='swf' && file_name != 'jpg' && file_name!='png'){
-      alert('檔案格式必須是swf, jpg, png');
+    if(file_extension != 'jpg' && file_extension!='png'){
+      alert('檔案格式必須是 jpg, png, JPG, PNG');
       $(this).val(null);
       return;
     }
+
+    $('#inputFileName').html(name);
   });
 }
 
 function cardBtnEvent() {
   $('#addCard').unbind('click');
   $('#addCard').click(function(){
-    emptyDetail();
-
-    var text;
-    text = '<img id="thumbImg" style="background:url(/card/unknown.jpg); background-size:100% 100%;">';
-    $('#cardDetail #thumbWrapper').append(text);
 
     $('#cardDetail').modal('show');
     $('#cardDetail .btnWrapper').hide();
@@ -199,33 +162,19 @@ function cardBtnEvent() {
 
   $('.thumbFile').unbind('click');
   $('.thumbFile').click(function(){
-    var data = {};
-    data.id = $(this).data('id');
+    var id = $(this).data('id');
+    var name = $(this).data('name');
 
-    console.log('get Detail ' + data.id);
-    $.get('/api/card/detail/' + data.id, function(result){
-      console.log(result);
-      card_detail = result;
-      $('#cardDetail #updateCardBtn').data('id', data.id);
+    console.log('card id ' + id);
 
-      emptyDetail();
-      insertDetail();
-    });
-  });
+    emptyCardModal();
 
-  $('#thumbBtn').unbind('click');
-  $('#thumbBtn').click(function(){
-    $('input[name="thumbFile"]').click();
-  });
+    $('#cardDetail').modal('show');
+    $('#cardDetail .btnWrapper').hide();
+    $('#updateCardWrapper').show();
 
-  $('#webBtn').unbind('click');
-  $('#webBtn').click(function(){
-    $('input[name="webFile"]').click();
-  });
-
-  $('#appBtn').unbind('click');
-  $('#appBtn').click(function(){
-    $('input[name="appFile"]').click();
+    $('input[name="cardName"]').val(name);
+    $('input[name=currentEditCardId]').val(id);
   });
 }
 
@@ -233,45 +182,28 @@ function produceCard(){
   var i;
   var text;
   var temp;
+  var id;
+  var name;
 
   for(i=0; card_data[i]!=null; i++){
+    id = card_data[i]['id'];
+    name = card_data[i]['name'];
+
     text  = '<li class="thumbFile">';
-    text += '<span>';
-    text += card_data[i]['name'];
-    text += '</span>';
-    text += '<div ';
-    text += 'style="background:url(/card/thumb/';
-    text += card_data[i]['id'];
-    text += ');background-size:cover;"></div></li>';
+    text += `<span>${name}</span>`;
+    text += `<div style="background:url(/card/web/${id});background-size:cover;">`;
+    text += '</div></li>';
 
     $('.cardContent').append(text);
     $('.cardContent li:last')
-      .attr('data-id', card_data[i]['id']);
+      .attr('data-id', id)
+      .attr('data-name', name);
   }
 
   cardBtnEvent();
 }
 
-function emptyDetail(){
-  $('.previewWrapper *').remove();
-  $('#cardDetail input').val(null);
-}
-
-function insertDetail(){
-  $('#cardDetail').modal('show');
-  $('#cardDetail .btnWrapper').hide();
-  $('#updateCardWrapper').show();
-
-  $('input[name="cardName"]').val(card_detail['name']);
-  var text;
-
-  text = '<img id="thumbImg" style="background:url(/card/thumb/';
-  text+= card_detail['id'];
-  text+= '); background-size:100% 100%;">';
-  $('#thumbWrapper').append(text);
-
-  text = '<img id="webImg" style="background:url(/card/web/';
-  text+= card_detail['id'];
-  text+= '); background-size:100% 100%;">';
-  $('#webWrapper').append(text);
+function emptyCardModal() {
+  $('input[name="cardName"]').val(null);
+  $('input[name="webFile"]').val(null);
 }

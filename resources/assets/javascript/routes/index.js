@@ -1,3 +1,0 @@
-require('./user');
-
-require('./main');

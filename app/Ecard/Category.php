@@ -5,6 +5,8 @@ use Storage;
 use DB;
 use Illuminate\Http\Request;
 
+use App\Ecard\Card;
+
 class Category {
     public function __construct() {
 
@@ -31,7 +33,19 @@ class Category {
     }
 
     static public function deleteParent($id) {
-        $result = DB::table('category')
+        $result = [];
+        $allChild = DB::table('category')
+            ->where('parent', '=', $id)
+            ->get();
+
+        $result['delete_child'] = [];
+        if($allChild) {
+            for($i=0; $i<count($allChild); $i++) {
+                $result['delete_child'][$i] = self::deleteChild($allChild[$i]->id);
+            }
+        }
+
+        $result['delete_category'] = DB::table('category')
             ->where('parent', '=', $id)
             ->orWhere('id', '=', $id)
             ->delete();
@@ -70,10 +84,29 @@ class Category {
     }
 
     static public function deleteChild($id) {
-        $result = DB::table('category')
+        $result = [];
+        $current = DB::table('category')
+            ->where('id', '=', $id)
+            ->first();
+        $i = 0;
+        if($current) {
+            $parent = $current->parent;
+            $child = $current->child;
+
+            $wait_delete = DB::table('card')
+                ->where('parent', '=', $parent)
+                ->where('child', '=', $child)
+                ->get();
+
+            for($i=0; $i<count($wait_delete); $i++) {
+                Card::delete($wait_delete[$i]->id);
+            }
+        }
+
+        $result['delete_card_counts'] = $i;
+        $result['child'] = DB::table('category')
             ->where('id', '=', $id)
             ->delete();
-
         return $result;
     }
 

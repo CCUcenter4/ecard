@@ -15,27 +15,28 @@ use App\Ecard\MailTool;
 class CardController extends Controller
 {
     public function create(Request $request) {
-        $thumb_type = $request->input('thumb_type');
-        $web_type   = $request->input('web_type');
-
         $id = Card::create($request);
 
-        if($thumb_type > -1) {
-            Upload::thumbFile($id, $_FILES['thumbFile']['tmp_name']);
-        }
-        if($web_type > -1) {
-            Upload::webFile($id, $_FILES['webFile']['tmp_name']);
-        }
+        Upload::webFile($id, $_FILES['webFile']['tmp_name']);
 
         return $id;
     }
 
     public function update($id, Request $request) {
+        $result = Card::update($id, $request);
+        $webFileExist = $request->input('webFileExist');
 
+        if($webFileExist == 1) {
+            Upload::webFile($id, $_FILES['webFile']['tmp_name']);
+        }
+
+        return $result;
     }
 
     public function delete($id) {
+        $result = Card::delete($id);
 
+        return $result;
     }
 
     public function list($parent_id, $child_id) {

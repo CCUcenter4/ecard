@@ -18,6 +18,7 @@
   @include('manager.modal.child')
   @include('manager.header')
 
+    <input type="hidden" name="currentEditCardId">
   <br>
   <div class="row">
       <div class="col-sm-4">
