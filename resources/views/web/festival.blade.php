@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{url('assets/css/web/index.css')}}">
 <link rel="stylesheet" href="{{url('assets/css/web/carousel.css')}}">
 <link rel="stylesheet" href="{{url('assets/css/web/card.css')}}">
+<link rel="stylesheet" href="{{url('assets/css/web/normal.css')}}">
 
 @stop
 
@@ -67,24 +68,29 @@
             <p class="pull-right visible-xs">
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
             </p>
-            <div class="jumbotron">
-                <h1>新年賀卡</h1>
-                <p>此區塊為暫定樣式</p>
-            </div>
+            <div class="row" id="cardContainer">
+                <!--
             <div class="row">
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
                         <a data-toggle="modal" data-target="#card">
-                            <img class="featurette-image img-responsive center-block" data-src="holder.js/280x200/auto" alt="Generic placeholder image">
+                            <img class="featurette-image img-responsive center-block">
                         </a>
                         <div class="caption">
                             <h3>標題</h3>
-                            <p>描述</p>
-                            <p><a class="btn btn-default" href="#" role="button"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 25</a>
-                                <a class="btn btn-default" href="#" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></a></p>
+                            <p>
+                                <a class="btn btn-default" href="#" role="button">
+                                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 25
+                                </a>
+                                <a class="btn btn-default" href="#" role="button">
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
+            </div>
+            -->
             </div>
         </div>
     </div>

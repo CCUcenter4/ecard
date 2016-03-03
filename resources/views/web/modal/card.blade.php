@@ -9,14 +9,14 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-8">
-                        <img class="featurette-image img-responsive center-block" data-src="holder.js/720x600/auto" alt="Generic placeholder image">
+                        <img class="featurette-image img-responsive center-block" id="modalCard">
                     </div><!-- /.col-lg-4 -->
                     <div class="col-lg-4">
                         <h3 id="cardName"></h3><cite title="Source Title" id="cardAuthor"></cite><br>
                         <p id="cardDescription">
                         </p>
                         <p>
-                            <a class="btn btn-danger" id="mailHref">
+                            <a class="btn btn-danger" id="mail">
                                 寄送
                                 <span class="glyphicon glyphicon-heart" aria-hidden="true" id="mailTime"></span>
                             </a>
