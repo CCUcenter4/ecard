@@ -12,7 +12,8 @@ class Card {
             'parent'  => $request->input('parent'),
             'child'     => $request->input('child'),
             'created_at'=> date('Y-m-d H:i:s'),
-            'updated_at'=> date('Y-m-d H:i:s')
+            'updated_at'=> date('Y-m-d H:i:s'),
+            'webfile_format'=> $request->input('file_extension')
         ];
 
         $id = DB::table('card')
@@ -22,10 +23,19 @@ class Card {
     }
 
     static public function update($id, Request $request) {
-        $data   = [
-            'name'      => $request->input('name'),
-            'updated_at'=> date('Y-m-d H:i:s')
-        ];
+        $exist = $request->input('webFileExist');
+        if($exist) {
+            $data   = [
+                'name'      => $request->input('name'),
+                'updated_at'=> date('Y-m-d H:i:s'),
+                'webfile_format'=>$request->input('file_extension')
+            ];
+        }else {
+            $data   = [
+                'name'      => $request->input('name'),
+                'updated_at'=> date('Y-m-d H:i:s')
+            ];
+        }
         $result = DB::table('card')
             ->where('id', '=', $id)
             ->update($data);

@@ -164,7 +164,6 @@ function categoryChangeEvent() {
     if(child_id == null) {
       return;
     }
-    console.log('child change');
     console.log(parent_id + ' ' + child_id);
     $.get('/api/card/list/' + parent_id + '/' + child_id, function(result){
       console.log(result);
@@ -181,8 +180,6 @@ function categoryChangeEvent() {
       produceCard();
     });
   });
-
-
 }
 
 function categoryBtnEvent() {
@@ -211,14 +208,19 @@ function categoryBtnEvent() {
   $('.openChildDialog').unbind('click');
   $('.openChildDialog').click(function(){
     var method = $(this).data('method');
+    var selectedParent = $('#parent').val();
+    var selectedChild = $('#child').val();
 
     $('#childDialog .btnWrapper').hide();
     if(method == 'create') {
+      if(selectedParent == null) {
+        alert('尚未選擇父元素');
+        return;
+      }
       $('#childName').val(null);
       $('#createChildWrapper').show();
     }else{
-      var selected = $('#child').val();
-      if(selected == null) {
+      if(selectedChild == null) {
         alert('尚未選擇子元素');
         return;
       }
