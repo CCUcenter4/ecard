@@ -66,7 +66,14 @@ function cardEvent() {
       $('#cardName').text(result.name);
       $('#mailTime').text(result.mail_times);
       $('#shareTime').text(result.share_times);
+      $('#cardDescription').text(result.description);
+      $('#cardAuthor').text(result.author);
       $('#modalCard').attr('src', '/card/web/' + id);
     })
+  });
+
+  $('#mailBtn').unbind('click');
+  $('#mailBtn').click(function() {
+
   });
 }

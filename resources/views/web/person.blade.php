@@ -27,7 +27,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbarHref">
             <li><a href="/web">首頁</a></li>
-            <li><a href="/web/festival/10/1">節慶卡片</a></li>
+            <li><a href="/web/festival/1/1">節慶卡片</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             @if(Auth::check())

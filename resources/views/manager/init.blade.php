@@ -22,6 +22,7 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
+  <script src="//cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.15/autosize.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.min.js"></script>
   <script src="{{url('assets/js/common.js')}}"></script>
 

@@ -10,4 +10,6 @@ $(function() {
       options.data += "_token=" + csrf_token;
     }
   });
+
+  autosize($('textarea'));
 });

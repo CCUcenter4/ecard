@@ -5,7 +5,11 @@
                 <div class="dialogContent">
                     <div>
                         <label for="cardName">卡片名稱：</label>
-                        <input class="form-control" type="text" name="cardName" id="cardName">
+                        <input class="form-control" type="text" id="cardName">
+                    </div>
+                    <div>
+                        <label for="cardDescription">卡片描述：</label>
+                        <textarea id="cardDescription" placeholder="description" class="form-control" style="resize:none;"></textarea>
                     </div>
                     <div>
                         <p>web 卡片<b class="fileType">（限制格式為jpg, png, JPG, PNG）</b></p>

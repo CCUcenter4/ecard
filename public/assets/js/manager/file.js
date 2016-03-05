@@ -15,11 +15,11 @@ function filePostEvent(){
     data.parent       = $('#parent').val();
     temp = $('#child').val();
     data.child        = $('#child option[value="' + temp + '"]').data('child_id');
-    data.name         = $('input[name="cardName"]').val();
+    data.name         = $('#cardName').val();
+    data.description  = $('#cardDescription').val();
 
-
-    if(_.trim(data.name) == '') {
-      alert('還沒填寫卡片名字');
+    if(_.trim(data.name) == '' || _.trim(data.description) == '') {
+      alert('所有欄位都必須填寫');
       return;
     }
 
@@ -56,10 +56,11 @@ function filePostEvent(){
     var temp;
 
     data._token       = $('meta[name="csrf-token"]').attr('content');
-    data.name         = $('input[name="cardName"]').val();
+    data.name         = $('#cardName').val();
+    data.description  = $('#cardDescription').val();
 
-    if(_.trim(data.name) == '') {
-      alert('還沒填寫卡片名字');
+    if(_.trim(data.name) == '' || _.trim(data.description) == '') {
+      alert('所有欄位都必須填寫');
       return;
     }
 
@@ -108,7 +109,7 @@ function filePostEvent(){
 function cardModalEvent() {
   $('#addCard').unbind('click');
   $('#addCard').click(function(){
-    emptyDetail();
+    emptyCardModal();
 
     var text;
     text = '<img id="thumbImg" style="background:url(/card/unknown.jpg); background-size:100% 100%;">';
@@ -163,18 +164,27 @@ function cardBtnEvent() {
   $('.thumbFile').unbind('click');
   $('.thumbFile').click(function(){
     var id = $(this).data('id');
-    var name = $(this).data('name');
+    var data = {} ;
+    data._token       = $('meta[name="csrf-token"]').attr('content');
 
     console.log('card id ' + id);
 
-    emptyCardModal();
+    $.get('/api/card/detail/' + id, data, function(result) {
+      // insert data
+      $('#cardName').val(result.name);
+      $('#cardDescription').val(result.description);
+      $('input[name="currentEditCardId"]').val(id);
 
-    $('#cardDetail').modal('show');
-    $('#cardDetail .btnWrapper').hide();
-    $('#updateCardWrapper').show();
+      // view
+      $('#cardDetail').modal('show');
+      $('#cardDetail .btnWrapper').hide();
+      $('#updateCardWrapper').show();
+    }).fail(function() {
+      alert('卡片詳細資料取得失敗');
+    })
 
-    $('input[name="cardName"]').val(name);
-    $('input[name=currentEditCardId]').val(id);
+
+
   });
 }
 
@@ -204,6 +214,7 @@ function produceCard(){
 }
 
 function emptyCardModal() {
-  $('input[name="cardName"]').val(null);
+  $('#cardName').val(null);
+  $('#cardDescription').val(null);
   $('input[name="webFile"]').val(null);
 }

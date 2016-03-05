@@ -34,6 +34,7 @@
 
 <!-- Lib -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js" defer></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.15/autosize.min.js" defer></script>
 
 <!-- Demonic Write -->
 <script src="{{url('assets/js/common.js')}}"></script>
