@@ -43,7 +43,7 @@ function produceCard() {
       text += `<img class="${imgClass}" src="/card/web/${card_id}">`;
       text += '</a>';
       text += '<div class="caption">';
-      text += `<h3>${card_name}</h3>`;
+      text += `<h3 class="text-left">${card_name}</h3>`;
       text += '</div>';//end caption
       text += '</div>';//end thumbnail
       text += '</div>';
@@ -73,6 +73,27 @@ function cardEvent() {
 
   $('#mailBtn').unbind('click');
   $('#mailBtn').click(function() {
+    var id = $('#currentCardId').val();
+    var validateEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var data = {};
+    data.reciever_name = $('#reciever_name').val();
+    data.reciever_email = $('#reciever_email').val();
+    data.message = $('#message').val();
 
+    if(_.trim(data.reciever_name) == '' || _.trim(data.reciever_email) == '') {
+      toastr['warning']('信箱跟姓名欄位都要填');
+    }
+
+    if(!validateEmail.test(data.reciever_email)) {
+      toastr['warning']('信箱格式不合');
+    }
+
+    return;
+    $.post('/api/card/mail/' + id, data, function(result) {
+      console.log(result);
+      toastr['success']('寄信成功');
+    }).fail(function() {
+      toastr['error']('寄信失敗');
+    });
   });
 }

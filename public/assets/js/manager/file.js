@@ -179,13 +179,11 @@ function cardBtnEvent() {
       // view
       $('#cardDetail').modal('show');
       $('#cardDetail .btnWrapper').hide();
+      $('input[name="webFile"]').val(null);
       $('#updateCardWrapper').show();
     }).fail(function() {
       toastr['error']('卡片詳細資料取得失敗');
     })
-
-
-
   });
 }
 

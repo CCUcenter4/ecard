@@ -17,6 +17,7 @@
 @include('web.modal.card')
 <input type="hidden" value="{{$parent_id}}" id="parent_id">
 <input type="hidden" value="{{$child_id}}" id="child_id">
+<input type="hidden" id="currentCardId">
 
 <!-- Header -->
 <div class="navbar-wrapper">

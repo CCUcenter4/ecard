@@ -36,7 +36,9 @@ class Register{
             $data = [];
             $data = [
                 'user_id'=>$user_id,
-                'name'=>$request->input('name')
+                'name'=>$request->input('name'),
+                'created_at'=> date('Y-m-d H:i:s'),
+                'updated_at'=> date('Y-m-d H:i:s')
             ];
             // 建立個人資料
             Person::create($data);
