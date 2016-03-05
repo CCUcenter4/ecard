@@ -23,6 +23,10 @@
                         <div class="row">
                             <form id="mailForm" onsubmit="return false;">
                                 <div class="col-lg-12">
+                                    <label for="reciever_name">收件人姓名</label>
+                                    <input type="text" id="reciever_name" placeholder="Name" class="form-control">
+                                </div>
+                                <div class="col-lg-12">
                                     <label for="reciever_email">收件人信箱</label>
                                     <input type="text" id="reciever_email" placeholder="Email" class="form-control">
                                 </div>
@@ -30,6 +34,7 @@
                                     <label for="message">想說的話</label>
                                     <textarea id="message" class="form-control" placeholder="Message" style="resize:none;"></textarea>
                                 </div>
+                                <br>
                                 <div class="col-lg-12 text-center">
                                     <button type="submit" class="btn btn-default" id="mailBtn">Submit</button>
                                 </div>

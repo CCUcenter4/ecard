@@ -28,16 +28,16 @@ function categoryEditEvent() {
     data._token = $('meta[name="csrf-token"]').attr('content');
 
     if(_.trim(data.name)=='') {
-      alert('名字不能為空');
+      toastr['warning']('名字不能為空');
       return;
     }
     $.post('/api/category/parent/create', data, function(result){
       console.log(result);
       getParentList();
       $('#parentDialog').modal('hide');
-      alert('新增父元素成功');
+      toastr['success']('新增父元素成功');
     }).fail(function(){
-      alert('新增父元素失敗');
+      toastr['error']('新增父元素失敗');
     });
   });
 
@@ -49,16 +49,16 @@ function categoryEditEvent() {
     data._token = $('meta[name="csrf-token"]').attr('content');
 
     if(_.trim(data.name)=='') {
-      alert('名字不能為空');
+      toastr['warning']('名字不能為空');
       return;
     }
     $.post('/api/category/parent/update/' + id, data, function(result){
       console.log(result);
       getParentList();
       $('#parentDialog').modal('hide');
-      alert('更新父元素成功');
+      toastr['success']('更新父元素成功');
     }).fail(function(){
-      alert('更新父元素失敗');
+      toastr['error']('更新父元素失敗');
     });
   });
 
@@ -72,9 +72,9 @@ function categoryEditEvent() {
       console.log(result);
       getParentList();
       $('#parentDialog').modal('hide');
-      alert('刪除父元素成功');
+      toastr['success']('刪除父元素成功');
     }).fail(function() {
-      alert('刪除父元素失敗');
+      toastr['error']('刪除父元素失敗');
     });
   });
 
@@ -86,7 +86,7 @@ function categoryEditEvent() {
     data._token = $('meta[name="csrf-token"]').attr('content');
 
     if(_.trim(data.name)=='') {
-      alert('名字不能為空');
+      toastr['warning']('名字不能為空');
       return;
     }
 
@@ -94,9 +94,9 @@ function categoryEditEvent() {
       console.log(result);
       $('#parent').change();
       $('#childDialog').modal('hide');
-      alert('新增子元素成功');
+      toastr['success']('新增子元素成功');
     }).fail(function(){
-      alert('新增子元素失敗');
+      toastr['error']('新增子元素失敗');
     });
   });
 
@@ -108,7 +108,7 @@ function categoryEditEvent() {
     data._token = $('meta[name="csrf-token"]').attr('content');
 
     if(_.trim(data.name)=='') {
-      alert('名字不能為空');
+      toastr['warning']('名字不能為空');
       return;
     }
     console.log(data);
@@ -116,9 +116,9 @@ function categoryEditEvent() {
       console.log(result);
       $('#parent').change();
       $('#childDialog').modal('hide');
-      alert('更新子元素成功');
+      toastr['success']('更新子元素成功');
     }).fail(function(){
-      alert('更新子元素失敗');
+      toastr['error']('更新子元素失敗');
     });
   });
 
@@ -132,9 +132,9 @@ function categoryEditEvent() {
       console.log(result);
       $('#parent').change();
       $('#childDialog').modal('hide');
-      alert('刪除子元素成功');
+      toastr['success']('刪除子元素成功');
     }).fail(function() {
-      alert('刪除子元素失敗');
+      toastr['error']('刪除子元素失敗');
     });
   });
 }
@@ -194,7 +194,7 @@ function categoryBtnEvent() {
     }else{
       var selected = $('#parent').val();
       if(selected == null) {
-        alert('尚未選擇父元素');
+        toastr['warning']('尚未選擇父元素');
         return;
       }
       var inputValue = $('#parent option[value="' + selected + '"]').html();
@@ -214,14 +214,14 @@ function categoryBtnEvent() {
     $('#childDialog .btnWrapper').hide();
     if(method == 'create') {
       if(selectedParent == null) {
-        alert('尚未選擇父元素');
+        toastr['warning']('尚未選擇父元素');
         return;
       }
       $('#childName').val(null);
       $('#createChildWrapper').show();
     }else{
       if(selectedChild == null) {
-        alert('尚未選擇子元素');
+        toastr['warning']('尚未選擇子元素');
         return;
       }
       var inputValue = $('#child option[value="' + selected + '"]').html();

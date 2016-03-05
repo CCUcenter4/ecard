@@ -1,4 +1,12 @@
-footer, .marketing {
+.marketing {
   position: relative;
   top: 100px;
+  margin-bottom: 100px;
 }
+
+.thumbnail .thumb {
+  width: 100%;
+  height: 200px;
+}
+
+

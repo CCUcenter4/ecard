@@ -31,27 +31,26 @@ function produceCard() {
   var card_name;
   var imgClass='featurette-image img-responsive center-block thumb';
 
+  text = '<div class="row">';
   for(i=0; i<card_list.length;) {
-    text = '<div class="row">';
     for(j=0; j<3 && i<card_list.length; j++, i++) {
       card_id = card_list[i].id;
       card_name = card_list[i].name;
 
       text += '<div class="col-lg-4 col-md-4 col-sm-6">';
-      text += '<div class="thumb_nail">';
+      text += '<div class="thumbnail">';
       text += `<a data-toggle="modal" data-target="#card" class="list" data-card_id="${card_id}">`;
       text += `<img class="${imgClass}" src="/card/web/${card_id}">`;
       text += '</a>';
       text += '<div class="caption">';
       text += `<h3>${card_name}</h3>`;
       text += '</div>';//end caption
-      text += '</div>';//end thumb_nail
+      text += '</div>';//end thumbnail
       text += '</div>';
     }
-    text += '</div>';
-
-    $('#cardContainer').append(text);
   }
+  text += '</div>';
+  $('#cardContainer').append(text);
 
   cardEvent();
 }

@@ -19,12 +19,12 @@ function filePostEvent(){
     data.description  = $('#cardDescription').val();
 
     if(_.trim(data.name) == '' || _.trim(data.description) == '') {
-      alert('所有欄位都必須填寫');
+      toastr['warning']('所有欄位都必須填寫');
       return;
     }
 
     if(web_t[0].files[0]==null){
-      alert('還沒選擇卡片檔案');
+      toastr['warning']('還沒選擇卡片檔案');
       return;
     }
 
@@ -38,12 +38,12 @@ function filePostEvent(){
       data    : data,
       success : function(result){
         console.log(result);
-        alert('新增卡片成功');
+        toastr['success']('新增卡片成功');
         $('#cardDetail').modal('hide');
         $('#child').change();
       },
       error   : function(){
-        alert('新增卡片失敗');
+        toastr['error']('新增卡片失敗');
       }
     });
   });
@@ -60,7 +60,7 @@ function filePostEvent(){
     data.description  = $('#cardDescription').val();
 
     if(_.trim(data.name) == '' || _.trim(data.description) == '') {
-      alert('所有欄位都必須填寫');
+      toastr['warning']('所有欄位都必須填寫');
       return;
     }
 
@@ -79,12 +79,12 @@ function filePostEvent(){
       data    : data,
       success : function(result){
         console.log(result);
-        alert('更新卡片成功');
+        toastr['success']('更新卡片成功');
         $('#cardDetail').modal('hide');
         $('#child').change();
       },
       fail    : function(){
-        alert('更新卡片失敗');
+        toastr['error']('更新卡片失敗');
       }
     });
   });
@@ -97,11 +97,11 @@ function filePostEvent(){
 
     console.log(id);
     $.post('/api/card/delete/' + id, function(result) {
-      alert('刪除成功');
+      toastr['success']('刪除成功');
       $('#cardDetail').modal('hide');
         $('#child').change();
     }).fail(function() {
-      alert('刪除失敗');
+      toastr['error']('刪除失敗');
     });
   });
 }
@@ -134,7 +134,7 @@ function fileChangeEvent() {
   $('input[name="webFile"]').change(function(){
     var size = $(this)[0].files[0].size/1024/1024;
     if(size>=10){
-      alert('檔案大小超過10mb');
+      toastr['warning']('檔案大小超過10mb');
       $(this).val(null);
       return;
     }
@@ -143,7 +143,7 @@ function fileChangeEvent() {
     var file_extension = name.substring(name.lastIndexOf('.')+1).toLowerCase();
 
     if(file_extension != 'jpg' && file_extension!='png'){
-      alert('檔案格式必須是 jpg, png, JPG, PNG');
+      toastr['warning']('檔案格式必須是 jpg, png, JPG, PNG');
       $(this).val(null);
       return;
     }
@@ -155,6 +155,7 @@ function fileChangeEvent() {
 function cardBtnEvent() {
   $('#addCard').unbind('click');
   $('#addCard').click(function(){
+    emptyCardModal();
 
     $('#cardDetail').modal('show');
     $('#cardDetail .btnWrapper').hide();
@@ -180,7 +181,7 @@ function cardBtnEvent() {
       $('#cardDetail .btnWrapper').hide();
       $('#updateCardWrapper').show();
     }).fail(function() {
-      alert('卡片詳細資料取得失敗');
+      toastr['error']('卡片詳細資料取得失敗');
     })
 
 
