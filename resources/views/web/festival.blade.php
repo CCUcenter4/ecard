@@ -66,32 +66,7 @@
         </div><!--/.sidebar-offcanvas-->
 
         <div class="col-xs-12 col-sm-9">
-            <p class="pull-right visible-xs">
-                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-            </p>
             <div class="row" id="cardContainer">
-                <!--
-            <div class="row">
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <a data-toggle="modal" data-target="#card">
-                            <img class="featurette-image img-responsive center-block">
-                        </a>
-                        <div class="caption">
-                            <h3>標題</h3>
-                            <p>
-                                <a class="btn btn-default" href="#" role="button">
-                                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 25
-                                </a>
-                                <a class="btn btn-default" href="#" role="button">
-                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            -->
             </div>
         </div>
     </div>

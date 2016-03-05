@@ -16,6 +16,11 @@
                         <cite title="Source Title" id="cardAuthor"></cite><br>
                         <p id="cardDescription"></p>
                         <p>
+                            <button type="button" class="btn btn-sm btn-primary shareFB" data-from="modal">
+                                分享到 FB<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                            </button>
+                        </p>
+                        <p>
                             寄送次數 : <b id="mailTime"></b>
                             分享次數 : <b id="shareTime"></b>
                         </p>
@@ -36,7 +41,7 @@
                                 </div>
                                 <br>
                                 <div class="col-lg-12 text-center">
-                                    <button type="submit" class="btn btn-default" id="mailBtn">Submit</button>
+                                    <button type="submit" class="btn btn-default" id="mailBtn">寄送</button>
                                 </div>
                             </form>
                         </div>

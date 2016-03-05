@@ -26,7 +26,7 @@
                         <label class="sr-only" for="Password">Password</label>
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></div>
-                            <input type="text" class="form-control" id="Password" placeholder="您的密碼">
+                            <input type="password" class="form-control" id="Password" placeholder="您的密碼">
                         </div>
                     </div>
                 </form>

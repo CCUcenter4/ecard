@@ -199,7 +199,7 @@ function produceCard(){
     name = card_data[i]['name'];
 
     text  = '<li class="thumbFile">';
-    text += `<span>${name}</span>`;
+    text += `<p>[No.${id}] ${name}</p>`
     text += `<div style="background:url(/card/web/${id});background-size:cover;">`;
     text += '</div></li>';
 
