@@ -1,6 +1,13 @@
 $(function(){
   bootstrapEvent();
   getCard();
+  $.ajaxSetup({ cache: true  });
+  $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+      FB.init({
+        appId      : '1680047898922505',
+        version: 'v2.5' // or v2.0, v2.1, v2.2, v2.3
+      });
+    });
 });
 
 function bootstrapEvent() {
@@ -94,6 +101,16 @@ function cardEvent() {
     }
 
     console.log(id);
+    FB.ui({
+      method: 'share',
+      href: 'http://demonic.csie.io:8001/web/card/' + id
+    });
+
+    $.post('/api/card/fb_share_increment/' + id, function(result) {
+
+    }).fail(function() {
+
+    });
   });
 
   $('#mailBtn').unbind('click');

@@ -56,4 +56,10 @@ class CardController extends Controller
 
         return $result;
     }
+
+    public function fb_share_increment($id) {
+        $result = Card::fb_share_increment($id);
+
+        return $result;
+    }
 }

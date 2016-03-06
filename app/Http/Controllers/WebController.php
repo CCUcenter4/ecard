@@ -36,8 +36,13 @@ class WebController extends Controller
     }
 
     public function card($card_id) {
+        $card = Card::detail($card_id);
+
         return view('web.card')
-            ->with('id');
+            ->with('fb_app_id', env('FB_client_id'))
+            ->with('card_id', $card->id)
+            ->with('card_name', $card->name)
+            ->with('card_description', $card->description);
     }
 
     public function person(){

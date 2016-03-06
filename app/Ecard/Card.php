@@ -92,5 +92,20 @@ class Card {
 
         return $result;
     }
+
+    static public function fb_share_increment($id) {
+        $card = DB::table('card')
+            ->where('id', '=', $id)
+            ->first();
+
+        $currentTimes = $card->share_times;
+        $currentTimes++;
+
+        $result = DB::table('card')
+            ->where('id', '=', $id)
+            ->update(['share_times'=>$currentTimes]);
+
+        return $result;
+    }
 }
 ?>

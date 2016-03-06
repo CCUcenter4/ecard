@@ -55,6 +55,8 @@ Route::group(['prefix'=>'api'], function() {
 
         // mail
         Route::post('mail/{id}', 'Api\CardController@mail');
+        // fb_share
+        Route::post('fb_share_increment/{id}', 'Api\CardController@fb_share_increment');
     });
 
     Route::group(['prefix'=>'person'], function() {
