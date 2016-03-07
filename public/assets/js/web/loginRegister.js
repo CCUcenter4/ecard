@@ -41,8 +41,12 @@ function modalBtnEvent() {
     console.log(request);
     $.post('/api/auth/register', request, function(result) {
       console.log(result);
-      toastr['success']('註冊成功');
-      $('#registerModal').modal('hide');
+      if(result.status == 1) {
+        toastr['success']('註冊成功');
+        $('#registerModal').modal('hide');
+      }else {
+        toastr['error']('註冊失敗，可能有哪邊輸入錯誤，請再仔細檢查');
+      }
     }).fail(function() {
       toastr['error']('註冊失敗');
     });

@@ -23,6 +23,9 @@ function getCard() {
   var child_id = $('#child_id').val();
 
   $.get('/api/card/list/' + parent_id + '/' + child_id, function(result) {
+    if(result.length == 0) {
+      toastr['warning']('此分類暫無卡片，敬請期待');
+    }
     console.log(result);
     card_list = result;
 
@@ -124,13 +127,14 @@ function cardEvent() {
 
     if(_.trim(data.reciever_name) == '' || _.trim(data.reciever_email) == '') {
       toastr['warning']('信箱跟姓名欄位都要填');
+      return;
     }
 
     if(!validateEmail.test(data.reciever_email)) {
       toastr['warning']('信箱格式不合');
+      return;
     }
 
-    return;
     $.post('/api/card/mail/' + id, data, function(result) {
       console.log(result);
       toastr['success']('寄信成功');

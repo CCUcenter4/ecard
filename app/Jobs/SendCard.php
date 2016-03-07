@@ -12,12 +12,13 @@ use Illuminate\Contracts\Mail\Mailer;
 use DB;
 use Auth;
 
+use App\Ecard\Card;
+
 class SendCard extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
     protected $card_id;
-    protected $sender;
     protected $reciever;
     protected $message;
 
@@ -28,10 +29,9 @@ class SendCard extends Job implements SelfHandling, ShouldQueue
      *
      * @return void
      */
-    public function __construct($card_id, $sender, $reciever, $message)
+    public function __construct($card_id, $reciever, $message)
     {
         $this->card_id = $card_id;
-        $this->sender = $sender;
         $this->reciever = $reciever;
         $this->message = $message;
     }
@@ -43,9 +43,8 @@ class SendCard extends Job implements SelfHandling, ShouldQueue
      */
     public function handle(Mailer $mailer)
     {
+        $card = Card::detail($this->card_id);
         $person = [];
-        $person['sender_name'] = $this->sender['name'];
-        $person['sender_email'] = $this->sender['email'];
         $person['reciever_name'] = $this->reciever['name'];
         $person['reciever_email'] = $this->reciever['email'];
         $person['message'] = $this->message;

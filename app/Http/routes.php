@@ -25,6 +25,7 @@ Route::group(['prefix'=>'web'], function() {
 
 Route::group(['prefix'=>'manager'], function() {
     Route::get('upload', ['middleware'=>'manager', 'uses'=>'ManagerController@upload']);
+    Route::get('env', ['middleware'=>'manager', 'uses'=>'ManagerController@env']);
     Route::get('login', 'ManagerController@login');
 });
 
@@ -43,11 +44,12 @@ Route::group(['prefix'=>'api'], function() {
 
         Route::post('register', 'AuthController@register');
     });
+
     Route::group(['prefix'=>'card'], function() {
         // manage
         Route::post('create', 'Api\CardController@create');
         Route::post('update/{id}', 'Api\CardController@update');
-        Route::post('delete/{id}', 'Api\CardController@delete');
+        Route::delete('delete/{id}', 'Api\CardController@delete');
 
         // get data
         Route::get('list/{parent_id}/{child_id}', 'Api\CardController@list');
@@ -60,13 +62,13 @@ Route::group(['prefix'=>'api'], function() {
     });
 
     Route::group(['prefix'=>'person'], function() {
-        Route::post('update', 'Api\PersonController@update');
+        Route::put('update', 'Api\PersonController@update');
         Route::get('history', 'Api\PersonController@gistory');
 
         Route::group(['prefix'=>'reservation'], function() {
             Route::post('create/{card_id}', 'Api\ReservationController@create');
-            Route::post('update/{id}', 'Api\ReservationController@update');
-            Route::post('delete/{id}', 'Api\ReservationController@delete');
+            Route::put('update/{id}', 'Api\ReservationController@update');
+            Route::delete('delete/{id}', 'Api\ReservationController@delete');
             Route::get('get', 'Api\ReservationController@get');
         });
     });
@@ -74,15 +76,23 @@ Route::group(['prefix'=>'api'], function() {
     Route::group(['prefix'=>'category'], function() {
         Route::group(['prefix'=>'parent'], function() {
             Route::post('create', 'Api\CategoryController@createParent');
-            Route::post('update/{id}', 'Api\CategoryController@updateParent');
-            Route::post('delete/{id}', 'Api\CategoryController@deleteParent');
+            Route::put('update/{id}', 'Api\CategoryController@updateParent');
+            Route::delete('delete/{id}', 'Api\CategoryController@deleteParent');
             Route::get('get', 'Api\CategoryController@getParent');
         });
         Route::group(['prefix'=>'child'], function() {
             Route::post('create/{parent_id}', 'Api\CategoryController@createChild');
-            Route::post('update/{id}', 'Api\CategoryController@updateChild');
-            Route::post('delete/{id}', 'Api\CategoryController@deleteChild');
+            Route::put('update/{id}', 'Api\CategoryController@updateChild');
+            Route::delete('delete/{id}', 'Api\CategoryController@deleteChild');
             Route::get('get/{parent_id}', 'Api\CategoryController@getChild');
+        });
+    });
+
+    Route::group(['prefix'=>'env'], function() {
+        Route::group(['prefix'=>'navbar'], function() {
+            Route::get('/', 'Api\NavbarController@get');
+            Route::post('create/{parent_id}', 'Api\NavbarController@create');
+            Route::delete('delete/{id}', 'Api\NavbarController@delete');
         });
     });
 });

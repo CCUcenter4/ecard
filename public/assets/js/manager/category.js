@@ -17,7 +17,7 @@ function getParentList() {
     produceParent();
     categoryChangeEvent();
     $('#parent').change();
-  })
+  });
 }
 
 function categoryEditEvent() {
@@ -31,6 +31,7 @@ function categoryEditEvent() {
       toastr['warning']('名字不能為空');
       return;
     }
+
     $.post('/api/category/parent/create', data, function(result){
       console.log(result);
       getParentList();
@@ -52,13 +53,20 @@ function categoryEditEvent() {
       toastr['warning']('名字不能為空');
       return;
     }
-    $.post('/api/category/parent/update/' + id, data, function(result){
-      console.log(result);
-      getParentList();
-      $('#parentDialog').modal('hide');
-      toastr['success']('更新父元素成功');
-    }).fail(function(){
-      toastr['error']('更新父元素失敗');
+
+    $.ajax({
+      url: '/api/category/parent/update/' + id,
+      data: data,
+      method: 'put',
+      success: function(result) {
+        console.log(result);
+        getParentList();
+        $('#parentDialog').modal('hide');
+        toastr['success']('更新父元素成功');
+      },
+      fail: function() {
+        toastr['error']('更新父元素失敗');
+      }
     });
   });
 
@@ -68,13 +76,19 @@ function categoryEditEvent() {
     var data = {};
     data._token = $('meta[name="csrf-token"]').attr('content');
 
-    $.post('/api/category/parent/delete/' + id, data, function(result) {
-      console.log(result);
-      getParentList();
-      $('#parentDialog').modal('hide');
-      toastr['success']('刪除父元素成功');
-    }).fail(function() {
-      toastr['error']('刪除父元素失敗');
+    $.ajax({
+      url: '/api/category/parent/delete/' + id,
+      data: data,
+      method: 'delete',
+      success: function(result) {
+        console.log(result);
+        getParentList();
+        $('#parentDialog').modal('hide');
+        toastr['success']('刪除父元素成功');
+      },
+      fail: function() {
+        toastr['error']('刪除父元素失敗');
+      }
     });
   });
 
@@ -111,14 +125,20 @@ function categoryEditEvent() {
       toastr['warning']('名字不能為空');
       return;
     }
-    console.log(data);
-    $.post('/api/category/child/update/' + id, data, function(result){
-      console.log(result);
-      $('#parent').change();
-      $('#childDialog').modal('hide');
-      toastr['success']('更新子元素成功');
-    }).fail(function(){
-      toastr['error']('更新子元素失敗');
+
+    $.ajax({
+      url: '/api/category/child/update/' + id,
+      data: data,
+      method: 'put',
+      success: function(result) {
+        console.log(result);
+        $('#parent').change();
+        $('#childDialog').modal('hide');
+        toastr['success']('更新子元素成功');
+      },
+      fail: function() {
+        toastr['error']('更新子元素失敗');
+      }
     });
   });
 
@@ -128,13 +148,19 @@ function categoryEditEvent() {
     var data = {};
     data._token = $('meta[name="csrf-token"]').attr('content');
 
-    $.post('/api/category/child/delete/' + id, data, function(result) {
-      console.log(result);
-      $('#parent').change();
-      $('#childDialog').modal('hide');
-      toastr['success']('刪除子元素成功');
-    }).fail(function() {
-      toastr['error']('刪除子元素失敗');
+    $.ajax({
+      url: '/api/category/child/delete/' + id,
+      data: data,
+      method: 'delete',
+      success: function(result) {
+        console.log(result);
+        $('#parent').change();
+        $('#childDialog').modal('hide');
+        toastr['success']('刪除子元素成功');
+      },
+      fail: function() {
+        toastr['error']('刪除子元素失敗');
+      }
     });
   });
 }
@@ -224,7 +250,7 @@ function categoryBtnEvent() {
         toastr['warning']('尚未選擇子元素');
         return;
       }
-      var inputValue = $('#child option[value="' + selected + '"]').html();
+      var inputValue = $('#child option[value="' + selectedChild + '"]').html();
 
       $('#childName').val(inputValue);
       $('#updateChildWrapper').show();
@@ -236,22 +262,29 @@ function categoryBtnEvent() {
 function produceParent() {
   var text = '<option disabled>父元素</option>';
   var i;
+  var id;
+  var name;
 
   for(i=0; parent_data[i]!=null; i++) {
-    text += '<option value="' + parent_data[i]['id'] + '">' + parent_data[i]['name'] + '</option>';
+    id = parent_data[i]['id'];
+    name = parent_data[i]['name'];
+    text += `<option value="${id}">${name}</option>`;
   }
-
   $('#parent').html(text);
 }
 
 function produceChild(parent_id) {
   var text = '<option disabled>子元素</option>';
   var i;
+  var id;
+  var child;
+  var name;
 
   for(i=0; child_data[i]!=null; i++){
-    text += '<option value="' + child_data[i]['id'] + '"';
-    text += 'data-child_id="' + child_data[i]['child'] + '">'
-    text += child_data[i]['name'] + '</option>';
+    id = child_data[i]['id'];
+    child_id = child_data[i]['child'];
+    name = child_data[i]['name'];
+    text += `<option value="${id}" data-child_id="${child_id}">${name}</option>`;
   }
   $('#child').html(text);
 }

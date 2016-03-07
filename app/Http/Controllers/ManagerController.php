@@ -13,6 +13,10 @@ class ManagerController extends Controller
         return view('manager.upload');
     }
 
+    public function env() {
+        return view('manager.env');
+    }
+
     public function login() {
         return view('manager.login');
     }

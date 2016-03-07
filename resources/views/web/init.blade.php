@@ -13,7 +13,8 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
       <!-- bootstrap style plugin-->
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+      <link rel="stylesheet" href="{{url('assets/css/toastr.min.css')}}">
+
       <link rel="stylesheet" href="{{url('assets/css/web/common.css')}}">
     @yield('css')
 
@@ -36,7 +37,7 @@
 <!-- Bootstrap Latest compiled and minified JavaScript -->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <!-- bootstrap style plugin-->
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="{{url('/assets/js/toastr.min.js')}}" defer></script>
 
 <!-- Lib -->
 <script src="{{url('/assets/js/lodash.min.js')}}" defer></script>

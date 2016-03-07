@@ -2,9 +2,8 @@
 
 @section('content')
 <p>
-  <b>{{$person['sender_name']}}</b>：您好
+    <b>{{trim($person['reciever_name'])}}({{trim($person['reciever_email'])}})</b>：您好
 </p>
-<p>{{trim($person['reciever_name'])}}({{trim($person['reciever_email'])}})</p>
 <p>從中正大學電子賀卡系統寄送了一封卡片給您</p>
 <p>{{trim($person['message'])}}</p>
 

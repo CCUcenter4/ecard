@@ -83,7 +83,7 @@ function filePostEvent(){
         $('#cardDetail').modal('hide');
         $('#child').change();
       },
-      fail    : function(){
+      error   : function(){
         toastr['error']('更新卡片失敗');
       }
     });
@@ -96,12 +96,18 @@ function filePostEvent(){
     data._token = $('meta[name="csrf-token"]').attr('content');
 
     console.log(id);
-    $.post('/api/card/delete/' + id, function(result) {
-      toastr['success']('刪除成功');
-      $('#cardDetail').modal('hide');
+    $.ajax({
+      url: '/api/card/delete/' + id,
+      method: 'delete',
+      data: data,
+      success: function(result) {
+        toastr['success']('刪除成功');
+        $('#cardDetail').modal('hide');
         $('#child').change();
-    }).fail(function() {
-      toastr['error']('刪除失敗');
+      },
+      fail: function() {
+        toastr['error']('刪除失敗');
+      }
     });
   });
 }
