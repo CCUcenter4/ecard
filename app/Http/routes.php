@@ -35,8 +35,6 @@ Route::group(['prefix'=>'api'], function() {
             // common user
             Route::post('ecard', 'AuthController@ecard');
             Route::post('sso', 'AuthController@sso');
-            Route::get('facebook', 'AuthController@facebook');
-            Route::get('facebook/callback', 'AuthController@facebookCallback');
 
             // manager
             Route::post('manager', 'AuthController@manager');
@@ -66,7 +64,7 @@ Route::group(['prefix'=>'api'], function() {
         Route::get('history', 'Api\PersonController@gistory');
 
         Route::group(['prefix'=>'reservation'], function() {
-            Route::post('create/{card_id}', 'Api\ReservationController@create');
+            Route::post('create', 'Api\ReservationController@create');
             Route::put('update/{id}', 'Api\ReservationController@update');
             Route::delete('delete/{id}', 'Api\ReservationController@delete');
             Route::get('get', 'Api\ReservationController@get');
@@ -90,7 +88,7 @@ Route::group(['prefix'=>'api'], function() {
 
     Route::group(['prefix'=>'env'], function() {
         Route::group(['prefix'=>'navbar'], function() {
-            Route::get('/', 'Api\NavbarController@get');
+            Route::get('/get', 'Api\NavbarController@get');
             Route::post('create/{parent_id}', 'Api\NavbarController@create');
             Route::delete('delete/{id}', 'Api\NavbarController@delete');
         });

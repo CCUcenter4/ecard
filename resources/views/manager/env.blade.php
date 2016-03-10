@@ -18,13 +18,15 @@
       <div class="col-sm-3 col-md-3 col-lg-3">
           <h3>NavBar 設定</h3>
       </div>
-      <div class="col-sm-4 col-md-4 col-lg-4">
-          <button id="addNavBar" class="btn btn-primary">新增</button>
-          <select id="parent" class="form-control"></select>
-      </div>
   </div>
   <div class="row">
-
+      <div class="col-sm-1 col-md-1 col-lg-1"></div><!-- space -->
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          <button id="createNavbarBtn" class="btn btn-primary">新增</button>
+          <select id="parent" class="form-control"></select>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="navbar">
+      </div>
   </div>
 @stop
 
