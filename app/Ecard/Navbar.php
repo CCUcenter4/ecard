@@ -3,7 +3,6 @@ namespace App\Ecard;
 
 use DB;
 use Illuminate\Http\Request;
-use Auth;
 
 class Navbar {
     static public function get() {

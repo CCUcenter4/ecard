@@ -22,7 +22,7 @@ function modalBtnEvent() {
     if(from == 1) {// login ecard
       $.post('/api/auth/login/ecard', request, function(result) {
         console.log(result);
-        window.reload();
+        window.location.reload();
       }).fail(function() {
         toastr['warning']('無此帳號密碼');
       });
