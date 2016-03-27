@@ -61,12 +61,12 @@ Route::group(['prefix'=>'api'], function() {
 
     Route::group(['prefix'=>'person'], function() {
         Route::put('update', 'Api\PersonController@update');
-        Route::get('history', 'Api\PersonController@gistory');
+        Route::get('history', 'Api\PersonController@history');
 
         Route::group(['prefix'=>'reservation'], function() {
             Route::post('create/{card_id}', 'Api\ReservationController@create');
             Route::delete('delete/{id}', 'Api\ReservationController@delete');
-            Route::get('get', 'Api\ReservationController@get');
+            Route::get('/', 'Api\ReservationController@get');
         });
     });
 

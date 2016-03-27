@@ -12,6 +12,12 @@ use App\Ecard\Person;
 
 class PersonController extends Controller
 {
+    public function history() {
+        $result = Person::getHistory();
+
+        return $result;
+    }
+
     public function update(Request $request) {
 
     }

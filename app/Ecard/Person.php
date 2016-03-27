@@ -52,5 +52,16 @@ class Person {
             return $result;
         }
     }
+
+    static public function getHistory() {
+        $user = Auth::user();
+        if($user) {
+            $result = DB::table('mail_history')
+                ->where('user_id', '=', $user->id)
+                ->get();
+        }
+
+        return $result;
+    }
 }
 ?>

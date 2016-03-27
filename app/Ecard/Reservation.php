@@ -37,7 +37,14 @@ class Reservation{
     }
 
     static public function get() {
-        return;
+        $user = Auth::user();
+        if($user) {
+            $result = DB::table('reservation')
+                ->where('user_id', '=', $user->id)
+                ->get();
+        }
+
+        return $result;
     }
 
     static public function create($card_id, Request $request){
