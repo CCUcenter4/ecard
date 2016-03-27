@@ -12,17 +12,16 @@ use App\Ecard\Reservation;
 
 class ReservationController extends Controller
 {
-    public function create(Request $request) {
-        $result = Reservation::create($request);
+    public function get(Request $request) {
+        $result = Reservation::get();
 
         return $result;
     }
 
-    public function update($id, Request $request) {
-        $result = Reservation::update($id, $request);
+    public function create($card_id, Request $request) {
+        $result = Reservation::create($card_id, $request);
 
-        return $result;
-
+        return (array)$result;
     }
 
     public function delete($id) {

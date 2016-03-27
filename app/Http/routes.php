@@ -64,8 +64,7 @@ Route::group(['prefix'=>'api'], function() {
         Route::get('history', 'Api\PersonController@gistory');
 
         Route::group(['prefix'=>'reservation'], function() {
-            Route::post('create', 'Api\ReservationController@create');
-            Route::put('update/{id}', 'Api\ReservationController@update');
+            Route::post('create/{card_id}', 'Api\ReservationController@create');
             Route::delete('delete/{id}', 'Api\ReservationController@delete');
             Route::get('get', 'Api\ReservationController@get');
         });

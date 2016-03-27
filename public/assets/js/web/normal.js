@@ -1,5 +1,6 @@
 $(function(){
   bootstrapEvent();
+  mailEvent();
   getCard();
   $.ajaxSetup({ cache: true  });
   $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
@@ -92,6 +93,13 @@ function cardEvent() {
       $('#cardDescription').text(result.description);
       $('#cardAuthor').text(result.author);
       $('#modalCard').attr('src', '/card/web/' + id);
+
+      // reset type
+      $('.nav-tabs li').removeClass('active');
+      $('.nav-tabs li:first').addClass('active');
+      $('#reservationWrapper').hide();
+      $('#mailBtn').show();
+      $('#reservationBtn').hide();
     })
   });
 
@@ -116,6 +124,25 @@ function cardEvent() {
     });
   });
 
+  $('.nav-tabs li').unbind('click');
+  $('.nav-tabs li').click(function() {
+    var type = $(this).attr('data-type');
+    $('.nav-tabs li').removeClass('active');
+    $(this).addClass('active');
+
+    if(type == 'reservation') {
+      $('#reservationWrapper').show();
+      $('#mailBtn').hide();
+      $('#reservationBtn').show();
+    }else {
+      $('#reservationWrapper').hide();
+      $('#mailBtn').show();
+      $('#reservationBtn').hide();
+    }
+  });
+}
+
+function mailEvent() {
   $('#mailBtn').unbind('click');
   $('#mailBtn').click(function() {
     var id = $('#currentCardId').val();
@@ -142,4 +169,33 @@ function cardEvent() {
       toastr['error']('寄信失敗');
     });
   });
+
+  $('#reservationBtn').unbind('click');
+  $('#reservationBtn').click(function() {
+    var id = $('#currentCardId').val();
+    var validateEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var data = {};
+    data.reciever_name = $('#reciever_name').val();
+    data.reciever_email = $('#reciever_email').val();
+    data.message = $('#message').val();
+    data.mail_time = `${$('#reservation_date').val()} ${$('#hour')}:00:00`;
+
+    if(_.trim(data.reciever_name) == '' || _.trim(data.reciever_email) == '') {
+      toastr['warning']('信箱跟姓名欄位都要填');
+      return;
+    }
+
+    if(!validateEmail.test(data.reciever_email)) {
+      toastr['warning']('信箱格式不合');
+      return;
+    }
+
+    $.post('/api/person/reservation/create/' + id, data, function(result) {
+      console.log(result);
+      toastr['success']('預約成功');
+    }).fail(function() {
+      toastr['error']('預約失敗');
+    });
+  });
+
 }

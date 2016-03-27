@@ -36,11 +36,14 @@ class Reservation{
         }
     }
 
-    static public function createReservation(Request $request){
+    static public function get() {
+        return;
+    }
+
+    static public function create($card_id, Request $request){
         $user_id = Auth::user()->id;
-        $card_id    = $request->input('card_id');
-        $to_name    = $request->input('to_name');
-        $to_email   = $request->input('to_email');
+        $reciever_name    = $request->input('reciever_name');
+        $reciever_email   = $request->input('reciever_email');
         $message    = $request->input('message');
         $mail_time  = $request->input('mail_time');
 
@@ -49,8 +52,8 @@ class Reservation{
             ->insert([
                 'card_id'   => $card_id,
                 'user_id'   => $user_id,
-                'to_name'   => $to_name,
-                'to_email'  => $to_email,
+                'reciever_name'   => $reciever_name,
+                'reciever_email'  => $reciever_email,
                 'message'   => $message,
                 'mail_time' => $mail_time
             ]);
@@ -58,26 +61,7 @@ class Reservation{
         return $result;
     }
 
-    static public function updateReservation($id, Request $request){
-        $to_name    = $request->input('to_name');
-        $to_email   = $request->input('to_email');
-        $message    = $request->input('message');
-        $mail_time  = $request->input('mail_time');
-
-
-        $result = DB::table('reservation')
-            ->where('id', '=', $id)
-            ->update([
-                'to_name'   => $to_name,
-                'to_email'  => $to_email,
-                'message'   => $message,
-                'mail_time' => $mail_time
-            ]);
-
-        return $result;
-    }
-
-    static public function deleteReservation($id){
+    static public function delete($id){
         $result = DB::table('reservation')
             ->where('id', '=', $id)
             ->delete();
