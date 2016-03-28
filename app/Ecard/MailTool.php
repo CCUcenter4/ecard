@@ -22,9 +22,10 @@ class MailTool {
         $reciever['name'] = $request->input('reciever_name');
         $reciever['email'] = $request->input('reciever_email');
         $message = $request->input('message');
+        $type = 'immediate';
 
         $dispatcher = new self();
-        $dispatcher->dispatch(new SendCard($card_id, $reciever, $message));
+        $dispatcher->dispatch(new SendCard($card_id, $reciever, $message, $type));
     }
 }
 ?>

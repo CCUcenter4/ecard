@@ -17,6 +17,7 @@ class Reservation{
 
         $now = date('Y-m-d H:i:s');
         $reciever = [];
+        $type = 'reservation';
         $dispatcher = new self();
         for($i=0; $i<count($reservation); $i++){
             if(strtotime($now) > strtotime($reservation[$i]->mail_time)){
@@ -26,7 +27,7 @@ class Reservation{
                 $message    = $reservation[$i]->message;
 
                 // send mail
-                $dispatcher->dispatch(new SendCard($card_id, $reciever, $message));
+                $dispatcher->dispatch(new SendCard($card_id, $reciever, $message, $type));
 
                 // remove reservation
                 DB::table('reservation')
@@ -62,7 +63,9 @@ class Reservation{
                 'reciever_name'   => $reciever_name,
                 'reciever_email'  => $reciever_email,
                 'message'   => $message,
-                'mail_time' => $mail_time
+                'mail_time' => $mail_time,
+                'created_at'=> date('Y-m-d H:i:s'),
+                'updated_at'=> date('Y-m-d H:i:s')
             ]);
 
         return $result;

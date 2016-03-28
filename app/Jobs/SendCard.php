@@ -21,6 +21,7 @@ class SendCard extends Job implements SelfHandling, ShouldQueue
     protected $card_id;
     protected $reciever;
     protected $message;
+    protected $type;
 
 
 
@@ -29,11 +30,12 @@ class SendCard extends Job implements SelfHandling, ShouldQueue
      *
      * @return void
      */
-    public function __construct($card_id, $reciever, $message)
+    public function __construct($card_id, $reciever, $message, $type)
     {
         $this->card_id = $card_id;
         $this->reciever = $reciever;
         $this->message = $message;
+        $this->type = $type;
     }
 
     /**
@@ -57,5 +59,18 @@ class SendCard extends Job implements SelfHandling, ShouldQueue
             ->to($person['reciever_email'], $person['reciever_name'])
             ->subject('中正大學電子賀卡系統卡片通知');
         });
+
+        // Log
+        DB::table('mail_history')
+            ->insert([
+                'user_id' => Auth::user()->id,
+                'card_id' => $this->card_id,
+                'reciever_name' => $this->reciever['name'],
+                'reciever_email' => $this->reciever['email'],
+                'message' => $this->message,
+                'created_at' => date('Y-m-d H:i:s'),
+                'type' => $this->type,
+                'status' => 'success'
+            ]);
     }
 }
