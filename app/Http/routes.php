@@ -52,6 +52,7 @@ Route::group(['prefix'=>'api'], function() {
         // get data
         Route::get('list/{parent_id}/{child_id}', 'Api\CardController@list');
         Route::get('detail/{id}', 'Api\CardController@detail');
+        Route::get('name', 'Api\CardController@name');
 
         // mail
         Route::post('mail/{id}', 'Api\CardController@mail');

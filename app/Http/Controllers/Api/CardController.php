@@ -62,4 +62,10 @@ class CardController extends Controller
 
         return $result;
     }
+
+    public function name() {
+        $result = Card::name();
+
+        return $result;
+    }
 }

@@ -74,6 +74,7 @@ class Reservation{
     static public function delete($id){
         $result = DB::table('reservation')
             ->where('id', '=', $id)
+            ->where('user_id', '=', Auth::user()->id)
             ->delete();
 
         return $result;

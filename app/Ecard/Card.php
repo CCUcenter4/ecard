@@ -107,5 +107,16 @@ class Card {
 
         return $result;
     }
+
+    static public function name() {
+        $database = DB::table('card')->get();
+        $result = [];
+
+        foreach($database as $card) {
+            $result[$card->id] = $card->name;
+        }
+
+        return $result;
+    }
 }
 ?>
