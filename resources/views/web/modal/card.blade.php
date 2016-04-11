@@ -30,6 +30,9 @@
                             <ul class="nav nav-tabs">
                                 <li role="mailTool" data-type="normal" class="active"><a href="#">一般</a></li>
                                 <li role="mailTool" data-type="reservation"><a href="#">預約</a></li>
+                                @if(Auth::check() && Auth::user()->role != 'user')
+                                <li role="mailTool" data-type="multi"><a href="#">大量寄信</a></li>
+                                @endif
                             </ul>
                             @endif
                             <form id="mailForm" onsubmit="return false;">
@@ -70,7 +73,13 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
+                                      </div>
+                                      <div id="multiWrapper">
+                                        <div class="col-lg-12">
+                                          <label for="excel">請選擇檔案</label>
+                                          <input type="file" id="excel" name="excel" class="form-control">
+                                        </div>
+                                      </div>
                                 @endif
                                 <div class="col-lg-12">
                                     <label for="message">想說的話</label>
@@ -81,6 +90,7 @@
                                     <button type="submit" class="btn btn-default" id="mailBtn">寄送</button>
                                     @if(Auth::check())
                                     <button type="submit" class="btn btn-default" id="reservationBtn">預約</button>
+                                    <button type="submit" class="btn btn-default" id="multiBtn">大量寄送</button>
                                     @endif
                                 </div>
                             </form>

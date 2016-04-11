@@ -42,6 +42,7 @@
 <!-- Lib -->
 <script src="{{url('/assets/js/lodash.min.js')}}" defer></script>
 <script src="{{url('/assets/js/autosize.min.js')}}" defer></script>
+<script src="{{url('assets/js/jquery.form.min.js')}}"></script>
 
 <!-- Demonic Write -->
 <script src="{{url('assets/js/common.js')}}"></script>

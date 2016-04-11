@@ -75,7 +75,7 @@ class Card {
         return $result;
     }
 
-    static public function list($parent_id, $child_id) {
+    static public function cardList($parent_id, $child_id) {
         $result = DB::table('card')
             ->select(['id', 'name', 'mail_times', 'share_times'])
             ->where('parent', '=', $parent_id)

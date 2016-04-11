@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
+use Excel;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -39,8 +40,8 @@ class CardController extends Controller
         return $result;
     }
 
-    public function list($parent_id, $child_id) {
-        $result = Card::list($parent_id, $child_id);
+    public function cardList($parent_id, $child_id) {
+        $result = Card::cardList($parent_id, $child_id);
 
         return $result;
     }
@@ -55,6 +56,18 @@ class CardController extends Controller
         $result = MailTool::card($id, $request);
 
         return $result;
+    }
+
+    public function multiMail($id, Request $request) {
+      $user = Auth::user();
+
+      if($user && $user->role != 'user') {
+        $filepath = $request->file('excel')->getRealPath();
+        $list = Excel::load($filepath)->toArray();
+        return $list;
+      }else {
+        return 'error';
+      }
     }
 
     public function fb_share_increment($id) {

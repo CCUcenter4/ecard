@@ -50,12 +50,14 @@ Route::group(['prefix'=>'api'], function() {
         Route::delete('delete/{id}', 'Api\CardController@delete');
 
         // get data
-        Route::get('list/{parent_id}/{child_id}', 'Api\CardController@list');
+        Route::get('list/{parent_id}/{child_id}', 'Api\CardController@cardList');
         Route::get('detail/{id}', 'Api\CardController@detail');
         Route::get('name', 'Api\CardController@name');
 
         // mail
         Route::post('mail/{id}', 'Api\CardController@mail');
+        Route::post('multiMail/{id}', 'Api\CardController@multiMail');
+
         // fb_share
         Route::post('fb_share_increment/{id}', 'Api\CardController@fb_share_increment');
     });

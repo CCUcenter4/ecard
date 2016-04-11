@@ -97,9 +97,11 @@ function cardEvent() {
       // reset type
       $('.nav-tabs li').removeClass('active');
       $('.nav-tabs li:first').addClass('active');
-      $('#reservationWrapper').hide();
       $('#mailBtn').show();
+      $('#reservationWrapper').hide();
       $('#reservationBtn').hide();
+      $('#multiWrapper').hide();
+      $('#multiBtn').hide();
     })
   });
 
@@ -127,17 +129,38 @@ function cardEvent() {
   $('.nav-tabs li').unbind('click');
   $('.nav-tabs li').click(function() {
     var type = $(this).attr('data-type');
+    var nameWrapper = $('#reciever_name').parent();
+    var emailWrapper = $('#reciever_email').parent();
     $('.nav-tabs li').removeClass('active');
     $(this).addClass('active');
 
     if(type == 'reservation') {
       $('#reservationWrapper').show();
-      $('#mailBtn').hide();
       $('#reservationBtn').show();
-    }else {
-      $('#reservationWrapper').hide();
+      nameWrapper.show();
+      emailWrapper.show();
+
+      $('#mailBtn').hide();
+      $('#multiBtn').hide();
+      $('#multiWrapper').hide();
+    }else if(type == 'normal'){
       $('#mailBtn').show();
+      nameWrapper.show();
+      emailWrapper.show();
+
+      $('#reservationWrapper').hide();
       $('#reservationBtn').hide();
+      $('#multiBtn').hide();
+      $('#multiWrapper').hide();
+    }else if(type == 'multi'){
+      $('#multiBtn').show();
+      $('#multiWrapper').show();
+
+      $('#mailBtn').hide();
+      $('#reservationWrapper').hide();
+      $('#reservationBtn').hide();
+      nameWrapper.hide();
+      emailWrapper.hide();
     }
   });
 }
@@ -198,4 +221,29 @@ function mailEvent() {
     });
   });
 
+  $('#multiBtn').unbind('click');
+  $('#multiBtn').click(function() {
+    var id = $('#currentCardId').val();
+    var data = {};
+    data._token = $('meta[name="csrf-token"]').attr('content');
+
+    if($('#excel')[0].files[0] == null) {
+      toastr['warning']('需選擇檔案');
+      return;
+    }
+
+    console.log(data);
+    $('#mailForm').ajaxSubmit({
+      url: '/api/card/multiMail/' + id,
+      method: 'POST',
+      data: data,
+      success: function(result) {
+        console.log(result);
+        toastr['success']('大量寄送成功');
+      },
+      fail: function() {
+        toastr['error']('解析excel失敗');
+      }
+    });
+  });
 }
