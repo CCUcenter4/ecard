@@ -90,6 +90,7 @@ function produceHistory(list) {
   var reciever_name;
   var reciever_email;
   var id;
+  var card_id;
   var message;
   var mail_time;
   var created_at;
@@ -98,6 +99,7 @@ function produceHistory(list) {
     reciever_name = _.trim(list[i].reciever_name);
     reciever_email = _.trim(list[i].reciever_email);
     id = list[i].id;
+    card_id = list[i].card_id;
     message = _.trim(list[i].message);
     mail_time = list[i].mail_time;
     created_at = list[i].created_at;
@@ -112,7 +114,7 @@ function produceHistory(list) {
     text += `</div>`;// end heading
     text += `<div id="collapse${i}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading${i}">`;
     text += `<div class="panel-body">`;
-    text += `<p>卡片名稱:<a href="/web/card/${id}">${cardName[id]}</a></p>`;
+    text += `<p>卡片名稱:<a href="/web/card/${card_id}">${cardName[card_id]}</a></p>`;
     text += `<p>訊息內容:${message}<p>`;
     text += `<p>寄送時間:${created_at}</p>`;
     text += `</div>`;// end body
@@ -133,6 +135,7 @@ function produceReservation(list) {
   var reciever_name;
   var reciever_email;
   var id;
+  var card_id;
   var message;
   var mail_time;
 
@@ -140,6 +143,7 @@ function produceReservation(list) {
     reciever_name = _.trim(list[i].reciever_name);
     reciever_email = _.trim(list[i].reciever_email);
     id = list[i].id;
+    card_id = list[i].card_id;
     message = _.trim(list[i].message);
     mail_time = list[i].mail_time;
 
@@ -153,7 +157,7 @@ function produceReservation(list) {
     text += `</div>`;// end heading
     text += `<div id="collapse${i}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading${i}">`;
     text += `<div class="panel-body">`;
-    text += `<p>卡片名稱:<a href="/web/card/${id}">${cardName[id]}</a></p>`;
+    text += `<p>卡片名稱:<a href="/web/card/${card_id}">${cardName[card_id]}</a></p>`;
     text += `<p>訊息內容:${message}<p>`;
     text += `<p>預約時間:${mail_time}</p>`;
     text += `<button class="btn btn-danger reservation_delete" data-id="${id}">刪除</button>`

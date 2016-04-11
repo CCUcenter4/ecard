@@ -50,19 +50,10 @@ class Register{
     }
 
     static public function createFromMultiLogin($person){
-        // prepare person_info data
-        $data = [
-            'email' => $person['email'],
-            'name'  => $person['name'],
-        ];
-
-        unset($person['email']);
-        unset($person['birth']);
-
         $person['created_at'] = date('Y-m-d H:i:s');
         $person['updated_at'] = date('Y-m-d H:i:s');
 
-        $query = DB::table('users');
+        $query = DB::table('user');
         $id = $query->insertGetId($person);
 
         return $id;

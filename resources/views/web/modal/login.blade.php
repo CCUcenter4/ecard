@@ -12,8 +12,10 @@
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-cloud" aria-hidden="true"></span></div>
                             <select id="From" class="form-control">
-                                <option value="1" selected>Ecard</option>
-                                <option value="2">SSO</option>
+                              <option value="1" selected>Ecard</option>
+                              <!--
+                              <option value="2">SSO</option>
+                              -->
                             </select>
                         </div>
                         <br><br>

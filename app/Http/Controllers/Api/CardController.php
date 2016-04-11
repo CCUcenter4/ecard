@@ -64,6 +64,10 @@ class CardController extends Controller
       if($user && $user->role != 'user') {
         $filepath = $request->file('excel')->getRealPath();
         $list = Excel::load($filepath)->toArray();
+        $message = $request->input('message');
+
+        MailTool::multiMail($id, $list, $message);
+
         return $list;
       }else {
         return 'error';

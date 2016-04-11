@@ -27,5 +27,18 @@ class MailTool {
         $dispatcher = new self();
         $dispatcher->dispatch(new SendCard($card_id, $reciever, $message, $type));
     }
+
+    static public function multiMail($card_id, $list, $message) {
+      $type = 'immediate';
+
+      $reciever = [];
+      $length = count($list[0]);
+      for($i=0; $i<$length; $i++) {
+        $reciever['name'] = $list[0][$i]['name'];
+        $reciever['email'] = $list[0][$i]['email'];
+        $dispatcher = new self();
+        $dispatcher->dispatch(new SendCard($card_id, $reciever, $message, $type));
+      }
+    }
 }
 ?>

@@ -226,6 +226,7 @@ function mailEvent() {
     var id = $('#currentCardId').val();
     var data = {};
     data._token = $('meta[name="csrf-token"]').attr('content');
+    data.message = $('#message').val();
 
     if($('#excel')[0].files[0] == null) {
       toastr['warning']('需選擇檔案');
