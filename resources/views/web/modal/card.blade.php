@@ -23,10 +23,10 @@
                         <p>
                             寄送次數 : <b id="mailTime"></b>
                             分享次數 : <b id="shareTime"></b>
-                        </p>
+                          </p>
+                          @if(Auth::check())
                         <hr>
                         <div class="row">
-                            @if(Auth::check())
                             <ul class="nav nav-tabs">
                                 <li role="mailTool" data-type="normal" class="active"><a href="#">一般</a></li>
                                 <li role="mailTool" data-type="reservation"><a href="#">預約</a></li>
@@ -34,7 +34,6 @@
                                 <li role="mailTool" data-type="multi"><a href="#">大量寄信</a></li>
                                 @endif
                             </ul>
-                            @endif
                             <form id="mailForm" onsubmit="return false;">
                                 <div class="col-lg-12">
                                     <label for="reciever_name">收件人姓名</label>
@@ -44,7 +43,6 @@
                                     <label for="reciever_email">收件人信箱</label>
                                     <input type="text" id="reciever_email" placeholder="Email" class="form-control">
                                 </div>
-                                @if(Auth::check())
                                     <div id="reservationWrapper">
                                         <div class="col-lg-12">
                                             <label for="reservation_date">預約日期</label>
@@ -80,7 +78,6 @@
                                           <input type="file" id="excel" name="excel" class="form-control">
                                         </div>
                                       </div>
-                                @endif
                                 <div class="col-lg-12">
                                     <label for="message">想說的話</label>
                                     <textarea id="message" class="form-control" placeholder="Message" style="resize:none;"></textarea>
@@ -88,12 +85,11 @@
                                 <br>
                                 <div class="col-lg-12 text-center">
                                     <button type="submit" class="btn btn-default" id="mailBtn">寄送</button>
-                                    @if(Auth::check())
                                     <button type="submit" class="btn btn-default" id="reservationBtn">預約</button>
                                     <button type="submit" class="btn btn-default" id="multiBtn">大量寄送</button>
-                                    @endif
                                 </div>
-                            </form>
+                              </form>
+                              @endif
                         </div>
                     </div>
                 </div><!-- /.col-lg-4 -->
