@@ -17,6 +17,7 @@ Route::group(['prefix'=>'web'], function() {
     Route::get('/', 'WebController@index');
     Route::get('festival/{parent_id}/{child_id}', 'WebController@festival');
     Route::get('card/{card_id}', 'WebController@card');
+    Route::get('normal/{navbar_id}/{parent_id}/{child_id}', 'WebController@normal');
 
     Route::group(['prefix'=>'person'], function() {
         Route::get('/', 'WebController@person');

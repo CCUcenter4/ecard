@@ -18,7 +18,7 @@ function getCardName() {
 function getHistory() {
   $.get('/api/person/history', function(result) {
     console.log(result);
-    toastr['success']('成功取得歷史紀錄');
+    //toastr['success']('成功取得歷史紀錄');
     if(result != '') {
       produceHistory(result);
     }else {
@@ -32,7 +32,7 @@ function getHistory() {
 function getReservation() {
   $.get('/api/person/reservation/', function(result) {
     console.log(result);
-    toastr['success']('成功取得預約紀錄');
+    //toastr['success']('成功取得預約紀錄');
     if(result != '') {
       produceReservation(result);
     }else {
