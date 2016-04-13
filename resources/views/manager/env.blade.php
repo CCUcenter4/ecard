@@ -28,5 +28,27 @@
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="navbar">
       </div>
   </div>
+
+  <div class="row">
+      <div class="col-sm-1 col-md-1 col-lg-1"></div><!-- space -->
+      <div class="col-sm-3 col-md-3 col-lg-3">
+          <h3>大量寄信帳號 設定</h3>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-1 col-md-1 col-lg-1"></div><!-- space -->
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <input type="text" class="form-control" id="account" placeholder="欲搜尋帳號">
+      </div>
+      <div class="col-sm-3 col-md-3 col-lg-3">
+          <button id="searchBtn" class="btn btn-primary">搜尋</button>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-lg-12" id="searchList"></div>
+  </div>
+  <div class="row">
+      <div class="col-lg-12" id="multiList"></div>
+  </div>
 @stop
 

@@ -91,9 +91,16 @@ Route::group(['prefix'=>'api'], function() {
 
     Route::group(['prefix'=>'env'], function() {
         Route::group(['prefix'=>'navbar'], function() {
-            Route::get('/get', 'Api\NavbarController@get');
+            Route::get('get', 'Api\NavbarController@get');
             Route::post('create/{parent_id}', 'Api\NavbarController@create');
             Route::delete('delete/{id}', 'Api\NavbarController@delete');
+        });
+
+        Route::group(['prefix'=>'multimail'], function() {
+            Route::get('get', 'Api\MultimailController@get');
+            Route::post('search', 'Api\MultimailController@search');
+            Route::post('create/{account_id}', 'Api\MultimailController@create');
+            Route::delete('delete/{account_id}', 'Api\MultimailController@delete');
         });
     });
 });

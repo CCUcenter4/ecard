@@ -6,6 +6,7 @@ $(function() {
 
 var parent_data;
 var navbar_data;
+var multimail_data;
 
 function getParentList() {
   $.get('/api/category/parent/get', function(result) {
@@ -61,6 +62,22 @@ function produceNavbarList() {
   $('#navbar').html(text);
 }
 
+function getMultimailList() {
+  $.get('/api/env/multimail/get', function(result) {
+    console.log(result);
+    multimail_data = result;
+    produceMultimailList();
+  });
+}
+
+function produceMultimailList() {
+
+}
+
+function produceSearchList() {
+
+}
+
 function btnEvent() {
   $('#createNavbarBtn').unbind('click');
   $('#createNavbarBtn').click(function() {
@@ -93,6 +110,54 @@ function btnEvent() {
       success: function(result) {
         toastr['success']('刪除成功');
         getNavbarList();
+      },
+      fail: function() {
+        toastr['error']('刪除失敗');
+      }
+    });
+  });
+
+  $('#searchBtn').unbind('click');
+  $('#searchBtn').click(function() {
+    var data = {};
+    data.pattern = $('#account').val();
+
+    if(_.trim(data.pattern) == '') {
+      toastr['warning']('請輸入欲搜尋帳號名稱');
+      return;
+    }
+
+    $.post('/api/env/multimail/search', data, function(result) {
+      console.log(result);
+    })
+  });
+
+  $('.addMultimailBtn').unbind('click');
+  $('.addMultimailBtn').click(function() {
+    var account_id = $(this).data('account_id');
+
+    $.post('/api/env/multimail/create/' + account_id, function(result) {
+      console.log(result);
+      toastr['success']('新增成功');
+      getNavbarList();
+    }).fail(function() {
+      toastr['error']('新增失敗');
+    });
+  });
+
+  $('.deleteMultimailBtn').unbind('click');
+  $('.deleteMultimailBtn').click(function() {
+    var account_id = $(this).data('account_id');
+    var data = {};
+    data._token = $('meta[name="csrf-token"]').attr('content');
+
+    $.ajax({
+      url: '/api/env/multimail/delete/' + account_id,
+      method: 'delete',
+      data: data,
+      success: function(result) {
+        toastr['success']('刪除成功');
+        getMultimailList();
       },
       fail: function() {
         toastr['error']('刪除失敗');
