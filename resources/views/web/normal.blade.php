@@ -1,7 +1,13 @@
 @extends('web.init')
 
 @section('css')
-<title>節慶卡片</title>
+<title>
+@for($i=0; $i<count($navbar); $i++)
+@if($navbar[$i]->id == $navbar_id)
+{{$navbar[$i]->name}} - {{$navbar[$i]->child_name}}
+@endif
+@endfor
+</title>
 <link rel="stylesheet" href="{{url('assets/css/web/index.css')}}">
 <link rel="stylesheet" href="{{url('assets/css/web/carousel.css')}}">
 <link rel="stylesheet" href="{{url('assets/css/web/card.css')}}">
@@ -33,10 +39,12 @@
                         @for($i=0; $i<count($navbar); $i++)
                             @if($navbar_id == $navbar[$i]->id)
                             <li class="active">
-                                <a href="/web/normal/{{$navbar[$i]->id}}/1/1">{{$navbar[$i]->name}}</a>
+                                <a href="/web/normal/{{$navbar[$i]->id}}/{{$navbar[$i]->parent_id}}/{{$navbar[$i]->child_id}}">{{$navbar[$i]->name}}</a>
                             </li>
                             @else
-                            <li><a href="/web/normal/{{$navbar[$i]->id}}/1/1">{{$navbar[$i]->name}}</a></li>
+                            <li>
+                                <a href="/web/normal/{{$navbar[$i]->id}}/{{$navbar[$i]->parent_id}}/{{$navbar[$i]->child_id}}">{{$navbar[$i]->name}}</a>
+                            </li>
                             @endif
                         @endfor
                     </ul>
