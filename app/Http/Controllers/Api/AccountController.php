@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 
 use App\Ecard\Account;
 
-class MultimailController extends Controller
+class AccountController extends Controller
 {
     public function getNotUser() {
         $result = Account::getNotUser();
@@ -23,7 +23,7 @@ class MultimailController extends Controller
             return;
         }
 
-        $result = Account::changeRole($id);
+        $result = Account::changeRole($id, $role);
 
         return $result;
     }

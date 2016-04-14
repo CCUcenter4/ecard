@@ -27,7 +27,7 @@ class Account {
 
     static public function searchUser($pattern) {
         $result = DB::table('user')
-            ->where('account', 'like', $pattern)
+            ->where('account', 'like', '%'.$pattern.'%')
             ->where('role', '=', 'user')
             ->get();
 
