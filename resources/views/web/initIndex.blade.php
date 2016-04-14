@@ -14,16 +14,16 @@
 
       <!-- bootstrap style plugin-->
       <link rel="stylesheet" href="{{url('assets/css/toastr.min.css')}}">
-        <link rel="stylesheet" href="{{url('assets/css/icon_css/font-awesome.min.css')}}">
+
       <link rel="stylesheet" href="{{url('assets/css/web/common.css')}}">
     @yield('css')
 
 </head>
-<body style="background-color: #e7e7e7;">
-<div class="container">
-    @yield('content')
-    @include('web.footer')
-</div>
+<body>
+
+@yield('content')
+@include('web.footer')
+
 
 
 @if(Auth::check())

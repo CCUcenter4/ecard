@@ -43,4 +43,11 @@ class AuthController extends Controller
 
         return $result;
     }
+
+    public function logout() {
+        
+        Auth::logout();
+
+        return redirect('web');
+    }
 }
