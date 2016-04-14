@@ -7,38 +7,28 @@ use Illuminate\Http\Request;
 use App\Ecard\Category;
 
 class Account {
-    static public function get() {
+    static public function getNotUser() {
         $result = DB::table('user')
-            ->where('role', '=', 'multimailer')
+            ->whereNotIn('role', ['user', 'manager'])
             ->get();
 
         return $result;
     }
 
-    static public function create($account_id) {
+    static public function changeRole($id, $role) {
         $result = DB::table('user')
-            ->where('id', '=', $account_id)
+            ->where('id', '=', $id)
             ->update([
-                'role' => 'multimailer'
+                'role' => $role
             ]);
 
         return var_dump($result);
     }
 
-    static public function delete($account_id) {
-        $result = DB::table('user')
-            ->where('id', '=', $account_id)
-            ->update([
-                'role' => 'user'
-            ]);
-
-        return $result;
-    }
-
-    static public function searchNotMultimailer($pattern) {
+    static public function searchUser($pattern) {
         $result = DB::table('user')
             ->where('account', 'like', $pattern)
-            ->whereNotIn('role', ['multimailer'])
+            ->where('role', '=', 'user')
             ->get();
 
         return $result;

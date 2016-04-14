@@ -6,7 +6,7 @@ $(function() {
 
 var parent_data;
 var navbar_data;
-var multimail_data;
+var not_user_data;
 
 function getParentList() {
   $.get('/api/category/parent/get', function(result) {
@@ -62,15 +62,15 @@ function produceNavbarList() {
   $('#navbar').html(text);
 }
 
-function getMultimailList() {
-  $.get('/api/env/multimail/get', function(result) {
+function getNotUserList() {
+  $.get('/api/account/getNotUser', function(result) {
     console.log(result);
-    multimail_data = result;
-    produceMultimailList();
+    not_user_data = result;
+    produceNotUserList();
   });
 }
 
-function produceMultimailList() {
+function produceNotUserList() {
 
 }
 
@@ -127,41 +127,36 @@ function btnEvent() {
       return;
     }
 
-    $.post('/api/env/multimail/search', data, function(result) {
+    $.post('/api/account/searchUser', data, function(result) {
       console.log(result);
     })
   });
 
-  $('.addMultimailBtn').unbind('click');
-  $('.addMultimailBtn').click(function() {
-    var account_id = $(this).data('account_id');
+  $('.addRoleBtn').unbind('click');
+  $('.addRoleBtn').click(function() {
+    var id = $(this).data('id');
+    var role = $('#role').val();
 
-    $.post('/api/env/multimail/create/' + account_id, function(result) {
+    $.post(`/api/account/changeRole/${id}/${role}`, function(result) {
       console.log(result);
-      toastr['success']('新增成功');
+      toastr['success']('變更成功');
       getNavbarList();
     }).fail(function() {
-      toastr['error']('新增失敗');
+      toastr['error']('變更失敗');
     });
   });
 
-  $('.deleteMultimailBtn').unbind('click');
-  $('.deleteMultimailBtn').click(function() {
-    var account_id = $(this).data('account_id');
-    var data = {};
-    data._token = $('meta[name="csrf-token"]').attr('content');
+  $('.deleteRoleBtn').unbind('click');
+  $('.deleteRoleBtn').click(function() {
+    var id = $(this).data('id');
+    var role = 'user';
 
-    $.ajax({
-      url: '/api/env/multimail/delete/' + account_id,
-      method: 'delete',
-      data: data,
-      success: function(result) {
-        toastr['success']('刪除成功');
-        getMultimailList();
-      },
-      fail: function() {
-        toastr['error']('刪除失敗');
-      }
+    $.post(`/api/account/changeRole/${id}/${role}`, function(result) {
+      console.log(result);
+      toastr['success']('變更成功');
+      getNavbarList();
+    }).fail(function() {
+      toastr['error']('變更失敗');
     });
   });
 }

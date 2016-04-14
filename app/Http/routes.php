@@ -42,6 +42,7 @@ Route::group(['prefix'=>'api'], function() {
         });
 
         Route::post('register', 'AuthController@register');
+        Route::post('logout', 'AuthController@logout');
     });
 
     Route::group(['prefix'=>'card'], function() {
@@ -95,12 +96,11 @@ Route::group(['prefix'=>'api'], function() {
             Route::post('create/{parent_id}', 'Api\NavbarController@create');
             Route::delete('delete/{id}', 'Api\NavbarController@delete');
         });
+    });
 
-        Route::group(['prefix'=>'multimail'], function() {
-            Route::get('get', 'Api\MultimailController@get');
-            Route::post('search', 'Api\MultimailController@search');
-            Route::post('create/{account_id}', 'Api\MultimailController@create');
-            Route::delete('delete/{account_id}', 'Api\MultimailController@delete');
-        });
+    Route::group(['prefix'=>'account'], function() {
+        Route::get('getNotUser', 'Api\AccountController@getNotUser');
+        Route::post('searchUser', 'Api\AccountController@searchUser');
+        Route::post('changeRole/{id}/{role}', 'Api\AccountController@changeRole');
     });
 });

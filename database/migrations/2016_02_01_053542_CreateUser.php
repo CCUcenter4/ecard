@@ -17,9 +17,9 @@ class CreateUser extends Migration
             $table->string('account', 128);
             $table->string('password', 128);
             $table->rememberToken();
-            $table->enum('type', ['ecard', 'academic', 'academic_gra', 'sso']);
-            $table->enum('status', ['available', 'disable']);
-            $table->enum('role', ['user', 'manager', 'multimailer']);
+            $table->string('type', 32);
+            $table->string('status', 32);
+            $table->string('role', 32);
             $table->timestamps();
 
             $table->unique(['account', 'type']);
