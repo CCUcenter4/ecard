@@ -17,7 +17,7 @@ class ManagerAuth
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
-        if($user && $user->role == 'manager') {
+        if($user && (($user->role == 'manager') || ($user->role == 'designer'))) {
             return $next($request);
         }else {
             return redirect()->intended('manager/login');

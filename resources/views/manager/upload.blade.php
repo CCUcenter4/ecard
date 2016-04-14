@@ -13,6 +13,10 @@
 @stop
 
 @section('content')
+@if(!Auth::check() && ((Auth::user()->role != 'designer') && (Auth::user()->role != 'manager')))
+<h1>請先登入管理者帳號</h1>
+<center><a href="{{url('manager/login')}}">登入</a></center>
+@else
   @include('manager.modal.card')
   @include('manager.modal.parent')
   @include('manager.modal.child')
@@ -39,5 +43,6 @@
   <br>
   <ul class="cardContent">
   </ul>
+  @endif
 @stop
 

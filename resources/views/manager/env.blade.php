@@ -11,6 +11,10 @@
 @stop
 
 @section('content')
+@if(!Auth::check() && Auth::user()->role != 'manager')
+<h1>請先登入管理者帳號</h1>
+<center><a href="{{url('manager/login')}}">登入</a></center>
+@else
   @include('manager.header')
 
   <div class="row">
@@ -68,5 +72,6 @@
   <div class="row">
       <div class="col-lg-12" id="notUserList"></div>
   </div>
+  @endif
 @stop
 
