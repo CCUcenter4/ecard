@@ -1,17 +1,17 @@
 #card .modal-dialog {
   width:1100px;
-  height:720px;
+  height:auto;
   position: relative;
   margin: 0 auto;
 }
 #card .modal-content {
   width:1100px;
-  height:720px;
+  height:auto;
   position: relative;
   margin: 0 auto;
 }
 
 #modalCard {
   width: 720px;
-  height: 600px;
+  height: auto;
 }

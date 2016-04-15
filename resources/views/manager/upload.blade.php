@@ -13,7 +13,7 @@
 @stop
 
 @section('content')
-@if(!Auth::check() && ((Auth::user()->role != 'designer') && (Auth::user()->role != 'manager')))
+@if((Auth::user()->role != 'designer') && (Auth::user()->role != 'manager'))
 <h1>請先登入管理者帳號</h1>
 <center><a href="{{url('manager/login')}}">登入</a></center>
 @else

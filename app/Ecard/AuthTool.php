@@ -90,13 +90,19 @@ class AuthTool {
   }
 
   static public function manager(Request $request) {
-    $data = [
+    $managerData = [
       'account' => $request->input('account'),
         'password' => $request->input('password'),
         'role' => 'manager'
       ];
+    $designerData = [
+      'account' => $request->input('account'),
+        'password' => $request->input('password'),
+        'role' => 'designer'
+      ];
 
-    if(Auth::attempt($data)) {
+
+    if(Auth::attempt($managerData) || Auth::attempt($designerData)) {
       return redirect()->intended('manager/upload');
     }else {
       return redirect()->intended('manager/login');

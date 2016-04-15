@@ -58,12 +58,11 @@ function produceCard() {
       text += `<img class="${imgClass}" src="/card/web/${card_id}">`;
       text += '</a>';
       text += '<div class="caption">';
-      text += `<h3 class="text-left">${card_name}`;
-      text += '<span style="float:right;">'
-      text += `<b>${mail_times}</b><span class="glyphicon glyphicon-send"></span>`;
-      text += `<b>${share_times}</b><span class="glyphicon glyphicon-share-alt"></span>`;
-      text += '</span>';
-      text += '</h3>';
+      text += `<h3 style="font-size: 140%;" class="text-center">${card_name}</h3>`;
+      text += `<i class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp;<span class="text-muted">${mail_times}</span>&nbsp;&nbsp;&nbsp;`;
+      text += `<i class="fa fa-star text-warning" aria-hidden="true"></i>&nbsp;<span class="text-muted">${share_times}</span>&nbsp;&nbsp;&nbsp;`;
+      text += `<i class="fa fa-paper-plane text-success" aria-hidden="true"></i>&nbsp;<span class="text-muted">${mail_times}</span>&nbsp;&nbsp;&nbsp;`;
+      text += `<i class="fa fa-share text-primary" aria-hidden="true"></i>&nbsp;<span class="text-muted">${share_times}</span>`;
       text += '</div>';//end caption
       text += '</div>';//end thumbnail
       text += '</div>';
@@ -98,10 +97,22 @@ function cardEvent() {
       $('.nav-tabs li').removeClass('active');
       $('.nav-tabs li:first').addClass('active');
       $('#mailBtn').show();
+
+      // tab appear
+      $('#tab_information').show();
+      $('#tab_multi_send').hide();
+      $('#tab_reservation_send').hide();
+      $('#tab_send').hide();
+
       $('#reservationWrapper').hide();
       $('#reservationBtn').hide();
       $('#multiWrapper').hide();
       $('#multiBtn').hide();
+      $('#mailBtn').hide();
+      $('#reciever_email_Wrapper').hide();
+      $('#reciever_name_Wrapper').hide();
+      $('#reciever_message_Wrapper').hide();
+
     })
   });
 
@@ -131,36 +142,92 @@ function cardEvent() {
     var type = $(this).attr('data-type');
     var nameWrapper = $('#reciever_name').parent();
     var emailWrapper = $('#reciever_email').parent();
+
     $('.nav-tabs li').removeClass('active');
     $(this).addClass('active');
 
-    if(type == 'reservation') {
+    if(type == 'information') {
+      $('#informationWrapper').show();
+      $('#tab_information').show();
+
+      $('#tab_multi_send').hide();
+      $('#tab_reservation_send').hide();
+      $('#tab_send').hide();
+
+      $('#reservationWrapper').hide();
+      $('#reservationBtn').hide();
+      $('#mailBtn').hide();
+      $('#multiBtn').hide();
+      $('#multiWrapper').hide();
+      $('#reciever_email_Wrapper').hide();
+      $('#reciever_name_Wrapper').hide();
+      $('#reciever_message_Wrapper').hide();
+
+    }else if(type == 'reservation') {
+
+      $('#tab_reservation_send').show();
+
       $('#reservationWrapper').show();
       $('#reservationBtn').show();
+      $('#reciever_email_Wrapper').show();
+      $('#reciever_name_Wrapper').show();
+      $('#reciever_message_Wrapper').show();
       nameWrapper.show();
       emailWrapper.show();
+
 
       $('#mailBtn').hide();
       $('#multiBtn').hide();
       $('#multiWrapper').hide();
+      $('#informationWrapper').hide();
+
+      $('#tab_information').hide();
+      $('#tab_multi_send').hide();
+      $('#tab_send').hide();
+
     }else if(type == 'normal'){
+
+      $('#tab_send').show();
+
       $('#mailBtn').show();
+      $('#reciever_email_Wrapper').show();
+      $('#reciever_name_Wrapper').show();
+      $('#reciever_message_Wrapper').show();
       nameWrapper.show();
       emailWrapper.show();
+
+      $('#tab_information').hide();
+      $('#tab_multi_send').hide();
+      $('#tab_reservation_send').hide();
 
       $('#reservationWrapper').hide();
       $('#reservationBtn').hide();
       $('#multiBtn').hide();
       $('#multiWrapper').hide();
+      $('#informationWrapper').hide();
+
     }else if(type == 'multi'){
+
+      $('#tab_multi_send').show();
+
+
       $('#multiBtn').show();
       $('#multiWrapper').show();
+      $('#reciever_message_Wrapper').show();
+
+      $('#tab_information').hide();
+      $('#tab_reservation_send').hide();
+      $('#tab_send').hide();
 
       $('#mailBtn').hide();
       $('#reservationWrapper').hide();
       $('#reservationBtn').hide();
+      $('#informationWrapper').hide();
+      $('#reciever_email_Wrapper').hide();
+      $('#reciever_name_Wrapper').hide();
       nameWrapper.hide();
       emailWrapper.hide();
+
     }
   });
 }
