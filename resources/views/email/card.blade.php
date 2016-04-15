@@ -20,14 +20,7 @@
   <a href="https://ecard.ccu.edu.tw">https://ecard.ccu.edu.tw</a>
   <p>Ecard 粉絲團</p>
   <a href="https://www.facebook.com/ccuecard?fref=ts">https://www.facebook.com/ccuecard?fref=ts</a>
-  <p>我們還有Ecard專屬的Android App，歡迎前往我們的網站下載</p>
-  <img src="{{url('assets/img/web/common/QR_app.jpg')}}"
-    style="
-      width:250px;
-      height:200px;
-    "
-  >
-  <p>CCU&copy;2010-15</p>
+  <p>CCU&copy</p>
 @stop
 
 

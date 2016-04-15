@@ -252,6 +252,12 @@ function mailEvent() {
       return;
     }
 
+    if(_.trim(data.message) == '') {
+      toastr['warning']('訊息欄位沒填');
+      return;
+    }
+
+    console.log(data);
     $.post('/api/card/mail/' + id, data, function(result) {
       console.log(result);
       toastr['success']('寄信成功');
@@ -280,6 +286,12 @@ function mailEvent() {
       return;
     }
 
+    if(_.trim(data.message) == '') {
+      toastr['warning']('訊息欄位沒填');
+      return;
+    }
+
+    console.log(data);
     $.post('/api/person/reservation/create/' + id, data, function(result) {
       console.log(result);
       toastr['success']('預約成功');
@@ -297,6 +309,11 @@ function mailEvent() {
 
     if($('#excel')[0].files[0] == null) {
       toastr['warning']('需選擇檔案');
+      return;
+    }
+
+    if(_.trim(data.message) == '') {
+      toastr['warning']('訊息欄位沒填');
       return;
     }
 

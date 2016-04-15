@@ -59,7 +59,8 @@ class WebController extends Controller
             ->with('fb_app_id', env('FB_client_id'))
             ->with('card_id', $card->id)
             ->with('card_name', $card->name)
-            ->with('card_description', $card->description);
+            ->with('card_description', $card->description)
+            ->with('author', $card->author);
     }
 
     public function person(){

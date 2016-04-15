@@ -46,36 +46,92 @@ function cardEvent() {
     var type = $(this).attr('data-type');
     var nameWrapper = $('#reciever_name').parent();
     var emailWrapper = $('#reciever_email').parent();
+
     $('.nav-tabs li').removeClass('active');
     $(this).addClass('active');
 
-    if(type == 'reservation') {
+    if(type == 'information') {
+      $('#informationWrapper').show();
+      $('#tab_information').show();
+
+      $('#tab_multi_send').hide();
+      $('#tab_reservation_send').hide();
+      $('#tab_send').hide();
+
+      $('#reservationWrapper').hide();
+      $('#reservationBtn').hide();
+      $('#mailBtn').hide();
+      $('#multiBtn').hide();
+      $('#multiWrapper').hide();
+      $('#reciever_email_Wrapper').hide();
+      $('#reciever_name_Wrapper').hide();
+      $('#reciever_message_Wrapper').hide();
+
+    }else if(type == 'reservation') {
+
+      $('#tab_reservation_send').show();
+
       $('#reservationWrapper').show();
       $('#reservationBtn').show();
+      $('#reciever_email_Wrapper').show();
+      $('#reciever_name_Wrapper').show();
+      $('#reciever_message_Wrapper').show();
       nameWrapper.show();
       emailWrapper.show();
+
 
       $('#mailBtn').hide();
       $('#multiBtn').hide();
       $('#multiWrapper').hide();
+      $('#informationWrapper').hide();
+
+      $('#tab_information').hide();
+      $('#tab_multi_send').hide();
+      $('#tab_send').hide();
+
     }else if(type == 'normal'){
+
+      $('#tab_send').show();
+
       $('#mailBtn').show();
+      $('#reciever_email_Wrapper').show();
+      $('#reciever_name_Wrapper').show();
+      $('#reciever_message_Wrapper').show();
       nameWrapper.show();
       emailWrapper.show();
+
+      $('#tab_information').hide();
+      $('#tab_multi_send').hide();
+      $('#tab_reservation_send').hide();
 
       $('#reservationWrapper').hide();
       $('#reservationBtn').hide();
       $('#multiBtn').hide();
       $('#multiWrapper').hide();
+      $('#informationWrapper').hide();
+
     }else if(type == 'multi'){
+
+      $('#tab_multi_send').show();
+
+
       $('#multiBtn').show();
       $('#multiWrapper').show();
+      $('#reciever_message_Wrapper').show();
+
+      $('#tab_information').hide();
+      $('#tab_reservation_send').hide();
+      $('#tab_send').hide();
 
       $('#mailBtn').hide();
       $('#reservationWrapper').hide();
       $('#reservationBtn').hide();
+      $('#informationWrapper').hide();
+      $('#reciever_email_Wrapper').hide();
+      $('#reciever_name_Wrapper').hide();
       nameWrapper.hide();
       emailWrapper.hide();
+
     }
   });
 }
@@ -85,55 +141,67 @@ function mailEvent() {
   $('#mailBtn').click(function() {
     var id = $('#currentCardId').val();
     var validateEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  var data = {};
-  data.reciever_name = $('#reciever_name').val();
-  data.reciever_email = $('#reciever_email').val();
-  data.message = $('#message').val();
+    var data = {};
+    data.reciever_name = $('#reciever_name').val();
+    data.reciever_email = $('#reciever_email').val();
+    data.message = $('#message').val();
 
-  if(_.trim(data.reciever_name) == '' || _.trim(data.reciever_email) == '') {
-    toastr['warning']('信箱跟姓名欄位都要填');
-    return;
-  }
+    if(_.trim(data.reciever_name) == '' || _.trim(data.reciever_email) == '') {
+      toastr['warning']('信箱跟姓名欄位都要填');
+      return;
+    }
 
-  if(!validateEmail.test(data.reciever_email)) {
-    toastr['warning']('信箱格式不合');
-    return;
-  }
+    if(!validateEmail.test(data.reciever_email)) {
+      toastr['warning']('信箱格式不合');
+      return;
+    }
 
-  $.post('/api/card/mail/' + id, data, function(result) {
-    console.log(result);
-    toastr['success']('寄信成功');
-  }).fail(function() {
-    toastr['error']('寄信失敗');
-  });
+    if(_.trim(data.message) == '') {
+      toastr['warning']('訊息欄位沒填');
+      return;
+    }
+
+    console.log(data);
+    $.post('/api/card/mail/' + id, data, function(result) {
+      console.log(result);
+      toastr['success']('寄信成功');
+    }).fail(function() {
+      toastr['error']('寄信失敗');
+    });
   });
 
   $('#reservationBtn').unbind('click');
   $('#reservationBtn').click(function() {
     var id = $('#currentCardId').val();
     var validateEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  var data = {};
-  data.reciever_name = $('#reciever_name').val();
-  data.reciever_email = $('#reciever_email').val();
-  data.message = $('#message').val();
-  data.mail_time = `${$('#reservation_date').val()} ${$('#hour')}:00:00`;
+    var data = {};
+    data.reciever_name = $('#reciever_name').val();
+    data.reciever_email = $('#reciever_email').val();
+    data.message = $('#message').val();
+    data.mail_time = `${$('#reservation_date').val()} ${$('#hour')}:00:00`;
 
-  if(_.trim(data.reciever_name) == '' || _.trim(data.reciever_email) == '') {
-    toastr['warning']('信箱跟姓名欄位都要填');
-    return;
-  }
+    if(_.trim(data.reciever_name) == '' || _.trim(data.reciever_email) == '') {
+      toastr['warning']('信箱跟姓名欄位都要填');
+      return;
+    }
 
-  if(!validateEmail.test(data.reciever_email)) {
-    toastr['warning']('信箱格式不合');
-    return;
-  }
+    if(!validateEmail.test(data.reciever_email)) {
+      toastr['warning']('信箱格式不合');
+      return;
+    }
 
-  $.post('/api/person/reservation/create/' + id, data, function(result) {
-    console.log(result);
-    toastr['success']('預約成功');
-  }).fail(function() {
-    toastr['error']('預約失敗');
-  });
+    if(_.trim(data.message) == '') {
+      toastr['warning']('訊息欄位沒填');
+      return;
+    }
+
+    console.log(data);
+    $.post('/api/person/reservation/create/' + id, data, function(result) {
+      console.log(result);
+      toastr['success']('預約成功');
+    }).fail(function() {
+      toastr['error']('預約失敗');
+    });
   });
 
   $('#multiBtn').unbind('click');
@@ -145,6 +213,11 @@ function mailEvent() {
 
     if($('#excel')[0].files[0] == null) {
       toastr['warning']('需選擇檔案');
+      return;
+    }
+
+    if(_.trim(data.message) == '') {
+      toastr['warning']('訊息欄位沒填');
       return;
     }
 
