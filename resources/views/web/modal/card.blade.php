@@ -23,7 +23,7 @@
                                     <li role="mailTool" data-type="information" class="active"><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> <span id="tab_information">卡片內容</span></a></li>
                                     <li role="mailTool" data-type="normal" class="active"><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> <span id="tab_send">卡片寄送</span></a></li>
                                     <li role="mailTool" data-type="reservation"><a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> <span id="tab_reservation_send">預約寄送</span></a></li>
-                                    @if(Auth::check() && Auth::user()->role != 'user')
+                                    @if(Auth::user()->role == 'multimailer' || Auth::user()->role == 'manager')
                                         <li role="mailTool" data-type="multi"><a href="#"><i class="fa fa-copy" aria-hidden="true"></i> <span id="tab_multi_send">大量寄信</span></a></li>
                                     @endif
                                 </ul>
@@ -111,7 +111,7 @@
                                                 <label class="sr-only" for="message">想說的話</label>
                                                 <div class="input-group">
                                                     <div class="input-group-addon"><i class="fa fa-commenting" aria-hidden="true"></i></div>
-                                                    <textarea id="reciever_name" class="form-control" rows="10" placeholder="您想跟對方說什麼呢？"></textarea>
+                                                    <textarea id="message" class="form-control" rows="10" placeholder="您想跟對方說什麼呢？"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 text-center">
