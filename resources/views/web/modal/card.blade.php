@@ -21,10 +21,10 @@
                             <div>
                                 <ul class="nav nav-tabs">
                                     <li role="mailTool" data-type="information" class="active"><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> <span id="tab_information">卡片內容</span></a></li>
-                                    <li role="mailTool" data-type="normal" class="active"><a href="#"><i class="fa fa-paper-plane" aria-hidden="true"></i> <span id="tab_send">卡片寄送</span></a></li>
+                                    <li role="mailTool" data-type="normal" class="active"><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> <span id="tab_send">卡片寄送</span></a></li>
                                     <li role="mailTool" data-type="reservation"><a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> <span id="tab_reservation_send">預約寄送</span></a></li>
                                     @if(Auth::check() && Auth::user()->role != 'user')
-                                        <li role="mailTool" data-type="multi"><a href="#"><i class="fa fa-th-large" aria-hidden="true"></i> <span id="tab_multi_send">大量寄信</span></a></li>
+                                        <li role="mailTool" data-type="multi"><a href="#"><i class="fa fa-copy" aria-hidden="true"></i> <span id="tab_multi_send">大量寄信</span></a></li>
                                     @endif
                                 </ul>
                                 <div class="tab-content">
@@ -38,12 +38,12 @@
                                                     <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i><b> </b><b id="shareTime"></b>
                                                 </button>
                                                 <button type="button" class="btn btn-sm btn-success" data-from="modal">
-                                                    <i class="fa fa-paper-plane " aria-hidden="true"></i><b> </b><b id="mailTime"></b>
+                                                    <i class="fa fa-envelope " aria-hidden="true"></i><b> </b><b id="mailTime"></b>
                                                 </button>
                                                 <button type="button" class="btn btn-sm btn-danger" data-from="modal">
                                                     <i class="fa fa-heart " aria-hidden="true"></i><b> 0</b>
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-warning shareFB" data-from="modal">
+                                                <button type="button" class="btn btn-sm btn-warning" data-from="modal">
                                                     <i class="fa fa-star " aria-hidden="true"></i><b> 0</b>
                                                 </button>
                                             </p>
@@ -117,7 +117,7 @@
                                             <div class="col-lg-12 text-center">
                                                 <button type="submit" class="btn btn-primary" id="mailBtn"><i class="fa fa-send" aria-hidden="true"></i> 寄送</button>
                                                 <button type="submit" class="btn btn-primary" id="reservationBtn"><i class="fa fa-clock-o" aria-hidden="true"></i> 預約</button>
-                                                <button type="submit" class="btn btn-primary" id="multiBtn"><i class="fa fa-th-large" aria-hidden="true"></i> 大量寄送</button>
+                                                <button type="submit" class="btn btn-primary" id="multiBtn"><i class="fa fa-copy" aria-hidden="true"></i> 大量寄送</button>
                                             </div>
                                         </form>
                                         @endif

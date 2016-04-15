@@ -72,7 +72,7 @@
                     @for($i=0; $i<count($list); $i++)
                         @if($list[$i]->child == $active_id)
                             <a href="/web/normal/{{$navbar_id}}/{{$parent_id}}/{{$list[$i]->child}}" class="list-group-item active">
-                                {{$list[$i]->name}}
+                                {{$list_name = $list[$i]->name}}
                             </a>
                         @else
                             <a href="/web/normal/{{$navbar_id}}/{{$parent_id}}/{{$list[$i]->child}}" class="list-group-item">

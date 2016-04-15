@@ -58,14 +58,11 @@ function produceCard() {
       text += `<img class="${imgClass}" src="/card/web/${card_id}">`;
       text += '</a>';
       text += '<div class="caption">';
-      text += `<h3 style="font-size: 140%;" class="text-left">${card_name}</h3>`;
-      //text += '<span style="float:right;">';
-      text += `<span class="glyphicon glyphicon-send text-success"></span> ${mail_times}     `;
-
-      text += `<span class="glyphicon glyphicon-share-alt text-primary"></span> ${mail_times}`;
-      //text += `<p><span class="glyphicon glyphicon-send text-success"></span> ${mail_times}`;
-      //text += `<span class="glyphicon glyphicon-share-alt"></span> ${share_times}</p>`;
-      //text += '</span>';
+      text += `<h3 style="font-size: 140%;" class="text-center">${card_name}</h3>`;
+      text += `<i class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp;<span class="text-muted">${mail_times}</span>&nbsp;&nbsp;&nbsp;`;
+      text += `<i class="fa fa-star text-warning" aria-hidden="true"></i>&nbsp;<span class="text-muted">${share_times}</span>&nbsp;&nbsp;&nbsp;`;
+      text += `<i class="fa fa-paper-plane text-success" aria-hidden="true"></i>&nbsp;<span class="text-muted">${mail_times}</span>&nbsp;&nbsp;&nbsp;`;
+      text += `<i class="fa fa-share text-primary" aria-hidden="true"></i>&nbsp;<span class="text-muted">${share_times}</span>`;
       text += '</div>';//end caption
       text += '</div>';//end thumbnail
       text += '</div>';
