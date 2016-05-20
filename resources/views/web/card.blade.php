@@ -88,10 +88,10 @@
                       <i class="fa fa-envelope " aria-hidden="true"></i><b> </b><b id="mailTime"></b>
                     </button>
                     <button type="button" class="btn btn-sm btn-danger" data-from="modal">
-                      <i class="fa fa-heart " aria-hidden="true"></i><b> 0</b>
+                      <i class="fa fa-heart " aria-hidden="true"></i><b> </b><b id="likeTime"></b>
                     </button>
                     <button type="button" class="btn btn-sm btn-warning" data-from="modal">
-                      <i class="fa fa-star " aria-hidden="true"></i><b> 0</b>
+                      <i class="fa fa-star " aria-hidden="true"></i><b> </b><b id="collectTime"></b>
                     </button>
                   </p>
                   <hr>

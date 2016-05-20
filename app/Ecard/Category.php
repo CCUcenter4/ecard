@@ -1,6 +1,7 @@
 <?php
 namespace App\Ecard;
 
+use Carbon\Carbon;
 use Storage;
 use DB;
 use Illuminate\Http\Request;
@@ -120,7 +121,9 @@ class Category {
 
     static public function getChild($parent_id) {
         $result = DB::table('category')
+            ->select(DB::raw('id, parent, child, name, festDate, festDate - NOW() as remainDay'))
             ->where('parent', '=', $parent_id)
+            ->orderBy('remainDay', 'ASC')
             ->get();
 
         return $result;

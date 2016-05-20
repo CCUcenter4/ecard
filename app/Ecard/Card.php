@@ -93,6 +93,22 @@ class Card {
         return $result;
     }
 
+    static public function likeDetail($id) {
+        $result = DB::table('like')
+            ->where('card_id','=', $id)
+            ->count();
+
+        return $result;
+    }
+
+    static public function collectDetail($id) {
+        $result = DB::table('collect')
+            ->where('card_id','=', $id)
+            ->count();
+
+        return $result;
+    }
+
     static public function fb_share_increment($id) {
         $card = DB::table('card')
             ->where('id', '=', $id)
@@ -106,6 +122,48 @@ class Card {
             ->update(['share_times'=>$currentTimes]);
 
         return $result;
+    }
+
+    static public function like_increment($id) {
+        $exist = DB::table('like')
+            ->where('card_id', '=', $id)
+            ->count();
+
+        if (!$exist) {
+            $result = DB::table('like')
+                ->insert([
+                    'user_id' => Auth::user()->id,
+                    'card_id' => $id
+                ]);
+        } else {
+            $result = DB::table('like')
+                ->where('user_id', Auth::user()->id)
+                ->where('card_id', $id)
+                ->delete();
+        }
+
+        return (string)$result;
+    }
+
+    static public function collect_increment($id) {
+        $exist = DB::table('collect')
+            ->where('card_id', '=', $id)
+            ->count();
+
+        if (!$exist) {
+            $result = DB::table('collect')
+                ->insert([
+                    'user_id' => Auth::user()->id,
+                    'card_id' => $id
+                ]);
+        } else {
+            $result = DB::table('collect')
+                ->where('user_id', Auth::user()->id)
+                ->where('card_id', $id)
+                ->delete();
+        }
+
+        return (string)$result;
     }
 
     static public function name() {

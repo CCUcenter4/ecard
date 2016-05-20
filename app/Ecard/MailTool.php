@@ -21,11 +21,12 @@ class MailTool {
         $reciever = [];
         $reciever['name'] = $request->input('reciever_name');
         $reciever['email'] = $request->input('reciever_email');
+        $contact = $request->input('contact');
         $message = $request->input('message');
         $type = 'immediate';
 
         $dispatcher = new self();
-        $dispatcher->dispatch(new SendCard($card_id, $reciever, $message, $type));
+        $dispatcher->dispatch(new SendCard($card_id, $reciever, $message, $type, $contact));
     }
 
     static public function multiMail($card_id, $list, $message) {

@@ -40,6 +40,15 @@ class WebController extends Controller
     public function normal($navbar_id, $parent_id, $child_id) {
         $navbar = Navbar::get();
         $list = Category::getChild($parent_id);
+        
+        if (isset(Auth::user()->id)){
+            $contact = DB::table('contact')
+                ->where('user_id', Auth::user()->id)
+                ->get();
+        }else{
+            $contact = "non";
+        }
+
 
         return view('web.normal')
             ->with('navbar', $navbar)
@@ -47,7 +56,8 @@ class WebController extends Controller
             ->with('parent_id', $parent_id)
             ->with('child_id', $child_id)
             ->with('list', $list)
-            ->with('active_id', $child_id);
+            ->with('active_id', $child_id)
+            ->with('contact', $contact);
     }
 
     public function card($card_id) {

@@ -2,9 +2,9 @@
 
 @section('css')
     <title>
-        @for($i=0; $i<count($navbar); $i++)
-            @if($navbar[$i]->id == $navbar_id)
-                {{$navbar[$i]->name}} - {{$navbar[$i]->child_name}}
+        @for($i=0; $i<count($list); $i++)
+            @if($list[$i]->child == $active_id)
+                {{$list_name = $list[$i]->name}}
             @endif
         @endfor
     </title>
@@ -12,11 +12,13 @@
     <link rel="stylesheet" href="{{url('assets/css/web/carousel.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/web/card.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/web/normal.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/sol.css')}}">
 
 @stop
 
 @section('js')
     <script src="{{url('assets/js/web/normal.js')}}"></script>
+    <script src="{{url('assets/js/sol.js')}}"></script>
 @stop
 
 @section('content')
@@ -72,7 +74,8 @@
                     @for($i=0; $i<count($list); $i++)
                         @if($list[$i]->child == $active_id)
                             <a href="/web/normal/{{$navbar_id}}/{{$parent_id}}/{{$list[$i]->child}}" class="list-group-item active">
-                                {{$list_name = $list[$i]->name}}
+                                {{$list[$i]->name}}
+                                <?php $list_name_date = $list[$i]->festDate; ?>
                             </a>
                         @else
                             <a href="/web/normal/{{$navbar_id}}/{{$parent_id}}/{{$list[$i]->child}}" class="list-group-item">
@@ -84,10 +87,26 @@
             </div><!--/.sidebar-offcanvas-->
 
             <div class="col-xs-12 col-sm-9">
+                @if(isset($list_name))
+                    <div class="row well well" >
+                        <h2>
+                            {{$list_name}}
+                            @if(isset($list_name_date) && $list_name_date != '0000-00-00')
+                                <p><small>{{$list_name_date}}</small></p>
+                            @endif
+                        </h2>
+                    </div>
+                @endif
                 <div class="row" id="cardContainer">
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $(function() {
+            // initialize sol
+            $('#my-select').searchableOptionList();
+        });
+    </script>
 @stop
 

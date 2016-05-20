@@ -40,11 +40,11 @@
                                                 <button type="button" class="btn btn-sm btn-success" data-from="modal">
                                                     <i class="fa fa-envelope " aria-hidden="true"></i><b> </b><b id="mailTime"></b>
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-danger" data-from="modal">
-                                                    <i class="fa fa-heart " aria-hidden="true"></i><b> 0</b>
+                                                <button type="button" class="btn btn-sm btn-danger like" data-from="modal">
+                                                    <i class="fa fa-heart " aria-hidden="true"></i><b> </b><b id="likeTime"></b>
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-warning" data-from="modal">
-                                                    <i class="fa fa-star " aria-hidden="true"></i><b> 0</b>
+                                                <button type="button" class="btn btn-sm btn-warning collect" data-from="modal">
+                                                    <i class="fa fa-star " aria-hidden="true"></i><b> </b><b id="collectTime"></b>
                                                 </button>
                                             </p>
                                             <hr>
@@ -64,6 +64,12 @@
                                                     <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
                                                     <input type="text" id="reciever_email" class="form-control" placeholder="請輸入收件人信箱">
                                                 </div>
+                                                <br>
+                                                <select id="my-select" name="contactSelect[]" multiple="multiple">
+                                                    @foreach($contact as $contacts)
+                                                        <option value="{{$contacts->email}},">{{$contacts->des}} <p class="text-muted" style="!important;">[{{$contacts->email}}]</p></option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div id="reservationWrapper">
                                                 <div class="form-group">
@@ -111,7 +117,7 @@
                                                 <label class="sr-only" for="message">想說的話</label>
                                                 <div class="input-group">
                                                     <div class="input-group-addon"><i class="fa fa-commenting" aria-hidden="true"></i></div>
-                                                    <textarea id="reciever_name" class="form-control" rows="10" placeholder="您想跟對方說什麼呢？"></textarea>
+                                                    <textarea id="message" class="form-control" rows="10" placeholder="您想跟對方說什麼呢？"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 text-center">

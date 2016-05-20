@@ -40,6 +40,39 @@ function cardEvent() {
 
     });
   });
+  $('.like').unbind('click');
+  $('.like').click(function() {
+    var from = $(this).data('from');
+    var id;
+    if(from == 'modal') {
+      id = $('#currentCardId').val();
+    }
+
+    console.log(id);
+
+    $.post('/api/card/like_increment/' + id, function(result) {
+
+    }).fail(function() {
+
+    });
+  });
+  $('.collect').unbind('click');
+  $('.collect').click(function() {
+    var from = $(this).data('from');
+    var id;
+    if(from == 'modal') {
+      id = $('#currentCardId').val();
+    }
+
+    console.log(id);
+
+    $.post('/api/card/collect_increment/' + id, function(result) {
+
+    }).fail(function() {
+
+    });
+  });
+
 
   $('.nav-tabs li').unbind('click');
   $('.nav-tabs li').click(function() {

@@ -52,6 +52,18 @@ class CardController extends Controller
         return (array)$result;
     }
 
+    public function likeDetail($id) {
+        $result = Card::likeDetail($id);
+
+        return (array)$result;
+    }
+
+    public function collectDetail($id) {
+        $result = Card::collectDetail($id);
+
+        return (array)$result;
+    }
+
     public function mail($id, Request $request) {
         $result = MailTool::card($id, $request);
 
@@ -76,6 +88,18 @@ class CardController extends Controller
 
     public function fb_share_increment($id) {
         $result = Card::fb_share_increment($id);
+
+        return $result;
+    }
+
+    public function like_increment($id) {
+        $result = Card::like_increment($id);
+
+        return $result;
+    }
+
+    public function collect_increment($id) {
+        $result = Card::collect_increment($id);
 
         return $result;
     }

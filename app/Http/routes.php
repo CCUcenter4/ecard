@@ -55,6 +55,8 @@ Route::group(['prefix'=>'api'], function() {
         // get data
         Route::get('list/{parent_id}/{child_id}', 'Api\CardController@cardList');
         Route::get('detail/{id}', 'Api\CardController@detail');
+        Route::get('likeDetail/{id}', 'Api\CardController@likeDetail');
+        Route::get('collectDetail/{id}', 'Api\CardController@collectDetail');
         Route::get('name', 'Api\CardController@name');
 
         // mail
@@ -63,6 +65,12 @@ Route::group(['prefix'=>'api'], function() {
 
         // fb_share
         Route::post('fb_share_increment/{id}', 'Api\CardController@fb_share_increment');
+
+        // like_inc
+        Route::post('like_increment/{id}', 'Api\CardController@like_increment');
+
+        // collect_inc
+        Route::post('collect_increment/{id}', 'Api\CardController@collect_increment');
     });
 
     Route::group(['prefix'=>'person'], function() {

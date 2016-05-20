@@ -2,7 +2,11 @@
 
 @section('content')
 <p>
+  @if(isset($person['reciever_name']) && isset($person['reciever_email']))
     <b>{{trim($person['reciever_name'])}}({{trim($person['reciever_email'])}})</b>：您好
+    @elseif(isset($personName) && isset($personEmail))
+    <b>{{trim($personName)}}({{trim($personEmail)}})</b>：您好
+  @endif
 </p>
 <p>從中正大學電子賀卡系統寄送了一封卡片給您</p>
 <p>{{trim($person['message'])}}</p>
