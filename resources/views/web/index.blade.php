@@ -8,10 +8,10 @@
 
 @section('js')
     <script src="{{url('assets/js/web/index.js')}}"></script>
-    @stop
+@stop
 
-    @section('content')
-            <!-- Header -->
+@section('content')
+    <!-- Header -->
     <div class="navbar-wrapper">
         <div class="container">
             <nav class="navbar navbar-inverse navbar-static-top">
@@ -44,23 +44,27 @@
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="myCarousel" data-slide-to="1"></li>
+            @for($i = 1; $i < 10 ; $i++)
+                <li data-target="myCarousel" data-slide-to="{{$i}}"></li>
+            @endfor
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img src="{{url('card/web/1')}}">
+                <img src="{{url('card/web/'.$popular[0]->id)}}" style="height: auto !important;">
                 <div class="carousel-caption">
-                    First
+                    {{$popular[0]->description}}
                 </div>
             </div>
-            <div class="item">
-                <img src="{{url('card/web/2')}}">
-                <div class="carousel-caption">
-                    Second
+            @for($i = 1; $i < 10 ; $i++)
+                <div class="item">
+                    <img src="{{url('card/web/'.$popular[$i]->id)}}" style="height: auto !important;">
+                    <div class="carousel-caption">
+                        {{$popular[$i]->description}}
+                    </div>
                 </div>
-            </div>
+            @endfor
         </div>
 
         <!-- Controls -->

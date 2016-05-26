@@ -4,15 +4,17 @@
     <title>個人設定</title>
     <link rel="stylesheet" href="{{url('assets/css/web/index.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/web/person.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/web/normal.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/web/carousel.css')}}">
 @stop
 
 @section('js')
     <script src="{{url('assets/js/web/index.js')}}"></script>
     <script src="{{url('assets/js/web/person.js')}}"></script>
-    @stop
+@stop
 
-    @section('content')
-            <!-- Header -->
+@section('content')
+    <!-- Header -->
     <div class="navbar-wrapper">
         <div class="container">
             <nav class="navbar navbar-inverse navbar-static-top">
@@ -41,21 +43,24 @@
         </div>
     </div>
 
+    <div class="container marketing">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                <ul class="nav nav-tabs">
+                    <li role="list" data-type="history" class="active"><a href="#">歷史紀錄</a></li>
+                    <li role="list" data-type="reservation"><a href="#">預約紀錄</a></li>
+                </ul>
+            </div>
+        </div>
 
-    <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            <ul class="nav nav-tabs">
-                <li role="list" data-type="history" class="active"><a href="#">歷史紀錄</a></li>
-                <li role="list" data-type="reservation"><a href="#">預約紀錄</a></li>
-            </ul>
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="list"></div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="list"></div>
-    </div>
+
 
 @stop
 

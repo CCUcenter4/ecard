@@ -93,6 +93,15 @@ class Card {
         return $result;
     }
 
+    static public function popularDetail() {
+        $result = DB::table('card')
+            ->orderBy('share_times', 'desc')
+            ->take(10)
+            ->get();
+
+        return $result;
+    }
+
     static public function likeDetail($id) {
         $result = DB::table('like')
             ->where('card_id','=', $id)

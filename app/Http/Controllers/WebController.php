@@ -23,8 +23,10 @@ class WebController extends Controller
 
     public function index(Request $request){
         $navbar = Navbar::get();
+        $popularCard = Card::popularDetail();
         return view('web.index')
-            ->with('navbar', $navbar);
+            ->with('navbar', $navbar)
+            ->with('popular', $popularCard);
     }
 
     public function festival($parent_id, $child_id){
@@ -62,6 +64,19 @@ class WebController extends Controller
 
     public function card($card_id) {
         $card = Card::detail($card_id);
+        $navbar = Navbar::get();
+
+        return view('web.card')
+            ->with('navbar', $navbar)
+            ->with('fb_app_id', env('FB_client_id'))
+            ->with('card_id', $card->id)
+            ->with('card_name', $card->name)
+            ->with('card_description', $card->description)
+            ->with('author', $card->author);
+    }
+
+    public function popularCard() {
+        $card = Card::popularDetail();
         $navbar = Navbar::get();
 
         return view('web.card')
