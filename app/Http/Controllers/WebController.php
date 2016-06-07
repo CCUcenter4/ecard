@@ -62,9 +62,18 @@ class WebController extends Controller
             ->with('contact', $contact);
     }
 
-    public function card($card_id) {
+    public function card($card_id, $visitor_type, $refer) {
         $card = Card::detail($card_id);
+        Card::return_visitor_recording($card_id, $visitor_type, $refer);
         $navbar = Navbar::get();
+
+        if (isset(Auth::user()->id)){
+            $contact = DB::table('contact')
+                ->where('user_id', Auth::user()->id)
+                ->get();
+        }else{
+            $contact = "non";
+        }
 
         return view('web.card')
             ->with('navbar', $navbar)
@@ -72,7 +81,8 @@ class WebController extends Controller
             ->with('card_id', $card->id)
             ->with('card_name', $card->name)
             ->with('card_description', $card->description)
-            ->with('author', $card->author);
+            ->with('author', $card->author)
+            ->with('contact', $contact);
     }
 
     public function popularCard() {

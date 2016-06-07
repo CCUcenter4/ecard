@@ -4,11 +4,19 @@ $(function(){
   // reset type
   $('.nav-tabs li').removeClass('active');
   $('.nav-tabs li:first').addClass('active');
-  $('#mailBtn').show();
+  $('#tab_information').show();
+  $('#tab_multi_send').hide();
+  $('#tab_reservation_send').hide();
+  $('#tab_send').hide();
+
   $('#reservationWrapper').hide();
   $('#reservationBtn').hide();
   $('#multiWrapper').hide();
   $('#multiBtn').hide();
+  $('#mailBtn').hide();
+  $('#reciever_email_Wrapper').hide();
+  $('#reciever_name_Wrapper').hide();
+  $('#reciever_message_Wrapper').hide();
 
   $.ajaxSetup({ cache: true  });
   $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
@@ -20,6 +28,67 @@ $(function(){
 });
 
 function cardEvent() {
+  $('.list').click(function() {
+    var id = $(this).data('card_id');
+
+    $.get('/api/card/detail/' + id, function(result) {
+      console.log(result);
+
+      // current Card
+      $('#currentCardId').val(id);
+
+      // insert Modal
+      $('#cardTitle').text(result.name);
+      $('#cardName').text(result.name);
+      $('#mailTime').text(result.mail_times);
+      $('#shareTime').text(result.share_times);
+      $('#cardDescription').text(result.description);
+      $('#cardAuthor').text(result.author);
+      $('#modalCard').attr('src', '/card/web/' + id);
+
+      // reset type
+      $('.nav-tabs li').removeClass('active');
+      $('.nav-tabs li:first').addClass('active');
+      $('#mailBtn').show();
+
+      // tab appear
+      $('#tab_information').show();
+      $('#tab_multi_send').hide();
+      $('#tab_reservation_send').hide();
+      $('#tab_send').hide();
+
+      $('#reservationWrapper').hide();
+      $('#reservationBtn').hide();
+      $('#multiWrapper').hide();
+      $('#multiBtn').hide();
+      $('#mailBtn').hide();
+      $('#reciever_email_Wrapper').hide();
+      $('#reciever_name_Wrapper').hide();
+      $('#reciever_message_Wrapper').hide();
+
+    })
+    $.get('/api/card/collectDetail/' + id, function(collectResult) {
+      console.log(collectResult);
+
+      // current Card
+      $('#currentCardId').val(id);
+
+      // insert Modal
+      $('#collectTime').text(collectResult);
+    })
+    $.get('/api/card/likeDetail/' + id, function(likeResult) {
+      console.log(likeResult);
+
+      // current Card
+      $('#currentCardId').val(id);
+
+      // insert Modal
+      $('#likeTime').text(likeResult);
+    })
+  })
+
+
+
   $('.shareFB').unbind('click');
   $('.shareFB').click(function() {
     var from = $(this).data('from');
@@ -31,7 +100,7 @@ function cardEvent() {
     console.log(id);
     FB.ui({
       method: 'share',
-      href: 'http://demonic.csie.io:8001/web/card/' + id
+      href: 'http://ecard.csie.io/web/card/' + id + '/FB/NONE'
     });
 
     $.post('/api/card/fb_share_increment/' + id, function(result) {
@@ -40,10 +109,11 @@ function cardEvent() {
 
     });
   });
+
   $('.like').unbind('click');
   $('.like').click(function() {
     var from = $(this).data('from');
-    var id;
+    var id, likeCount;
     if(from == 'modal') {
       id = $('#currentCardId').val();
     }
@@ -52,14 +122,24 @@ function cardEvent() {
 
     $.post('/api/card/like_increment/' + id, function(result) {
 
+      $.get('/api/card/likeDetail/' + id, function(likeResult) {
+        console.log(likeResult);
+        // insert Modal
+        $('#likeTime').text(likeResult);
+        console.log(likeResult);
+        likeCount = likeResult;
+      });
+
     }).fail(function() {
 
     });
+
+
   });
   $('.collect').unbind('click');
   $('.collect').click(function() {
     var from = $(this).data('from');
-    var id;
+    var id, collectCount;
     if(from == 'modal') {
       id = $('#currentCardId').val();
     }
@@ -68,11 +148,20 @@ function cardEvent() {
 
     $.post('/api/card/collect_increment/' + id, function(result) {
 
+      $.get('/api/card/collectDetail/' + id, function(collectResult) {
+        console.log(collectResult);
+        // insert Modal
+        $('#collectTime').text(collectResult);
+        console.log(collectResult)
+        collectCount = collectResult;
+      });
+
     }).fail(function() {
 
     });
-  });
 
+
+  });
 
   $('.nav-tabs li').unbind('click');
   $('.nav-tabs li').click(function() {

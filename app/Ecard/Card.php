@@ -142,7 +142,8 @@ class Card {
             $result = DB::table('like')
                 ->insert([
                     'user_id' => Auth::user()->id,
-                    'card_id' => $id
+                    'card_id' => $id,
+                    'updated_at'=> date('Y-m-d H:i:s')
                 ]);
         } else {
             $result = DB::table('like')
@@ -154,6 +155,34 @@ class Card {
         return (string)$result;
     }
 
+    static public function return_visitor_recording($id, $type, $refer_email) {
+
+        $ipAddress = $_SERVER['REMOTE_ADDR'];
+        if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
+            $ipAddress = array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
+        }
+        
+        if ($type === "FB" || $type === "SEARCH_ENG"){
+            $refer = (isset($_SERVER["HTTP_REFERER"])) ? $_SERVER["HTTP_REFERER"] : "none";
+        }elseif ($type === "MAIL") {
+            $refer = $refer_email;
+        }
+
+        if (($type === "FB" || $type === "MAIL" || $type === "SEARCH_ENG")) {
+            $result = DB::table('return_visitor')
+                ->insert([
+                    'user_id' => (isset(Auth::user()->id))?Auth::user()->id:-1,
+                    'card_id' => $id,
+                    'original' => $type,
+                    'ip' => $ipAddress,
+                    'refer' => $refer,
+                    'updated_at'=> date('Y-m-d H:i:s')
+                ]);
+        }
+
+        return;
+    }
+
     static public function collect_increment($id) {
         $exist = DB::table('collect')
             ->where('card_id', '=', $id)
@@ -163,7 +192,8 @@ class Card {
             $result = DB::table('collect')
                 ->insert([
                     'user_id' => Auth::user()->id,
-                    'card_id' => $id
+                    'card_id' => $id,
+                    'updated_at'=> date('Y-m-d H:i:s')
                 ]);
         } else {
             $result = DB::table('collect')

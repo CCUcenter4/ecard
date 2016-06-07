@@ -18,6 +18,24 @@ class PersonController extends Controller
         return $result;
     }
 
+    public function like() {
+        $result = Person::getLike();
+
+        return $result;
+    }
+
+    public function collect() {
+        $result = Person::getCollect();
+
+        return $result;
+    }
+
+    public function contact() {
+        $result = Person::getContact();
+
+        return $result;
+    }
+
     public function update(Request $request) {
 
     }

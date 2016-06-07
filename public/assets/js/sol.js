@@ -54,7 +54,7 @@
             name: undefined,           // name attribute, can also be set as name="" attribute on original element or data-sol-name=""
 
             texts: {
-                noItemsAvailable: '找不到任何人',
+                noItemsAvailable: '找不到任何人，想要新增好友嗎？',
                 selectAll: '全部選取',
                 selectNone: '全部取消',
                 quickDelete: '&times;',

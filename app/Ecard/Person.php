@@ -63,5 +63,40 @@ class Person {
 
         return $result;
     }
+
+    static public function getLike() {
+        $user = Auth::user();
+        if($user) {
+            $result = DB::table('like')
+                ->leftJoin('card', 'card.id', '=', 'like.card_id')
+                ->where('like.user_id', '=', $user->id)
+                ->get();
+        }
+
+        return $result;
+    }
+
+    static public function getCollect() {
+        $user = Auth::user();
+        if($user) {
+            $result = DB::table('collect')
+                ->leftJoin('card', 'card.id', '=', 'collect.card_id')
+                ->where('collect.user_id', '=', $user->id)
+                ->get();
+        }
+
+        return $result;
+    }
+
+    static public function getContact() {
+        $user = Auth::user();
+        if($user) {
+            $result = DB::table('contact')
+                ->where('user_id', '=', $user->id)
+                ->get();
+        }
+
+        return $result;
+    }
 }
 ?>

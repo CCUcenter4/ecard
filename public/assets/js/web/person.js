@@ -29,6 +29,17 @@ function getHistory() {
   });
 }
 
+function getCollect() {
+  $.get('/api/person/collect', function(result) {
+    if(result.length == 0) {
+      toastr['warning']('此分類暫無卡片，敬請期待');
+    }
+    console.log(result);
+    card_list = result;
+
+    produceCard();
+  });
+}
 function getReservation() {
   $.get('/api/person/reservation/', function(result) {
     console.log(result);
@@ -76,8 +87,12 @@ function btnEvent() {
     $('#list').html('');// empty
     if(type == 'reservation') {
       getReservation();
-    }else {
+    }else if (type == 'history') {
       getHistory();
+    }else if (type == 'like') {
+      getLike();
+    }else if (type == 'collect') {
+      getCollect();
     }
   });
 }
@@ -114,7 +129,7 @@ function produceHistory(list) {
     text += `</div>`;// end heading
     text += `<div id="collapse${i}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading${i}">`;
     text += `<div class="panel-body">`;
-    text += `<p>卡片名稱:<a href="/web/card/${card_id}">${cardName[card_id]}</a></p>`;
+    text += `<p>卡片名稱:<a href="/web/card/${card_id}/HISTORY/NONE">${cardName[card_id]}</a></p>`;
     text += `<p>訊息內容:${message}<p>`;
     text += `<p>寄送時間:${created_at}</p>`;
     text += `</div>`;// end body
@@ -157,7 +172,7 @@ function produceReservation(list) {
     text += `</div>`;// end heading
     text += `<div id="collapse${i}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading${i}">`;
     text += `<div class="panel-body">`;
-    text += `<p>卡片名稱:<a href="/web/card/${card_id}">${cardName[card_id]}</a></p>`;
+    text += `<p>卡片名稱:<a href="/web/card/${card_id}/RESERVE/NONE">${cardName[card_id]}</a></p>`;
     text += `<p>訊息內容:${message}<p>`;
     text += `<p>預約時間:${mail_time}</p>`;
     text += `<button class="btn btn-danger reservation_delete" data-id="${id}">刪除</button>`
@@ -171,3 +186,40 @@ function produceReservation(list) {
   dataEvent();
 }
 
+function produceCard() {
+  var text;
+  var i;
+  var j;
+  var card_id;
+  var card_name;
+  var mail_times;
+  var share_times;
+  var imgClass='featurette-image img-responsive center-block thumb';
+
+  text += `<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">`;
+  text = '<div class="row">';
+  for(i=0; i<card_list.length;) {
+    for(j=0; j<3 && i<card_list.length; j++, i++) {
+      card_id = card_list[i].card_id;
+      card_name = card_list[i].name;
+      mail_times = card_list[i].mail_times;
+      share_times = card_list[i].share_times;
+
+      text += '<div class="col-lg-4 col-md-4 col-sm-6">';
+      text += '<div class="thumbnail">';
+      text += `<a data-toggle="modal" data-target="#card" class="list" data-card_id="${card_id}">`;
+      text += `<a href="/web/card/${card_id}/COLLECT/NONE"><img class="${imgClass}" src="/card/web/${card_id}"></a>`;
+      text += '</a>';
+      text += '<div class="caption">';
+      text += `<h3 style="font-size: 140%;" class="text-center">${card_name}</h3>`;
+      text += '</div>';//end caption
+      text += '</div>';//end thumbnail
+      text += '</div>';
+    }
+  }
+  text += '</div>';
+  text += `</div>`;
+  $('#list').append(text);
+  $('.collapse').collapse();
+  dataEvent();
+}

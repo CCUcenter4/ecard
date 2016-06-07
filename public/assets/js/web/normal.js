@@ -147,7 +147,7 @@ function cardEvent() {
         console.log(id);
         FB.ui({
             method: 'share',
-            href: 'http://demonic.csie.io:8001/web/card/' + id
+            href: 'http://ecard.csie.io/web/card/' + id + '/FB/NONE'
         });
 
         $.post('/api/card/fb_share_increment/' + id, function(result) {

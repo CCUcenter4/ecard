@@ -22,7 +22,9 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             @for($i=0; $i<count($navbar); $i++)
-                                <li><a href="/web/normal/{{$navbar[$i]->id}}/1/1">{{$navbar[$i]->name}}</a></li>
+                                <li>
+                                    <a href="/web/normal/{{$navbar[$i]->id}}/{{$navbar[$i]->parent_id}}/{{$navbar[$i]->child_id}}">{{$navbar[$i]->name}}</a>
+                                </li>
                             @endfor
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
@@ -78,7 +80,15 @@
         </a>
     </div>
 
-    <div id="main">
-    </div>
+    <!--<div id="main">
+        <div id="camera" class="camera_wrap">
+            @for($i = 1; $i < 10 ; $i++)
+                <div data-src="{{url('card/web/'.$popular[$i]->id)}}"></div>
+            @endfor
+        </div>
+    </div>-->
+    <script type="text/javascript">
+        jQuery('#camera').camera(); //the basic method
+    </script>
 @stop
 

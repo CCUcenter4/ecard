@@ -34,7 +34,7 @@
                                             <p id="cardDescription"></p>
                                             <hr>
                                             <p>
-                                                <button type="button" class="btn btn-sm btn-primary shareFB" data-from="modal">
+                                                <button type="button" class="btn btn-sm btn-primary shareFB" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
                                                     <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i><b> </b><b id="shareTime"></b>
                                                 </button>
                                                 <button type="button" class="btn btn-sm btn-success" data-from="modal">
@@ -69,6 +69,7 @@
                                                     @foreach($contact as $contacts)
                                                         <option value="{{$contacts->email}},">{{$contacts->des}} <p class="text-muted" style="!important;">[{{$contacts->email}}]</p></option>
                                                     @endforeach
+                                                        <option value=""><input type="text" id="reciever_email" class="form-control" placeholder="請輸入收件人信箱"></option>
                                                 </select>
                                             </div>
                                             <div id="reservationWrapper">

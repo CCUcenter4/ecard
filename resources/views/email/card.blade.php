@@ -13,11 +13,10 @@
 
 
 
-  <img src="{{url('card/web/'.$card->id)}}"
-      width="550"
-      height="400"
-      border="0"
-    >
+  <a href="{{url('web/card/'.$card->id.'/MAIL/'.trim($person['reciever_email']))}}"><img src="{{url('card/web/'.$card->id)}}"
+          width="550"
+          border="0"
+    ></a>
   <p>我們將永久為您保存這張卡片，不過還是因為儘速前往瀏覽，以免錯過重要訊息</p>
 
   <p>國立中正大學電子卡片寄送服務</p>

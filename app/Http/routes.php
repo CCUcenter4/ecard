@@ -16,7 +16,7 @@ Route::get('/', 'InitController@index');
 Route::group(['prefix'=>'web'], function() {
     Route::get('/', 'WebController@index');
     Route::get('festival/{parent_id}/{child_id}', 'WebController@festival');
-    Route::get('card/{card_id}', 'WebController@card');
+    Route::get('card/{card_id}/{visitor_type}/{refer}', 'WebController@card');
     Route::get('normal/{navbar_id}/{parent_id}/{child_id}', 'WebController@normal');
     Route::get('logout', 'AuthController@logout');
 
@@ -76,6 +76,9 @@ Route::group(['prefix'=>'api'], function() {
     Route::group(['prefix'=>'person'], function() {
         Route::put('update', 'Api\PersonController@update');
         Route::get('history', 'Api\PersonController@history');
+        Route::get('like', 'Api\PersonController@like');
+        Route::get('collect', 'Api\PersonController@collect');
+        Route::get('contact', 'Api\PersonController@contact');
 
         Route::group(['prefix'=>'reservation'], function() {
             Route::post('create/{card_id}', 'Api\ReservationController@create');

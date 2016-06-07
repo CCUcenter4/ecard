@@ -45,18 +45,20 @@
 
     <div class="container marketing">
         <div class="row">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+           <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                 <ul class="nav nav-tabs">
                     <li role="list" data-type="history" class="active"><a href="#">歷史紀錄</a></li>
                     <li role="list" data-type="reservation"><a href="#">預約紀錄</a></li>
+                    <li role="list" data-type="collect"><a href="#">收藏列表</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="list"></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" id="list"></div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" id="collect"></div>
         </div>
     </div>
 
