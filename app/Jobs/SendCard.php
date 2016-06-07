@@ -49,8 +49,8 @@ class SendCard extends Job implements SelfHandling, ShouldQueue
     {
         $card = Card::detail($this->card_id);
         $person = [];
-        $person['reciever_name'] = $this->reciever['name'];
-        $person['reciever_email'] = $this->contact;
+        /*$person['reciever_name'] = $this->reciever['name'];
+        $person['reciever_email'] = $this->contact;*/
         $person['message'] = $this->message;
         $contactSelect = $this->contact;
 
@@ -64,42 +64,56 @@ class SendCard extends Job implements SelfHandling, ShouldQueue
             });*/
 
         foreach ($contactSelect as $contactSelects) {
-            $contactSelects =  preg_replace("/[,]/",'',$contactSelects);
-            $contactDetails = DB::table('contact')
-                ->where('email', $contactSelects)
-                ->where('user_id', Auth::user()->id)
-                ->get();
-            $contactExist = DB::table('contact')
-                ->where('email', $contactSelects)
-                ->where('user_id', Auth::user()->id)
-                ->count();
-            if (!$contactExist) $person['reciever_name'] = $this->reciever['name'];
-            else $person['reciever_name'] = $contactDetails[0]->des;
-            $person['reciever_email'] = $contactSelects;
-            $mailer->send(['email.card', 'email.plainText.card']
-                , ['card' => $card, 'person' => $person]
-                , function($message) use ($person) {
-                    $message
-                        ->from('k12cc@ccu.edu.tw', '中正大學電子賀卡系統')
-                        ->to($person['reciever_email'], $person['reciever_name'])
-                        ->subject('中正大學電子賀卡系統卡片通知');
-                });
+            $contactName =  strtok($contactSelects, "/");
+            $contactEmail = strtok("/");
+            if ($contactSelects != NULL) {
+                $contactDetails = DB::table('contact')
+                    ->where('email', $contactEmail)
+                    ->where('user_id', Auth::user()->id)
+                    ->get();
+                $contactExist = DB::table('contact')
+                    ->where('email', $contactEmail)
+                    ->where('user_id', Auth::user()->id)
+                    ->count();
+                if (!$contactExist) {
+                    DB::table('contact')
+                        ->insert([
+                            'user_id' => Auth::user()->id,
+                            'des' => $contactName,
+                            'email' => $contactEmail,
+                            'classify_id' => 0,
+                            'send_times' => 1
+                        ]);
+                    $person['reciever_name'] = $contactName;
+                }
+                if (!$contactExist) $person['reciever_name'] = $contactName;
+                else $person['reciever_name'] = $contactDetails[0]->des;
+                $person['reciever_email'] = $contactEmail;
+                $mailer->send(['email.card', 'email.plainText.card']
+                    , ['card' => $card, 'person' => $person]
+                    , function ($message) use ($person) {
+                        $message
+                            ->from('k12cc@ccu.edu.tw', '中正大學電子賀卡系統')
+                            ->to($person['reciever_email'], $person['reciever_name'])
+                            ->subject('中正大學電子賀卡系統卡片通知');
+                    });
 
-            DB::table('mail_history')
-                ->insert([
-                    'user_id' => Auth::user()->id,
-                    'card_id' => $this->card_id,
-                    'reciever_name' => $person['reciever_name'],
-                    'reciever_email' => $person['reciever_email'],
-                    'message' => $this->message,
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'type' => $this->type,
-                    'status' => 'success'
-                ]);
+                DB::table('mail_history')
+                    ->insert([
+                        'user_id' => Auth::user()->id,
+                        'card_id' => $this->card_id,
+                        'reciever_name' => $person['reciever_name'],
+                        'reciever_email' => $person['reciever_email'],
+                        'message' => $this->message,
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'type' => $this->type,
+                        'status' => 'success'
+                    ]);
+            }
         }
 
         // Log
-        DB::table('mail_history')
+        /*DB::table('mail_history')
             ->insert([
                 'user_id' => Auth::user()->id,
                 'card_id' => $this->card_id,
@@ -109,24 +123,9 @@ class SendCard extends Job implements SelfHandling, ShouldQueue
                 'created_at' => date('Y-m-d H:i:s'),
                 'type' => $this->type,
                 'status' => 'success'
-            ]);
+            ]);*/
 
-        $exist = DB::table('contact')
-            ->select('user_id, email')
-            ->where('user_id', Auth::user()->id)
-            ->where('email', $this->reciever['email'])
-            ->count();
 
-        if (!$exist) {
-            DB::table('contact')
-                ->insert([
-                    'user_id' => Auth::user()->id,
-                    'des' => $this->reciever['name'],
-                    'email' => $this->reciever['email'],
-                    'classify_id' => 0,
-                    'send_times' => 1
-                ]);
-        }
 
     }
 }

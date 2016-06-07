@@ -34,16 +34,16 @@
                                             <p id="cardDescription"></p>
                                             <hr>
                                             <p>
-                                                <button type="button" class="btn btn-sm btn-primary shareFB" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
+                                                <button type="button" class="btn btn-sm btn-primary shareFB" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="覺得卡片不錯嗎？分享到 FB 吧">
                                                     <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i><b> </b><b id="shareTime"></b>
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-success" data-from="modal">
+                                                <button type="button" class="btn btn-sm btn-success" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="寄這張卡片表達你的祝福～">
                                                     <i class="fa fa-envelope " aria-hidden="true"></i><b> </b><b id="mailTime"></b>
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-danger like" data-from="modal">
+                                                <button type="button" class="btn btn-sm btn-danger like" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="喜歡">
                                                     <i class="fa fa-heart " aria-hidden="true"></i><b> </b><b id="likeTime"></b>
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-warning collect" data-from="modal">
+                                                <button type="button" class="btn btn-sm btn-warning collect" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="收藏">
                                                     <i class="fa fa-star " aria-hidden="true"></i><b> </b><b id="collectTime"></b>
                                                 </button>
                                             </p>
@@ -51,26 +51,37 @@
                                         </div>
                                         <form id="mailForm" onsubmit="return false;">
                                             <br>
-                                            <div class="form-group" id="reciever_name_Wrapper">
+                                            <!--<div class="form-group" id="reciever_name_Wrapper">
                                                 <label class="sr-only" for="reciever_name">收件人姓名</label>
                                                 <div class="input-group">
                                                     <div class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></div>
                                                     <input type="text" id="reciever_name" class="form-control" placeholder="請輸入收件人姓名">
                                                 </div>
-                                            </div>
+                                            </div>-->
                                             <div class="form-group" id="reciever_email_Wrapper">
-                                                <label class="sr-only" for="reciever_email">收件人信箱</label>
+                                                <!--<label class="sr-only" for="reciever_email">收件人信箱</label>
                                                 <div class="input-group">
                                                     <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
                                                     <input type="text" id="reciever_email" class="form-control" placeholder="請輸入收件人信箱">
+                                                </div>-->
+                                                <p class="text-muted"><span class="glyphicon glyphicon-search"></span> 選取聯絡人</p>
+                                                <select multiple="multiple" id="contactSelect" name="contactSelect[]" >
+                                                    @foreach($contact as $contacts)
+                                                        <option value="{{$contacts->des}}/{{$contacts->email}}">{{$contacts->des}} 	&lt;{{$contacts->email}}&gt;</option>
+                                                    @endforeach
+                                                </select>
+                                                <br> <br> <p class="text-muted"><span class="glyphicon glyphicon-plus"></span> 新增聯絡人</p>
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-user"></span></span>
+                                                    <input id="inputName" type="text" class="form-control" placeholder="請輸入收件人姓名" aria-describedby="sizing-addon3">
+                                                </div>
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-envelope"></span></span>
+                                                    <input id="inputEmail" type="text" class="form-control" placeholder="請輸入收件人信箱" aria-describedby="sizing-addon3">
                                                 </div>
                                                 <br>
-                                                <select id="my-select" name="contactSelect[]" multiple="multiple">
-                                                    @foreach($contact as $contacts)
-                                                        <option value="{{$contacts->email}},">{{$contacts->des}} <p class="text-muted" style="!important;">[{{$contacts->email}}]</p></option>
-                                                    @endforeach
-                                                        <option value=""><input type="text" id="reciever_email" class="form-control" placeholder="請輸入收件人信箱"></option>
-                                                </select>
+                                                <button id="refreshAdd" class="btn btn-sm btn-success">新增聯絡人</button>
+                                                <br>
                                             </div>
                                             <div id="reservationWrapper">
                                                 <div class="form-group">
@@ -131,6 +142,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('[data-toggle="tooltip"]').tooltip()
+                                });
+                            </script>
                     </div>
                 </div><!-- /.col-lg-4 -->
             </div><!-- /.row -->

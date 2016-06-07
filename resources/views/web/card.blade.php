@@ -193,14 +193,5 @@
     </div><!-- /.row -->
   </div>
 </div>
-<script type="text/javascript">
-  $(function() {
-    // initialize sol
-    $('#my-select').searchableOptionList();
-  });
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  });
-</script>
 @stop
 

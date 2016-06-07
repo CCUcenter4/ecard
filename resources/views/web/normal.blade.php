@@ -13,12 +13,12 @@
     <link rel="stylesheet" href="{{url('assets/css/web/card.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/web/normal.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/sol.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/multiple-select.css')}}">
 
 @stop
 
 @section('js')
     <script src="{{url('assets/js/web/normal.js')}}"></script>
-    <script src="{{url('assets/js/sol.js')}}"></script>
 @stop
 
 @section('content')
@@ -102,10 +102,30 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        $(function() {
-            // initialize sol
-            $('#my-select').searchableOptionList();
+    <script src="{{url('assets/js/multiple-select.js')}}"></script>
+    <script>
+        $("#contactSelect").multipleSelect({
+            placeholder: "選擇要寄送的聯絡人",
+            filter: true
+        });
+        $("#refreshAdd").click(function() {
+            var $select = $("select"),
+                    $inputEmail = $("#inputEmail"),
+                    $inputName = $("#inputName"),
+                    valueEmail = $.trim($inputEmail.val()),
+                    valueName = $.trim($inputName.val()),
+                    $opt = $("<option />", {
+                        value: valueName+"/"+valueEmail,
+                        text: valueName+" 	<"+valueEmail+">"
+                    });
+            if (!valueEmail) {
+                $inputEmail.focus();
+                return;
+            }
+            $opt.prop("selected", true);
+            $inputEmail.val("");
+            $inputName.val("");
+            $select.append($opt).multipleSelect("refresh");
         });
     </script>
 @stop
