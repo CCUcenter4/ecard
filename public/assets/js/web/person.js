@@ -100,7 +100,10 @@ function btnEvent() {
 function produceHistory(list) {
   var text = '';
   var i;
-  text += `<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">`;
+  //text += `<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">`;
+  text += `<table class="table table-hover">`;
+  text += `<thead> <tr><td>收件人</td><td>信箱</td><td>卡片名稱</td><td>訊息內容</td><td>寄送時間</td></tr> </thead>`;
+  text += `<tbody>`;
 
   var reciever_name;
   var reciever_email;
@@ -119,7 +122,9 @@ function produceHistory(list) {
     mail_time = list[i].mail_time;
     created_at = list[i].created_at;
 
-    text += `<div class="panel panel-default">`;
+    text += `<tr><td>${reciever_name}</td><td>${reciever_email}</td><td><a href="/web/card/${card_id}/HISTORY/NONE">${cardName[card_id]}</a></td><td>${message}</td><td>${created_at}</td></tr>`;
+
+    /*text += `<div class="panel panel-default">`;
     text += `<div class="panel-heading" role="tab" id="heading${i}">`;
     text += `<h4 class="panel-title">`;
     text += `<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">`;
@@ -134,18 +139,25 @@ function produceHistory(list) {
     text += `<p>寄送時間:${created_at}</p>`;
     text += `</div>`;// end body
     text += `</div>`;
-    text += `</div>`;
+    text += `</div>`;*/
   }
-  text += `</div>`;
+  text += `</tbody>`;
+  text += `</table>`;
+  //text += `</div>`;
+
   $('#list').append(text);
-  $('.collapse').collapse();
+ /*
+  $('.collapse').collapse();*/
   dataEvent();
 }
 
 function produceReservation(list) {
   var text = '';
   var i;
-  text += `<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">`;
+  //text += `<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">`;
+  text += `<table class="table table-hover">`;
+  text += `<thead> <tr><td>收件人</td><td>信箱</td><td>卡片名稱</td><td>訊息內容</td><td>預約時間</td></tr> </thead>`;
+  text += `<tbody>`;
 
   var reciever_name;
   var reciever_email;
@@ -162,6 +174,10 @@ function produceReservation(list) {
     message = _.trim(list[i].message);
     mail_time = list[i].mail_time;
 
+
+    text += `<tr><td>${reciever_name}</td><td>${reciever_email}</td><td><a href="/web/card/${card_id}/RESERVE/NONE">${cardName[card_id]}</a></td><td>${message}</td><td>${mail_time}<button class="btn btn-danger reservation_delete" data-id="${id}">刪除</button></td></tr>`;
+
+    /*
     text += `<div class="panel panel-default">`;
     text += `<div class="panel-heading" role="tab" id="heading${i}">`;
     text += `<h4 class="panel-title">`;
@@ -179,10 +195,15 @@ function produceReservation(list) {
     text += `</div>`;// end body
     text += `</div>`;
     text += `</div>`;
+    */
   }
-  text += `</div>`;
+  text += `</tbody>`;
+  text += `</table>`;
+  //text += `</div>`;
+
   $('#list').append(text);
-  $('.collapse').collapse();
+  /*
+  $('.collapse').collapse();*/
   dataEvent();
 }
 

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{url('assets/css/toastr.min.css')}}">
 
     <link rel="stylesheet" href="{{url('assets/css/web/common.css')}}">
-    <script src="{{url('assets/js/camera.js')}}"></script>
+    <script src="{{url('assets/js/wall.js')}}"></script>
     @yield('css')
 
 </head>
@@ -41,7 +41,6 @@
 
 
 <!-- JS framework -->
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <!-- Bootstrap Latest compiled and minified JavaScript -->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

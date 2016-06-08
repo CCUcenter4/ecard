@@ -1,9 +1,8 @@
-#card .modal-dialog {
-  width:1100px;
-  height:auto;
-  position: relative;
-  margin: 0 auto;
+#card .modal-lg {
+  width:950px;
 }
+
+/*
 #card .modal-content {
   width:1100px;
   height:auto;
@@ -12,6 +11,6 @@
 }
 
 #modalCard {
-  width: 720px;
+  width: auto;
   height: auto;
-}
+}*/

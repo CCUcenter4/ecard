@@ -4,6 +4,20 @@
     <title>首頁</title>
     <link rel="stylesheet" href="{{url('assets/css/web/index.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/web/carousel.css')}}">
+    <style>
+        #viewport{
+            width:900px;
+            height:450px;
+            position:relative;
+            overflow:hidden;
+            margin:0 auto;
+            background:#111111  ;
+        }
+
+        #wall{
+            z-index:1;
+        }
+    </style>
 @stop
 
 @section('js')
@@ -11,6 +25,7 @@
 @stop
 
 @section('content')
+
     <!-- Header -->
     <div class="navbar-wrapper">
         <div class="container">
@@ -42,44 +57,6 @@
         </div>
     </div>
 
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="myCarousel" data-slide-to="0" class="active"></li>
-            @for($i = 1; $i < 10 ; $i++)
-                <li data-target="myCarousel" data-slide-to="{{$i}}"></li>
-            @endfor
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img src="{{url('card/web/'.$popular[0]->id)}}" style="height: auto !important;">
-                <div class="carousel-caption">
-                    {{$popular[0]->description}}
-                </div>
-            </div>
-            @for($i = 1; $i < 10 ; $i++)
-                <div class="item">
-                    <img src="{{url('card/web/'.$popular[$i]->id)}}" style="height: auto !important;">
-                    <div class="carousel-caption">
-                        {{$popular[$i]->description}}
-                    </div>
-                </div>
-            @endfor
-        </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-
     <!--<div id="main">
         <div id="camera" class="camera_wrap">
             @for($i = 1; $i < 10 ; $i++)
@@ -87,8 +64,79 @@
             @endfor
         </div>
     </div>-->
+    <br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="myCarousel" data-slide-to="0" class="active"></li>
+                        @for($i = 1; $i < 10 ; $i++)
+                            <li data-target="myCarousel" data-slide-to="{{$i}}"></li>
+                        @endfor
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="{{url('card/web/'.$popular[0]->id)}}" style="height: auto !important;">
+                            <div class="carousel-caption">
+                                {{$popular[0]->description}}
+                            </div>
+                        </div>
+                        @for($i = 1; $i < 10 ; $i++)
+                            <div class="item">
+                                <img src="{{url('card/web/'.$popular[$i]->id)}}" style="height: auto !important;">
+                                <div class="carousel-caption">
+                                    {{$popular[$i]->description}}
+                                </div>
+                            </div>
+                        @endfor
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-5">
+
+            </div>
+            </div>
+        </div>
+
+    <div id="viewport">
+        <div id="wall"></div>
+    </div>
     <script type="text/javascript">
-        jQuery('#camera').camera(); //the basic method
+        var maxLength    = 100; // Max Number images
+        var counterFluid = 1;
+        var wallFluid = new Wall("wall", {
+            "draggable":true,
+            "inertia":true,
+            "width":150,
+            "height":150,
+            "rangex":[-100,100],
+            "rangey":[-100,100],
+            callOnUpdate: function(items){
+                items.each(function(e, i){
+                    var a = new Element("img[src={{url('card/web/'.$popular[0]->id)}}]");
+                    a.inject(e.node).fade("hide").fade("in");
+                    counterFluid++;
+                    // Reset counter
+                    if( counterFluid > maxLength ) counterFluid = 1;
+                })
+            }
+        });
+        // Init Fluid Wall
+        wallFluid.initWall();
     </script>
 @stop
 

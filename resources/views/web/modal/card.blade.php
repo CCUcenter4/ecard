@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="card" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -67,7 +67,7 @@
                                                 <p class="text-muted"><span class="glyphicon glyphicon-search"></span> 選取聯絡人</p>
                                                 <select multiple="multiple" id="contactSelect" name="contactSelect[]" >
                                                     @foreach($contact as $contacts)
-                                                        <option value="{{$contacts->des}}/{{$contacts->email}}">{{$contacts->des}} 	&lt;{{$contacts->email}}&gt;</option>
+                                                        <option value="{{$contacts->des}}/{{$contacts->email}}">   {{$contacts->des}} 	&lt;{{$contacts->email}}&gt;</option>
                                                     @endforeach
                                                 </select>
                                                 <br> <br> <p class="text-muted"><span class="glyphicon glyphicon-plus"></span> 新增聯絡人</p>
@@ -138,6 +138,14 @@
                                                 <button type="submit" class="btn btn-primary" id="multiBtn"><i class="fa fa-copy" aria-hidden="true"></i> 大量寄送</button>
                                             </div>
                                         </form>
+                                        @else
+                                            <div class="alert alert-info text-center" style="margin-top: 20%;">
+                                                <h4><span style="color: red;" class="glyphicon glyphicon-heart"></span> </h3>
+                                                    <h4>喜歡這張卡片嗎？</h4>
+                                                    <p>登入後您將享有更多功能</p>
+                                                    <br>
+                                                    <p><a class="btn btn-warning"  data-toggle="modal" data-target="#registerModal">註冊</a> <a class="btn btn-success" data-toggle="modal" data-target="#loginModal">登入</a></p>
+                                            </div>
                                         @endif
                                     </div>
                                 </div>
@@ -147,6 +155,7 @@
                                     $('[data-toggle="tooltip"]').tooltip()
                                 });
                             </script>
+
                     </div>
                 </div><!-- /.col-lg-4 -->
             </div><!-- /.row -->

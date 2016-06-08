@@ -121,11 +121,10 @@ class Category {
 
     static public function getChild($parent_id) {
         $result = DB::table('category')
-            ->select(DB::raw('id, parent, child, name, festDate, festDate - NOW() as remainDay'))
+            ->select(DB::raw('id, parent, child, name, festDate, ABS(DATEDIFF(festDate,NOW())) as remainDay'))
             ->where('parent', '=', $parent_id)
             ->orderBy('remainDay', 'ASC')
             ->get();
-
         return $result;
     }
 }

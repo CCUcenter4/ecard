@@ -327,7 +327,7 @@ function mailEvent() {
         }*/
 
         if(_.trim(data.message) == '') {
-            toastr['warning'](data.contact);
+            toastr['warning']('請至少選擇一位聯絡人');
             return;
         }
 
@@ -343,7 +343,7 @@ function mailEvent() {
     $('#reservationBtn').unbind('click');
     $('#reservationBtn').click(function() {
         var id = $('#currentCardId').val();
-        var validateEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        //var validateEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         var data = {};
         /*data.reciever_name = $('#reciever_name').val();
         data.reciever_email = $('#reciever_email').val();*/

@@ -109,6 +109,11 @@
             filter: true
         });
         $("#refreshAdd").click(function() {
+            var validateEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if(!validateEmail.test($("#inputEmail").val())) {
+                toastr['warning']('信箱格式不合');
+                return;
+            }
             var $select = $("select"),
                     $inputEmail = $("#inputEmail"),
                     $inputName = $("#inputName"),
@@ -116,7 +121,7 @@
                     valueName = $.trim($inputName.val()),
                     $opt = $("<option />", {
                         value: valueName+"/"+valueEmail,
-                        text: valueName+" 	<"+valueEmail+">"
+                        text: "   "+valueName+" 	<"+valueEmail+">"
                     });
             if (!valueEmail) {
                 $inputEmail.focus();
