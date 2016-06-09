@@ -52,17 +52,17 @@ function produceCard() {
             mail_times = card_list[i].mail_times;
             share_times = card_list[i].share_times;
 
-            text += '<div class="col-lg-4 col-md-4 col-sm-6">';
+            text += '<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">';
             text += '<div class="thumbnail">';
             text += `<a data-toggle="modal" data-target="#card" class="list" data-card_id="${card_id}">`;
             text += `<img class="${imgClass}" src="/card/web/${card_id}">`;
             text += '</a>';
             text += '<div class="caption">';
-            text += `<h3 style="font-size: 140%;" class="text-center">${card_name}</h3>`;
-            text += `<i class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp;<span class="text-muted">${mail_times}</span>&nbsp;&nbsp;&nbsp;`;
+            text += `<h3 style="font-size: 120%;" class="text-center">${card_name}</h3>`;
+            text += `<p class="text-center"><i class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp;<span class="text-muted">${mail_times}</span>&nbsp;&nbsp;&nbsp;`;
             text += `<i class="fa fa-star text-warning" aria-hidden="true"></i>&nbsp;<span class="text-muted">${mail_times}</span>&nbsp;&nbsp;&nbsp;`;
             text += `<i class="fa fa-paper-plane text-success" aria-hidden="true"></i>&nbsp;<span class="text-muted">${mail_times}</span>&nbsp;&nbsp;&nbsp;`;
-            text += `<i class="fa fa-share text-primary" aria-hidden="true"></i>&nbsp;<span class="text-muted">${share_times}</span>`;
+            text += `<i class="fa fa-share text-primary" aria-hidden="true"></i>&nbsp;<span class="text-muted">${share_times}</span></p>`;
             text += '</div>';//end caption
             text += '</div>';//end thumbnail
             text += '</div>';

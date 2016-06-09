@@ -39,7 +39,10 @@ class CardController extends Controller
 
         return $result;
     }
-
+    
+    public function specialSelect ($card_id, Request $request) {
+        
+    }
     public function cardList($parent_id, $child_id) {
         $result = Card::cardList($parent_id, $child_id);
 

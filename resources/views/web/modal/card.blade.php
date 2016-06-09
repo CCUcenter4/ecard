@@ -8,12 +8,16 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-8 col-md-8 col-sm-8">
-                        <img class="center-block" id="modalCard">
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                        <img class="pull-right" id="modalCard" style="width: 100%;">
                     </div><!-- /.col-lg-4 -->
-                    <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
 
-                        <h3><span id="cardName"></span> <br><small id="cardAuthor"></small></h3>
+                        <h3 class="text-center">
+                            <span id="cardName"></span>
+                            <br><br>
+                            <small id="cardAuthor"></small>
+                        </h3>
 
                         <br>
 
@@ -33,17 +37,17 @@
                                             <br>
                                             <p id="cardDescription"></p>
                                             <hr>
-                                            <p>
-                                                <button type="button" class="btn btn-sm btn-primary shareFB" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="覺得卡片不錯嗎？分享到 FB 吧">
+                                            <p class="text-center">
+                                                <button type="button" class="btn btn-primary shareFB" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="覺得卡片不錯嗎？分享到 FB 吧">
                                                     <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i><b> </b><b id="shareTime"></b>
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-success" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="寄這張卡片表達你的祝福～">
+                                                <button type="button" class="btn btn-success" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="寄這張卡片表達你的祝福～">
                                                     <i class="fa fa-envelope " aria-hidden="true"></i><b> </b><b id="mailTime"></b>
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-danger like" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="喜歡">
+                                                <button type="button" class="btn btn-danger like" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="喜歡">
                                                     <i class="fa fa-heart " aria-hidden="true"></i><b> </b><b id="likeTime"></b>
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-warning collect" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="收藏">
+                                                <button type="button" class="btn btn-warning collect" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="收藏">
                                                     <i class="fa fa-star " aria-hidden="true"></i><b> </b><b id="collectTime"></b>
                                                 </button>
                                             </p>
@@ -118,6 +122,9 @@
                                             </div>
                                             <div id="multiWrapper">
                                                 <div class="form-group">
+                                                    <a class="btn btn-sm btn-success" href="{{url('assets/files/contactExcel.pdf')}}" target="_blank">上傳格式請點我看教學</a>
+                                                </div>
+                                                <div class="form-group">
                                                     <label class="sr-only" for="excel">請選擇檔案</label>
                                                     <div class="input-group">
                                                         <div class="input-group-addon"><i class="fa fa-file" aria-hidden="true"></i></div>
@@ -150,12 +157,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('[data-toggle="tooltip"]').tooltip()
-                                });
-                            </script>
-
                     </div>
                 </div><!-- /.col-lg-4 -->
             </div><!-- /.row -->

@@ -19,16 +19,15 @@
 
     <!-- bootstrap style plugin-->
     <link rel="stylesheet" href="{{url('assets/css/toastr.min.css')}}">
-
+    <link rel="stylesheet" href="{{url('assets/css/icon_css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/web/common.css')}}">
-    <script src="{{url('assets/js/wall.js')}}"></script>
+    <link rel="stylesheet" href="{{url('assets/css/component.css')}}">
     @yield('css')
 
 </head>
 <body>
 
 @yield('content')
-@include('web.footer')
 
 
 
@@ -41,9 +40,6 @@
 
 
 <!-- JS framework -->
-
-<!-- Bootstrap Latest compiled and minified JavaScript -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <!-- bootstrap style plugin-->
 <script src="{{url('/assets/js/toastr.min.js')}}" defer></script>
 

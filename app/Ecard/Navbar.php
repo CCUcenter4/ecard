@@ -23,7 +23,7 @@ class Navbar {
                 $result[$i]->child_name = 'null';
             }
         }
-
+        
         return $result;
     }
 

@@ -1,21 +1,16 @@
 @extends('web.initIndex')
 
 @section('css')
-    <title>首頁</title>
-    <link rel="stylesheet" href="{{url('assets/css/web/index.css')}}">
+    <title>中正電子賀卡</title>
+    <link rel="stylesheet" href="{{url('assets/css/web/indexSpecialize.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/web/carousel.css')}}">
     <style>
-        #viewport{
-            width:900px;
-            height:450px;
-            position:relative;
-            overflow:hidden;
-            margin:0 auto;
-            background:#111111  ;
+        body {
+            padding: 0px !important;
         }
-
-        #wall{
-            z-index:1;
+        .site-wrapper img {
+            -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+            filter: grayscale(100%);
         }
     </style>
 @stop
@@ -27,116 +22,66 @@
 @section('content')
 
     <!-- Header -->
-    <div class="navbar-wrapper">
-        <div class="container">
-            <nav class="navbar navbar-inverse navbar-static-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="/web">中正大學電子賀卡</a>
-                    </div>
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            @for($i=0; $i<count($navbar); $i++)
-                                <li>
-                                    <a href="/web/normal/{{$navbar[$i]->id}}/{{$navbar[$i]->parent_id}}/{{$navbar[$i]->child_id}}">{{$navbar[$i]->name}}</a>
-                                </li>
-                            @endfor
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            @if(Auth::check())
-                                <li><a href="/web/person">個人設定頁面</a></li>
-                                <li><a href="/web/logout">登出</a></li>
-                            @else
-                                <li><a data-toggle="modal" data-target="#loginModal">登入</a></li>
-                                <li><a data-toggle="modal" data-target="#registerModal">註冊</a></li>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
+    <div class="site-wrapper" style="background-image: url('http://ecard.csie.io/card/web/129'); background-size: cover;">
+        <div class="site-wrapper-inner">
 
-    <!--<div id="main">
-        <div id="camera" class="camera_wrap">
-            @for($i = 1; $i < 10 ; $i++)
-                <div data-src="{{url('card/web/'.$popular[$i]->id)}}"></div>
-            @endfor
-        </div>
-    </div>-->
-    <br><br><br>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="myCarousel" data-slide-to="0" class="active"></li>
-                        @for($i = 1; $i < 10 ; $i++)
-                            <li data-target="myCarousel" data-slide-to="{{$i}}"></li>
-                        @endfor
-                    </ol>
+            <div class="cover-container">
 
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img src="{{url('card/web/'.$popular[0]->id)}}" style="height: auto !important;">
-                            <div class="carousel-caption">
-                                {{$popular[0]->description}}
-                            </div>
-                        </div>
-                        @for($i = 1; $i < 10 ; $i++)
-                            <div class="item">
-                                <img src="{{url('card/web/'.$popular[$i]->id)}}" style="height: auto !important;">
-                                <div class="carousel-caption">
-                                    {{$popular[$i]->description}}
+                <div class="navbar-wrapper">
+                    <div class="container">
+                        <nav class="navbar navbar-inverse navbar-static-top">
+                            <div class="container">
+                                <div class="navbar-header">
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                        <a class="navbar-brand" href="/web"><span class="glyphicon glyphicon-send text-muted"></span> 中正大學電子賀卡</a>
+                                    </div>
+                                </div>
+                                <div id="navbar" class="navbar-collapse collapse">
+                                    <ul class="nav navbar-nav">
+                                        @for($i=0; $i<count($navbar); $i++)
+                                            <li>
+                                                <a href="/web/normal/{{$navbar[$i]->id}}/{{$navbar[$i]->parent_id}}/{{$navbar[$i]->child_id}}">{{$navbar[$i]->name}}</a>
+                                            </li>
+                                        @endfor
+                                    </ul>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        @if(Auth::check())
+                                            <li><a href="/web/person"><i class="fa fa-cog" aria-hidden="true"></i> 設定</a></li>
+                                            <li><a href="/web/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 登出</a></li>
+                                        @else
+                                            <li><a data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in" aria-hidden="true"></i> 登入</a></li>
+                                            <li><a data-toggle="modal" data-target="#registerModal"><i class="fa fa-plus" aria-hidden="true"></i> 註冊</a></li>
+                                        @endif
+                                    </ul>
                                 </div>
                             </div>
-                        @endfor
+                        </nav>
                     </div>
-
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                </div>
+                <div class="inner cover pull-right col-xs-12">
+                    <h4>
+                        <span class="glyphicon glyphicon-heart" style="color: red; text-shadow: 0 1px 3px rgba(0,0,0,.5);"></span>
+                    </h4>
+                    <h5 style="color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,.5);">
+                        <p>精選</p>
+                    </h5>
+                    <h1 class="cover-heading" style="color: #ffffff; font-family: Serif; text-shadow: 0 1px 3px rgba(0,0,0,.5);">蓮</h1>
+                    <p class="lead" style="color: #fffff0; font-family: Serif; text-shadow: 0 1px 3px rgba(0,0,0,.5);">含苞待放，殷殷期盼</p>
+                    <p class="lead">
+                        <a href="/web/normal/{{$navbar[0]->id}}/{{$navbar[0]->parent_id}}/{{$navbar[0]->child_id}}" class="btn btn-sm btn-default">
+                            <span class="glyphicon glyphicon-thumbs-up"></span> 欣賞更多卡片
+                        </a>
+                    </p>
                 </div>
             </div>
-            <div class="col-lg-5">
-
-            </div>
-            </div>
         </div>
-
-    <div id="viewport">
-        <div id="wall"></div>
     </div>
-    <script type="text/javascript">
-        var maxLength    = 100; // Max Number images
-        var counterFluid = 1;
-        var wallFluid = new Wall("wall", {
-            "draggable":true,
-            "inertia":true,
-            "width":150,
-            "height":150,
-            "rangex":[-100,100],
-            "rangey":[-100,100],
-            callOnUpdate: function(items){
-                items.each(function(e, i){
-                    var a = new Element("img[src={{url('card/web/'.$popular[0]->id)}}]");
-                    a.inject(e.node).fade("hide").fade("in");
-                    counterFluid++;
-                    // Reset counter
-                    if( counterFluid > maxLength ) counterFluid = 1;
-                })
-            }
-        });
-        // Init Fluid Wall
-        wallFluid.initWall();
-    </script>
+
 @stop
 

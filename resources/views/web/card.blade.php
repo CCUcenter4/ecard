@@ -2,20 +2,19 @@
 
 @section('css')
 <meta property="fb:app_id" content="{{$fb_app_id}}">
-<meta property="og:title" content="{{$card_name}}">
-<meta property="og:description" content="{{$card_description}}--中正電子賀卡系統">
-<meta property="og:site_name" content="中正電子賀卡系統" />
+<meta property="og:title" content="【中正電子卡片系統】{{$card_name}}">
+<meta property="og:description" content="{{$card_description}}">
+<meta property="og:site_name" content="中正電子卡片系統" />
 <meta property="og:image" content="{{url('card/web/'.$card_id)}}">
 
 <link rel="stylesheet" href="{{url('assets/css/web/index.css')}}">
 <link rel="stylesheet" href="{{url('assets/css/web/card.css')}}">
 <link rel="stylesheet" href="{{url('assets/css/web/carousel.css')}}">
-<link rel="stylesheet" href="{{url('assets/css/sol.css')}}">
+<link rel="stylesheet" href="{{url('assets/css/multiple-select.css')}}">
 @stop
 
 @section('js')
 <script src="{{url('assets/js/web/card.js')}}"></script>
-<script src="{{url('assets/js/sol.js')}}"></script>
 @stop
 
 @section('content')
@@ -83,43 +82,46 @@
                     <br>
                     <p id="cardDescription">{{$card_description}}</p>
                     <hr>
-                    <p>
-                      <button type="button" class="btn btn-sm btn-primary shareFB" data-from="modal">
-                        <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i><b> </b><b id="shareTime"></b>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-success" data-from="modal">
-                        <i class="fa fa-envelope " aria-hidden="true"></i><b> </b><b id="mailTime"></b>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-danger like" data-from="modal">
-                        <i class="fa fa-heart " aria-hidden="true"></i><b> </b><b id="likeTime"></b>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-warning collect" data-from="modal">
-                        <i class="fa fa-star " aria-hidden="true"></i><b> </b><b id="collectTime"></b>
-                      </button>
-                    </p>
-                    <hr>
+                    <!-- <p>
+
+                       <button type="button" class="btn btn-sm btn-primary shareFB" data-from="modal">
+                         <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i><b> </b><b id="shareTime"></b>
+                       </button>
+                       <button type="button" class="btn btn-sm btn-success" data-from="modal">
+                         <i class="fa fa-envelope " aria-hidden="true"></i><b> </b><b id="mailTime"></b>
+                       </button>
+                       <button type="button" class="btn btn-sm btn-danger like" data-from="modal">
+                         <i class="fa fa-heart " aria-hidden="true"></i><b> </b><b id="likeTime"></b>
+                       </button>
+                       <button type="button" class="btn btn-sm btn-warning collect" data-from="modal">
+                         <i class="fa fa-star " aria-hidden="true"></i><b> </b><b id="collectTime"></b>
+                       </button>
+                     </p>
+                     <hr>-->
                   </div>
                   <form id="mailForm" onsubmit="return false;">
                     <br>
                     <div class="form-group" id="reciever_name_Wrapper">
-                      <label class="sr-only" for="reciever_name">收件人姓名</label>
-                      <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></div>
-                        <input type="text" id="reciever_name" class="form-control" placeholder="請輸入收件人姓名">
-                      </div>
                     </div>
                     <div class="form-group" id="reciever_email_Wrapper">
-                      <label class="sr-only" for="reciever_email">收件人信箱</label>
-                      <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
-                        <input type="text" id="reciever_email" class="form-control" placeholder="請輸入收件人信箱">
-                      </div>
-                      <br>
-                      <select id="my-select" name="contactSelect[]" multiple="multiple">
+                      <p class="text-muted"><span class="glyphicon glyphicon-search"></span> 選取聯絡人</p>
+                      <select multiple="multiple" id="contactSelect" name="contactSelect[]" >
                         @foreach($contact as $contacts)
-                          <option value="{{$contacts->email}},">{{$contacts->des}} <p class="text-muted" style="!important;">[{{$contacts->email}}]</p></option>
+                          <option value="{{$contacts->des}}/{{$contacts->email}}">   {{$contacts->des}} 	&lt;{{$contacts->email}}&gt;</option>
                         @endforeach
                       </select>
+                      <br> <br> <p class="text-muted"><span class="glyphicon glyphicon-plus"></span> 新增聯絡人</p>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-user"></span></span>
+                        <input id="inputName" type="text" class="form-control" placeholder="請輸入收件人姓名" aria-describedby="sizing-addon3">
+                      </div>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-envelope"></span></span>
+                        <input id="inputEmail" type="text" class="form-control" placeholder="請輸入收件人信箱" aria-describedby="sizing-addon3">
+                      </div>
+                      <br>
+                      <button id="refreshAdd" class="btn btn-sm btn-success">新增聯絡人</button>
+                      <br>
                     </div>
                     <div id="reservationWrapper">
                       <div class="form-group">
@@ -193,5 +195,36 @@
     </div><!-- /.row -->
   </div>
 </div>
+<script src="{{url('assets/js/multiple-select.js')}}"></script>
+<script>
+  $("#contactSelect").multipleSelect({
+    placeholder: "選擇要寄送的聯絡人",
+    filter: true
+  });
+  $("#refreshAdd").click(function() {
+    var validateEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(!validateEmail.test($("#inputEmail").val())) {
+      toastr['warning']('信箱格式不合');
+      return;
+    }
+    var $select = $("select"),
+            $inputEmail = $("#inputEmail"),
+            $inputName = $("#inputName"),
+            valueEmail = $.trim($inputEmail.val()),
+            valueName = $.trim($inputName.val()),
+            $opt = $("<option />", {
+              value: valueName+"/"+valueEmail,
+              text: "   "+valueName+" 	<"+valueEmail+">",
+            }).attr('selected','selected');
+    if (!valueEmail) {
+      $inputEmail.focus();
+      return;
+    }
+    $inputEmail.val("");
+    $inputName.val("");
+    $select.append($opt).multipleSelect("refresh");
+    toastr['success']('新增聯絡人成功');
+  });
+</script>
 @stop
 

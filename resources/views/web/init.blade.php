@@ -24,7 +24,6 @@
 <body style="background-color: #e7e7e7;">
 <div class="container">
     @yield('content')
-    @include('web.footer')
 </div>
 
 

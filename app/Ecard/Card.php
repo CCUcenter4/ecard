@@ -75,6 +75,11 @@ class Card {
         return $result;
     }
 
+    static public function selectCardInsert($card_id, Request $request) {
+        $result = DB::table('special_selection')
+            ->select(['id', 'card_id', 'date',]);
+    }
+
     static public function cardList($parent_id, $child_id) {
         $result = DB::table('card')
             ->select(['id', 'name', 'mail_times', 'share_times'])
