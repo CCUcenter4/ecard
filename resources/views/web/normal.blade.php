@@ -59,8 +59,8 @@
                             <li><a href="/web/person"><i class="fa fa-cog" aria-hidden="true"></i> 設定</a></li>
                             <li><a href="/web/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 登出</a></li>
                         @else
-                            <li><a data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in" aria-hidden="true"></i> 登入</a></li>
-                            <li><a data-toggle="modal" data-target="#registerModal"><i class="fa fa-plus" aria-hidden="true"></i> 註冊</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in" aria-hidden="true"></i> 登入</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#registerModal"><i class="fa fa-plus" aria-hidden="true"></i> 註冊</a></li>
                         @endif
                     </ul>
                 </div>
@@ -72,9 +72,6 @@
 
         <!-- Card -->
             <div class="row row-offcanvas row-offcanvas-left">
-                <div class="col-xs-12 col-sm-12">
-                    <div class="alert alert-success"><strong>端午節快到了！</strong>寄幾張卡片表達你對好友們的關心～</div>
-                </div>
                 <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
                     <div class="list-group">
                         @for($i=0; $i<count($list); $i++)

@@ -112,6 +112,28 @@ function filePostEvent(){
   });
 }
 
+$('#selectCardBtn').unbind('click');
+$('#selectCardBtn').click(function(){
+  var data = {};
+  var id = $('input[name="currentEditCardId"]').val();
+
+  data._token       = $('meta[name="csrf-token"]').attr('content');
+  console.log(id);
+  $.ajax({
+    url: '/api/card/selectCard/' + id,
+    method: 'post',
+    data: data,
+    success: function(result) {
+      toastr['success']('選擇成功');
+      $('#cardDetail').modal('hide');
+      $('#child').change();
+    },
+    fail: function() {
+      toastr['error']('選擇失敗');
+    }
+  });
+});
+
 function cardModalEvent() {
   $('#addCard').unbind('click');
   $('#addCard').click(function(){

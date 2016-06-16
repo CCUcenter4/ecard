@@ -50,6 +50,7 @@ Route::group(['prefix'=>'api'], function() {
         // manage
         Route::post('create', 'Api\CardController@create');
         Route::post('update/{id}', 'Api\CardController@update');
+        Route::post('selectCard/{id}', 'Api\CardController@selectCard');
         Route::delete('delete/{id}', 'Api\CardController@delete');
 
         // get data

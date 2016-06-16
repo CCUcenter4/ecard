@@ -136,7 +136,7 @@
                                                 <label class="sr-only" for="message">想說的話</label>
                                                 <div class="input-group">
                                                     <div class="input-group-addon"><i class="fa fa-commenting" aria-hidden="true"></i></div>
-                                                    <textarea id="message" class="form-control" rows="10" placeholder="您想跟對方說什麼呢？"></textarea>
+                                                    <textarea id="message" class="form-control" rows="5" placeholder="您想跟對方說什麼呢？"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 text-center">

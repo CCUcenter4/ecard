@@ -20,6 +20,7 @@
                     </div>
                     <div id="updateCardWrapper" class="btnWrapper">
                         <button id="updateCardBtn" class="btn btn-warning">更新</button>
+                        <button id="selectCardBtn" class="btn btn-success">選為封面照片</button>
                         <button id="deleteCardBtn" class="btn btn-danger">刪除</button>
                     </div>
                     <div id="createCardWrapper" class="btnWrapper">

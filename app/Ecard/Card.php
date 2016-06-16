@@ -72,12 +72,32 @@ class Card {
             ->where('id', '=', $id)
             ->delete();
 
-        return $result;
+        return $id;
     }
 
-    static public function selectCardInsert($card_id, Request $request) {
-        $result = DB::table('special_selection')
-            ->select(['id', 'card_id', 'date',]);
+    static public function selectCardInsert($id) {
+        $exist = DB::table('special_selection')
+            ->where('card_id', '=', $id)
+            ->count();
+        $cardDetails = DB::table('card')
+            ->where('id', '=', $id)
+            ->first();
+
+        if (!$exist) {
+            $result = DB::table('special_selection')
+                ->insert([
+                    'card_id' => $id,
+                    'topic' => $cardDetails->name,
+                    'des' => $cardDetails->description,
+                    'date' => date('Y-m-d H:i:s'),
+                    'updated_at'=> date('Y-m-d H:i:s')
+                ]);
+        } else {
+            $result = DB::table('special_selection')
+                ->where('card_id', $id)
+                ->delete();
+        }
+        return 1;
     }
 
     static public function cardList($parent_id, $child_id) {
@@ -99,10 +119,15 @@ class Card {
     }
 
     static public function popularDetail() {
-        $result = DB::table('card')
-            ->orderBy('share_times', 'desc')
-            ->take(10)
+        $result = DB::table('special_selection')
             ->get();
+
+        return $result;
+    }
+
+    static public function popularCardCount() {
+        $result = DB::table('special_selection')
+            ->count();
 
         return $result;
     }
@@ -141,6 +166,7 @@ class Card {
     static public function like_increment($id) {
         $exist = DB::table('like')
             ->where('card_id', '=', $id)
+            ->where('user_id', '=', Auth::user()->id)
             ->count();
 
         if (!$exist) {
@@ -164,7 +190,7 @@ class Card {
 
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
-            $ipAddress = array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
+            $ipAddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
         
         if ($type === "FB" || $type === "SEARCH_ENG"){
@@ -191,6 +217,7 @@ class Card {
     static public function collect_increment($id) {
         $exist = DB::table('collect')
             ->where('card_id', '=', $id)
+            ->where('user_id', '=', Auth::user()->id)
             ->count();
 
         if (!$exist) {

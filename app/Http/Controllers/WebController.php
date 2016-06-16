@@ -24,9 +24,11 @@ class WebController extends Controller
     public function index(Request $request){
         $navbar = Navbar::get();
         $popularCard = Card::popularDetail();
+        $popularCardCount = Card::popularCardCount();
         return view('web.index')
             ->with('navbar', $navbar)
-            ->with('popular', $popularCard);
+            ->with('popular', $popularCard)
+            ->with('popularCount', $popularCardCount);
     }
 
     public function festival($parent_id, $child_id){

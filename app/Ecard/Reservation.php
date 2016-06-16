@@ -50,23 +50,26 @@ class Reservation{
 
     static public function create($card_id, Request $request){
         $user_id = Auth::user()->id;
-        $reciever_name    = $request->input('reciever_name');
-        $reciever_email   = $request->input('reciever_email');
         $message    = $request->input('message');
         $mail_time  = $request->input('mail_time');
 
 
-        $result = DB::table('reservation')
-            ->insert([
-                'card_id'   => $card_id,
-                'user_id'   => $user_id,
-                'reciever_name'   => $reciever_name,
-                'reciever_email'  => $reciever_email,
-                'message'   => $message,
-                'mail_time' => $mail_time,
-                'created_at'=> date('Y-m-d H:i:s'),
-                'updated_at'=> date('Y-m-d H:i:s')
-            ]);
+        foreach ($request->input('contact') as $contactSelects) {
+            $contactName =  strtok($contactSelects, "/");
+            $contactEmail = strtok("/");
+            $result = DB::table('reservation')
+                ->insert([
+                    'card_id'   => $card_id,
+                    'user_id'   => $user_id,
+                    'reciever_name'   => $contactName,
+                    'reciever_email'  => $contactEmail,
+                    'message'   => $message,
+                    'mail_time' => $mail_time,
+                    'created_at'=> date('Y-m-d H:i:s'),
+                    'updated_at'=> date('Y-m-d H:i:s')
+                ]);
+        }
+
 
         return $result;
     }

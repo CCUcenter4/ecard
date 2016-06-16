@@ -22,7 +22,13 @@
 @section('content')
 
     <!-- Header -->
-    <div class="site-wrapper" style="background-image: url('http://ecard.csie.io/card/web/129'); background-size: cover;">
+    <?php
+        $num = rand(0, $popularCount-1);
+        if (isset($popular[$num])){
+            $image = "url('card/web/".$popular[$num]->card_id."')";
+        }
+    ?>
+    <div class="site-wrapper" style="background-image: {{$image}}; background-size: cover;">
         <div class="site-wrapper-inner">
 
             <div class="cover-container">
@@ -55,8 +61,8 @@
                                             <li><a href="/web/person"><i class="fa fa-cog" aria-hidden="true"></i> 設定</a></li>
                                             <li><a href="/web/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 登出</a></li>
                                         @else
-                                            <li><a data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in" aria-hidden="true"></i> 登入</a></li>
-                                            <li><a data-toggle="modal" data-target="#registerModal"><i class="fa fa-plus" aria-hidden="true"></i> 註冊</a></li>
+                                            <li><a href="#" data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in" aria-hidden="true"></i> 登入</a></li>
+                                            <li><a href="#" data-toggle="modal" data-target="#registerModal"><i class="fa fa-plus" aria-hidden="true"></i> 註冊</a></li>
                                         @endif
                                     </ul>
                                 </div>
@@ -71,8 +77,8 @@
                     <h5 style="color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,.5);">
                         <p>精選</p>
                     </h5>
-                    <h1 class="cover-heading" style="color: #ffffff; font-family: Serif; text-shadow: 0 1px 3px rgba(0,0,0,.5);">蓮</h1>
-                    <p class="lead" style="color: #fffff0; font-family: Serif; text-shadow: 0 1px 3px rgba(0,0,0,.5);">含苞待放，殷殷期盼</p>
+                    <h1 class="cover-heading" style="color: #ffffff; font-family: Serif; text-shadow: 0 1px 3px rgba(0,0,0,.5);">{{$popular[$num]->topic}}</h1>
+                    <p class="lead" style="color: #fffff0; font-family: Serif; text-shadow: 0 1px 3px rgba(0,0,0,.5);">{{$popular[$num]->des}}</p>
                     <p class="lead">
                         <a href="/web/normal/{{$navbar[0]->id}}/{{$navbar[0]->parent_id}}/{{$navbar[0]->child_id}}" class="btn btn-sm btn-default">
                             <span class="glyphicon glyphicon-thumbs-up"></span> 欣賞更多卡片
