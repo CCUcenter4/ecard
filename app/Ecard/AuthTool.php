@@ -51,10 +51,10 @@ class AuthTool {
     $result = [];
 
     if(Auth::attempt($data)){
-      $result['status'] = 'success';
+      $result['status'] = 1;
     }
     else{
-      $result['status'] = 'fail';
+      $result['status'] = 0;
     }
 
     return $result;

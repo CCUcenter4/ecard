@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="bbdf1789-7dda-49fc-aa5b-407d2f8515a6" name="ecard" url="http://140.123.19.27:8000/">
+      <webServer id="bbdf1789-7dda-49fc-aa5b-407d2f8515a6" name="ecard" url="http://ecard.csie.io/">
         <fileTransfer host="140.123.19.27" port="22" rootFolder="/home/ecard/ecard" accessType="SFTP" password="df8bdfc4dfc3dfc7dfcedfcbdf8bdf8bdfc4dfc3dfc7dfcedfcbdf8b" username="ecard">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />

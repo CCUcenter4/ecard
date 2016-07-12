@@ -19,6 +19,7 @@ Route::group(['prefix'=>'web'], function() {
     Route::get('card/{card_id}/{visitor_type}/{refer}', 'WebController@card');
     Route::get('normal/{navbar_id}/{parent_id}/{child_id}', 'WebController@normal');
     Route::get('logout', 'AuthController@logout');
+    Route::get('policy', 'WebController@policy');
 
     Route::group(['prefix'=>'person'], function() {
         Route::get('/', 'WebController@person');

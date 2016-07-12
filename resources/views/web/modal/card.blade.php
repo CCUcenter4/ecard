@@ -41,7 +41,7 @@
                                                 <button type="button" class="btn btn-primary shareFB" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="覺得卡片不錯嗎？分享到 FB 吧">
                                                     <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i><b> </b><b id="shareTime"></b>
                                                 </button>
-                                                <button type="button" class="btn btn-success" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="寄這張卡片表達你的祝福～">
+                                                <button type="button" class="btn btn-success" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="卡片寄送次數">
                                                     <i class="fa fa-envelope " aria-hidden="true"></i><b> </b><b id="mailTime"></b>
                                                 </button>
                                                 <button type="button" class="btn btn-danger like" data-from="modal" data-toggle="tooltip" data-placement="bottom" title="喜歡">
@@ -76,11 +76,11 @@
                                                 </select>
                                                 <br> <br> <p class="text-muted"><span class="glyphicon glyphicon-plus"></span> 新增聯絡人</p>
                                                 <div class="input-group input-group-sm">
-                                                    <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-user"></span></span>
+                                                    <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-user"></span> 姓名</span>
                                                     <input id="inputName" type="text" class="form-control" placeholder="請輸入收件人姓名" aria-describedby="sizing-addon3">
                                                 </div>
                                                 <div class="input-group input-group-sm">
-                                                    <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-envelope"></span></span>
+                                                    <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-envelope"></span> 信箱</span>
                                                     <input id="inputEmail" type="text" class="form-control" placeholder="請輸入收件人信箱" aria-describedby="sizing-addon3">
                                                 </div>
                                                 <br>

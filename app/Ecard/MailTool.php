@@ -32,14 +32,21 @@ class MailTool {
     static public function multiMail($card_id, $list, $message) {
       $type = 'immediate';
 
+      $DEBUG = [];
       $reciever = [];
-      $length = count($list[0]);
+      $length = count($list);
       for($i=0; $i<$length; $i++) {
-        $reciever['name'] = $list[0][$i]['name'];
-        $reciever['email'] = $list[0][$i]['email'];
+        $reciever['name'] = $list[$i]['name'];
+        $reciever['email'] = $list[$i]['email'];
+
+        $contact = array($reciever['name'].'/'.$reciever['email']);
+        array_push($DEBUG, $contact);
+
         $dispatcher = new self();
-        $dispatcher->dispatch(new SendCard($card_id, $reciever, $message, $type));
+        $dispatcher->dispatch(new SendCard($card_id, $reciever, $message, $type, $contact));
       }
+
+      return $DEBUG;
     }
 }
 ?>
