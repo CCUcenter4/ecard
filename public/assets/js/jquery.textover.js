@@ -49,7 +49,7 @@
         }
 
 	    mouseAbs = function(e) {  
-	      return [e.pageX, e.pageY];
+	      return [e.pageX-230, e.pageY-530];
 	    };
 
 	    resizeTextArea = function(e) {

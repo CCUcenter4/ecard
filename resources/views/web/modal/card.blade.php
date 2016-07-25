@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                        <img class="pull-right" id="modalCard" style="width: 100%;">
+                        <img class="" id="modalCard" style="width: 100%;">
                     </div><!-- /.col-lg-4 -->
                     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
 

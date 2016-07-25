@@ -18,6 +18,7 @@
 
 @section('js')
     <script src="{{url('assets/js/web/normal.js')}}"></script>
+    <script src="{{url('assets/js/jquery.textover.js')}}"></script>
 @stop
 
 @section('content')
@@ -145,6 +146,19 @@
         });
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
+        });
+
+    </script>
+    <script type="text/javascript">
+        jQuery(function($){
+
+            var textover_api;
+
+            // How easy is this??
+            $('#modalCard').TextOver({}, function() {
+                textover_api = this;
+            });
+
         });
 
     </script>
